@@ -1,5 +1,4 @@
 const cities = [
-  { label: "不分縣市", value: "" },
   { label: "臺北市", value: "Taipei" },
   { label: "新北市", value: "NewTaipei" },
   { label: "桃園市", value: "Taoyuan" },

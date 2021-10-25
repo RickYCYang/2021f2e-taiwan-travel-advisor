@@ -44,12 +44,12 @@
 
   .shadow-corner-l {
     @apply bg-gray-600 h-20 w-1/3 lg:w-1/2  absolute transform-rorate-n6 md:transform-rorate-n4 shadow-corner
-    z-n1 left-0 bottom-8 md:bottom-6 lg:bottom-8;
+    z-n1 left-2 bottom-8 md:bottom-6 lg:bottom-8;
   }
 
   .shadow-corner-r {
-    @apply bg-gray-600 h-20 w-1/3 lg:w-1/2 absolute transform-rorate-6 md:transform-rorate-4 shadow-corner
-    z-n1 right-0 bottom-8 md:bottom-6 lg:bottom-8;
+    @apply bg-gray-600 h-10 w-1/3 lg:w-1/2 absolute transform-rorate-6 md:transform-rorate-4 shadow-corner
+    z-n1 right-2 bottom-8 md:bottom-6 lg:bottom-8;
   }
 }
 
@@ -78,12 +78,20 @@
     transform: rotate(-4deg);
   }
 
+  .transform-rorate-5 {
+    transform: rotate(5deg);
+  }
+
+  .transform-rorate-n5 {
+    transform: rotate(-5deg);
+  }
+
   .transform-rorate-6 {
-    transform: rotate(6deg);
+    transform: rotate(7deg);
   }
 
   .transform-rorate-n6 {
-    transform: rotate(-6deg);
+    transform: rotate(-7deg);
   }
 
   .z-n1 {

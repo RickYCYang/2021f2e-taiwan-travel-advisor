@@ -6,9 +6,20 @@ import Select from "react-select";
 import cities from "const/cities";
 import categories from "const/categories";
 
-const Banner = ({ home, bgImageClass }) => {
-  const [city, setCity] = useState(cities[0]);
-  const [category, setCategory] = useState(categories[0]);
+const createOptions = (options, firstOption) => {
+  const selectOptions = options.slice();
+  selectOptions.unshift(firstOption);
+  return selectOptions;
+};
+
+const Banner = ({ bgImageClass }) => {
+  const selectCities = createOptions(cities, { label: "不分縣市", value: "" });
+  const selectCategories = createOptions(categories, {
+    label: "類別",
+    value: "",
+  });
+  const [city, setCity] = useState(selectCities[0]);
+  const [category, setCategory] = useState(selectCategories[0]);
 
   const toggleCity = (e) => {
     setCity(e);
@@ -45,16 +56,16 @@ const Banner = ({ home, bgImageClass }) => {
           <div className="flex space-x-[6px] items-stretch">
             <Select
               className="flex-grow"
-              options={categories}
+              options={selectCategories}
               value={category}
-              defaultValue={categories[0]}
+              defaultValue={selectCategories[0]}
               onChange={toggleCategory}
             />
             <Select
               className="flex-grow tracking-wider"
-              options={cities}
+              options={selectCities}
               value={city}
-              defaultValue={cities[0]}
+              defaultValue={selectCities[0]}
               onChange={toggleCity}
             />
             <button className="bg-[#FFB72C] h-10 w-10 rounded">
