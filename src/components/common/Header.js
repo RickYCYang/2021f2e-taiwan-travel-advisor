@@ -3,7 +3,7 @@ import { SearchIcon } from "@heroicons/react/solid";
 
 const Header = () => {
   return (
-    <header className="bg-white">
+    <header className="bg-white sticky top-0 z-20 shadow-sm">
       <nav
         className="relativ container m-auto py-3 flex justify-center items-center 
                   md:justify-between md:items-end md:py-[17px] 
