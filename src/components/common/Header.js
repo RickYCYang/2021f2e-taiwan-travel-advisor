@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SearchIcon } from "@heroicons/react/solid";
+import { CaretUpOutlined } from "@ant-design/icons";
 
 const Header = () => {
   return (
@@ -22,13 +23,13 @@ const Header = () => {
           <li>
             <Link to="/attraction" className="nav-link text-custom-pink">
               <div className="nav-icon bg-custom-pink ">
-                <div className="border-triangle-white-1"></div>
+                <CaretUpOutlined className="text-white" />
               </div>
               台灣景點
             </Link>
           </li>
           <li>
-            <Link to="/food" className="nav-link text-custom-yellow">
+            <Link to="/RestaurantHotel" className="nav-link text-custom-yellow">
               <div className="nav-icon bg-custom-yellow">
                 <svg width="9" height="9">
                   <rect width="9" height="9" fill="white" />

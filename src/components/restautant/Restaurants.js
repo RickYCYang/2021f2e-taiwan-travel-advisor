@@ -1,4 +1,4 @@
-import SubTitle from "./SubTitle";
+import SubTitle from "../common/SubTitle";
 import RestaurantCollection from "./RestaurantCollection";
 
 const Restaurant = () => {

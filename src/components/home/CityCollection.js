@@ -2,6 +2,8 @@ import { useRef } from "react";
 //components
 import CityThumbnail from "./CityThumbnail";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { CaretRightFilled } from "@ant-design/icons";
+
 //constant
 import cities from "const/cities";
 
@@ -21,7 +23,7 @@ const CityCollection = () => {
         className="absolute top-[calc(50%-16px)] -right-12 rounded-lg w-8 h-8 bg-black flex justify-center items-center cursor-pointer hover:bg-gray-500"
         onClick={scrollRight}
       >
-        <div className="border-triangle-white-2"></div>
+        <CaretRightFilled className="text-white" />
       </div>
       <PerfectScrollbar containerRef={(el) => (scrollbarRef.current = el)}>
         <div className="relative flex flex-nowrap space-x-3">

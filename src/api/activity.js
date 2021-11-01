@@ -1,10 +1,10 @@
 import axios from "api/axios";
 
-export const getLatestStartTimeAcitivities = async (count) => {
+export const getNewestAcitivities = async (count) => {
   count = count ?? 10;
   const { data } = await axios(
     "get",
-    `Activity?$select=Name%2C%20Description%2C%20Location%2C%20Picture&$orderby=StartTime%20desc&$top=${count}&$format=JSON`
+    `Activity?$orderby=StartTime%20desc&$top=${count}&$format=JSON`
   );
   return data;
 };

@@ -1,15 +1,15 @@
 import Banner from "components/common/Banner";
 import Cities from "components/home/Cities";
 import Activities from "components/home/Activities";
-import Restaurant from "components/home/Restaurant";
+import Restaurants from "components/restautant/Restaurants";
 
 const Home = () => {
   return (
-    <main className="pb-20">
+    <main className="space-y-[80px] pb-20 relative overflow-hidden">
       <Banner bgImageClass="bg-home" />
       <Cities />
       <Activities />
-      <Restaurant />
+      <Restaurants />
     </main>
   );
 };

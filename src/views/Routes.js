@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router"; // react-router v4/v5
 import ErrorBoundary from "./ErrorBoundary";
 
 const Home = React.lazy(() => import("views/Home"));
-const Food = React.lazy(() => import("views/Food"));
+const RestaurantHotel = React.lazy(() => import("views/RestaurantHotel"));
 const Attraction = React.lazy(() => import("views/Attraction"));
 const Traffic = React.lazy(() => import("views/Traffic"));
 
@@ -24,10 +24,10 @@ const Routes = () => {
           </Suspense>
         </ErrorBoundary>
       </Route>
-      <Route exact path="/food">
+      <Route exact path="/RestaurantHotel">
         <ErrorBoundary>
           <Suspense fallback={<div>Loading...</div>}>
-            <Food />
+            <RestaurantHotel />
           </Suspense>
         </ErrorBoundary>
       </Route>

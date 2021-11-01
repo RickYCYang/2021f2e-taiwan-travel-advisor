@@ -1,6 +1,6 @@
 //components
 import CityCollection from "./CityCollection";
-import SubTitle from "./SubTitle";
+import SubTitle from "../common/SubTitle";
 
 const Cities = () => {
   return (

@@ -1,10 +1,12 @@
-const SubTitle = ({ subTitle, icon }) => {
-  ///icon ?? <div className="border-triangle-pink-2 mr-4"></div>
+import { CaretUpOutlined } from "@ant-design/icons";
 
+const SubTitle = ({ subTitle, icon }) => {
   let iconComponent = null;
 
   if (icon === "triangle") {
-    iconComponent = <div className="border-triangle-pink-2 mr-4"></div>;
+    iconComponent = (
+      <CaretUpOutlined className="text-custom-pink mr-4 text-[30px]" />
+    );
   } else if (icon === "rectangle") {
     iconComponent = (
       <svg width="20" height="20" className="mr-4">
