@@ -3,47 +3,47 @@ import { Route, Switch } from "react-router"; // react-router v4/v5
 import ErrorBoundary from "./ErrorBoundary";
 
 const Home = React.lazy(() => import("views/Home"));
-const RestaurantHotel = React.lazy(() => import("views/RestaurantHotel"));
-const Attraction = React.lazy(() => import("views/Attraction"));
+const Restaurant = React.lazy(() => import("views/Restaurant"));
+const ScenicSpot = React.lazy(() => import("views/ScenicSpot"));
+const Hotel = React.lazy(() => import("views/Hotel"));
 const Traffic = React.lazy(() => import("views/Traffic"));
 
 const Routes = () => {
   return (
-    <Switch>
-      <Route exact path="/">
-        <ErrorBoundary>
+    <ErrorBoundary>
+      <Switch>
+        <Route exact path="/">
           <Suspense fallback={<div>Loading...</div>}>
             <Home />
           </Suspense>
-        </ErrorBoundary>
-      </Route>
-      <Route exact path="/attraction">
-        <ErrorBoundary>
+        </Route>
+        <Route exact path="/scenicSpot">
           <Suspense fallback={<div>Loading...</div>}>
-            <Attraction />
+            <ScenicSpot />
           </Suspense>
-        </ErrorBoundary>
-      </Route>
-      <Route exact path="/RestaurantHotel">
-        <ErrorBoundary>
+        </Route>
+        <Route exact path="/restaurant">
           <Suspense fallback={<div>Loading...</div>}>
-            <RestaurantHotel />
+            <Restaurant />
           </Suspense>
-        </ErrorBoundary>
-      </Route>
-      <Route exact path="/traffic">
-        <ErrorBoundary>
+        </Route>
+        <Route exact path="/hotel">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Hotel />
+          </Suspense>
+        </Route>
+        <Route exact path="/traffic">
           <Suspense fallback={<div>Loading...</div>}>
             <Traffic />
           </Suspense>
-        </ErrorBoundary>
-      </Route>
-      <Route exact path="*">
-        <div>
-          <h1>404 Page not found</h1>
-        </div>
-      </Route>
-    </Switch>
+        </Route>
+        <Route exact path="*">
+          <div>
+            <h1>404 Page not found</h1>
+          </div>
+        </Route>
+      </Switch>
+    </ErrorBoundary>
   );
 };
 

@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setKeyword,
+  toggleCategory,
+  toggleCity,
+  searchSelector,
+} from "redux/slices/searchSlice";
 // third-party components
 import { SearchIcon } from "@heroicons/react/solid";
 import Select from "react-select";
@@ -13,20 +20,32 @@ const createOptions = (options, firstOption) => {
 };
 
 const Banner = ({ bgImageClass }) => {
+  /// Create selector options pool
   const selectCities = createOptions(cities, { label: "不分縣市", value: "" });
   const selectCategories = createOptions(categories, {
     label: "類別",
-    value: "",
+    value: null,
   });
-  const [city, setCity] = useState(selectCities[0]);
-  const [category, setCategory] = useState(selectCategories[0]);
+  const dispatch = useDispatch();
 
-  const toggleCity = (e) => {
-    setCity(e);
-  };
+  /// local temproal state
+  const [tmpKeyword, setTmpKeyword] = useState();
+  const [tmpCategory, setTmpCategory] = useState(selectCategories[0]);
+  const [tmpCity, setTmpCity] = useState(selectCities[0]);
 
-  const toggleCategory = (e) => {
-    setCategory(e);
+  /// Global states, set these states after click search button
+  const { keyword, category, city } = useSelector(searchSelector);
+
+  // useEffect(() => {
+  //   dispatch(toggleCategory(selectCategories[0]));
+  //   dispatch(toggleCity(selectCities[0]));
+  // }, []);
+
+  const categorySearch = () => {
+    console.log("tmpCategory", tmpCategory);
+    if (!tmpCategory.value) {
+      return alert("請選擇類別");
+    }
   };
 
   return (
@@ -47,6 +66,11 @@ const Banner = ({ bgImageClass }) => {
             <input
               type="text"
               placeholder="搜尋關鍵字"
+              onChange={(e) =>
+                //dispatch(pressKeyword({ payload: e.target.value }))
+                setTmpKeyword(e.target.value)
+              }
+              value={tmpKeyword}
               className="pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide"
             ></input>
             <button className="bg-[#FF1D6C] h-10 w-10 rounded">
@@ -57,18 +81,27 @@ const Banner = ({ bgImageClass }) => {
             <Select
               className="flex-grow"
               options={selectCategories}
-              value={category}
+              value={tmpCategory}
               defaultValue={selectCategories[0]}
-              onChange={toggleCategory}
+              onChange={
+                //(e) => dispatch(toggleCategory(e))
+                (e) => setTmpCategory(e)
+              }
             />
             <Select
               className="flex-grow tracking-wider"
               options={selectCities}
-              value={city}
+              value={tmpCity}
               defaultValue={selectCities[0]}
-              onChange={toggleCity}
+              onChange={
+                //(e) => dispatch(toggleCity(e))
+                (e) => setTmpCity(e)
+              }
             />
-            <button className="bg-[#FFB72C] h-10 w-10 rounded">
+            <button
+              className="bg-custom-yellow h-10 w-10 rounded"
+              onClick={categorySearch}
+            >
               <SearchIcon className="w-4 h-4 text-white m-auto" />
             </button>
           </div>

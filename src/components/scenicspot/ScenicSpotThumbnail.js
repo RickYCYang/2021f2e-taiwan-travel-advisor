@@ -1,24 +1,26 @@
 import { useDispatch } from "react-redux";
-import { openModal } from "redux/slices/modalSlice";
-
 // components
 import Card from "components/common/Card";
+import { openModal } from "redux/slices/modalSlice";
 
-const HotelThumbnail = ({ hotel }) => {
+const ScenicSpotThumbnail = ({ scenicSpot }) => {
   const dispatch = useDispatch();
-  const { Name, Description, Phone, Address, Picture, Class, SrcUpdateTime } =
-    hotel;
+  console.log("scenicSpot", scenicSpot);
+  const { Name, Description, Phone, Address, Picture, SrcUpdateTime, City } =
+    scenicSpot;
   const payload = {
     photos: Object.values(Picture) || [],
     title: Name,
     description: Description,
     phone: Phone,
     address: Address,
-    class1: Class,
     time: SrcUpdateTime,
+    city: City,
   };
+
   return (
     <Card
+      city={City}
       title={Name}
       address={Address}
       picture={Picture.PictureUrl1}
@@ -27,4 +29,4 @@ const HotelThumbnail = ({ hotel }) => {
   );
 };
 
-export default HotelThumbnail;
+export default ScenicSpotThumbnail;

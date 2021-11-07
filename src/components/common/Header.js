@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { SearchIcon } from "@heroicons/react/solid";
-import { CaretUpOutlined } from "@ant-design/icons";
+import { CaretUpOutlined, CloudFilled } from "@ant-design/icons";
 
 const Header = () => {
   return (
@@ -21,7 +21,7 @@ const Header = () => {
 
         <ul className="hidden md:flex space-x-[17px]">
           <li>
-            <Link to="/attraction" className="nav-link text-custom-pink">
+            <Link to="/scenicspot" className="nav-link text-custom-pink">
               <div className="nav-icon bg-custom-pink ">
                 <CaretUpOutlined className="text-white" />
               </div>
@@ -29,13 +29,21 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/RestaurantHotel" className="nav-link text-custom-yellow">
+            <Link to="/restaurant" className="nav-link text-custom-yellow">
               <div className="nav-icon bg-custom-yellow">
                 <svg width="9" height="9">
                   <rect width="9" height="9" fill="white" />
                 </svg>
               </div>
-              美食住宿
+              美食
+            </Link>
+          </li>
+          <li>
+            <Link to="/hotel" className="nav-link text-blue-500">
+              <div className="nav-icon bg-blue-500 ">
+                <CloudFilled className="text-white" />
+              </div>
+              住宿
             </Link>
           </li>
           <li>

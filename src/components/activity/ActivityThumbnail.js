@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
 // components
 import { LocationMarkerIcon } from "@heroicons/react/solid";
-import ActivityModal from "./ActivityModal";
+//import ActivityModal from "./_ActivityModal";
+import { openModal } from "redux/slices/modalSlice";
 
 const ActivityThumbnail = ({ activity }) => {
   const {
@@ -20,15 +22,27 @@ const ActivityThumbnail = ({ activity }) => {
     Charge,
     Phone,
   } = activity;
-  let photo = Object.values(Picture)[0];
-  const [showModal, setShowModal] = useState(false);
-
-  const toggleModal = () => {
-    setShowModal(true);
+  const payload = {
+    photos: Object.values(Picture) || [],
+    title: Name,
+    description: Description,
+    phone: Phone,
+    address: Address,
+    time: StartTime,
+    cycle: Cycle,
+    nonCycle: NonCycle,
+    charge: Charge,
   };
+  const dispatch = useDispatch();
+
+  let photo = Object.values(Picture)[0];
+  //const [showModal, setShowModal] = useState(false);
+  // const toggleModal = () => {
+  //   setShowModal(true);
+  // };
   return (
     <>
-      <div className="mb-12 w-[calc(50%-27px)] relative flex p-4 bg-white h-[228px] shadow after:shadow-corner-l before:shadow-corner-r">
+      <div className="w-[calc(50%-27px)] relative flex p-4 bg-white h-[228px] shadow after:shadow-corner-l before:shadow-corner-r">
         <img
           className="lazyload rounded block w-1/3 h-full object-cover mr-4 shadow"
           data-src={photo}
@@ -45,13 +59,14 @@ const ActivityThumbnail = ({ activity }) => {
             </div>
             <button
               className="border border-custom-pink px-8 py-2 text-custom-pink rounded-xl text-sm hover:bg-custom-pink hover:text-white"
-              onClick={toggleModal}
+              onClick={() => dispatch(openModal(payload))}
             >
               活動詳情
             </button>
           </div>
         </div>
       </div>
+      {/*       
       <ActivityModal
         show={showModal}
         location={Location}
@@ -67,7 +82,7 @@ const ActivityThumbnail = ({ activity }) => {
         class1={Class1}
         cycle={Cycle}
         nonCycle={NonCycle}
-      />
+      /> */}
     </>
   );
 };

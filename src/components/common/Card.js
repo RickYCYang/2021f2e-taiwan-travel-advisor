@@ -4,14 +4,16 @@ import "lazysizes/plugins/parent-fit/ls.parent-fit";
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 import ReactTooltip from "react-tooltip";
 
-const Card = ({ title, address, picture, width, height }) => {
+const Card = ({ title, address, picture, city, onClick }) => {
   return (
     <div
       className={`relative flex flex-col bg-white w-[206px] h-[243px] shadow after:shadow-corner-l before:shadow-corner-r p-3 cursor-pointer`}
+      onClick={onClick}
     >
       <img
         className="lazyload rounded block w-full h-[137px] object-cover shadow mb-[10px] transition hover:scale-110 duration-500"
         data-src={picture}
+        alt={title}
       />
       <h4 className="text-sm ">{title}</h4>
       <div className="mt-auto flex">
@@ -19,10 +21,10 @@ const Card = ({ title, address, picture, width, height }) => {
         <p
           className="text-custom-green text-xs inline line-clamp-1"
           data-for="main"
-          data-tip={address}
+          data-tip={address ?? city}
           data-iscapture="true"
         >
-          {address}
+          {address ?? city}
         </p>
       </div>
       <ReactTooltip

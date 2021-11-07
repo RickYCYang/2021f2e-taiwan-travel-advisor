@@ -20,7 +20,7 @@ const ActivityCollection = () => {
     <h1>{error.message}</h1>
   ) : (
     <>
-      <div className="flex justify-between flex-wrap">
+      <div className="flex flex-wrap gap-12 mb-12">
         {data
           .filter((activity) => Object.keys(activity.Picture).length > 0)
           .map((activity) => (
@@ -33,7 +33,7 @@ const ActivityCollection = () => {
                           hover:text-custom-pink hover:border hover:border-custom-pink"
           onClick={loadMoreActivity}
         >
-          Load More...
+          Load More
         </button>
       </div>
     </>

@@ -1,13 +1,19 @@
+import { useDispatch } from "react-redux";
+import { toggleCity } from "redux/slices/searchSlice";
+/// components
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 
 const Citythumbnail = ({ city, small }) => {
+  const dispatch = useDispatch();
   const bgClass = getBackgroundImageClass(city.value);
   const heightClass = getHeightClass(small);
   const paddingYaxis = getPaddingYaxisClass(small);
   const paddingXaxis = getPaddingXaxisClass(small);
+
   return (
     <div
       className={`bg-white ${paddingXaxis} ${paddingYaxis} mb-2 shadow cursor-pointer`}
+      onClick={() => dispatch(toggleCity(city.value))}
     >
       <div
         className={`bg-cover ${bgClass} bg-no-repeat bg-center w-[177px] ${heightClass}`}

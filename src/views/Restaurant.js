@@ -1,15 +1,13 @@
 import Banner from "components/common/Banner";
 import Restaurtants from "components/restautant/Restaurants";
-import Hotels from "components/hotel/Hotels";
 
-const RestaurantHotel = () => {
+const Restaurant = () => {
   return (
     <main className="space-y-[80px] pb-20 relative overflow-hidden">
-      <Banner bgImageClass="bg-hotel" />
-      <Restaurtants />
-      <Hotels />
+      <Banner bgImageClass="bg-restaurant" />
+      <Restaurtants defaultCount={40} />
     </main>
   );
 };
 
-export default RestaurantHotel;
+export default Restaurant;

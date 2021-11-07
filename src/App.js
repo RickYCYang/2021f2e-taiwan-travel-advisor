@@ -9,17 +9,24 @@ import Header from "components/common/Header";
 import Footer from "components/common/Footer";
 import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import rootReducer from "redux/slices";
 
 const queryClient = new QueryClient();
+const store = configureStore({ reducer: rootReducer });
+
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <Header />
-        <Routes />
-        <Footer />
-      </Router>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Header />
+          <Routes />
+          <Footer />
+        </Router>
+      </QueryClientProvider>
+    </Provider>
     // Redux Version
     // <Provider store={configureStore({})}>
     //   <ConnectedRouter history={history}>

@@ -1,4 +1,4 @@
-import { CaretUpOutlined } from "@ant-design/icons";
+import { CaretUpOutlined, CloudFilled } from "@ant-design/icons";
 
 const SubTitle = ({ subTitle, icon }) => {
   let iconComponent = null;
@@ -13,6 +13,8 @@ const SubTitle = ({ subTitle, icon }) => {
         <rect width="20" height="20" fill="#FFB72C" />
       </svg>
     );
+  } else if (icon === "cloud") {
+    iconComponent = <CloudFilled className="text-blue-500 mr-4 text-[30px]" />;
   }
 
   return (
