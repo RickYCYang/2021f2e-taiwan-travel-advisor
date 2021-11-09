@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { SearchIcon } from "@heroicons/react/solid";
-import { CaretUpOutlined, CloudFilled } from "@ant-design/icons";
+import { CaretUpOutlined, CloudFilled, YuqueFilled } from "@ant-design/icons";
 
 const Header = () => {
   return (
@@ -25,7 +25,15 @@ const Header = () => {
               <div className="nav-icon bg-custom-pink ">
                 <CaretUpOutlined className="text-white" />
               </div>
-              台灣景點
+              景點
+            </Link>
+          </li>
+          <li>
+            <Link to="/activity" className="nav-link text-purple-600">
+              <div className="nav-icon bg-purple-600 ">
+                <YuqueFilled className="text-white" />
+              </div>
+              活動
             </Link>
           </li>
           <li>
@@ -53,7 +61,7 @@ const Header = () => {
                   <circle cx="50%" cy="50%" r="5" fill="white" />
                 </svg>
               </div>
-              景點交通
+              交通
             </Link>
           </li>
         </ul>

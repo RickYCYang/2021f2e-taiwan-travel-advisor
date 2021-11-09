@@ -1,31 +1,30 @@
-import { useDispatch } from "react-redux";
-import { toggleCity } from "redux/slices/searchSlice";
+import { Link } from "react-router-dom";
 /// components
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 
 const Citythumbnail = ({ city, small }) => {
-  const dispatch = useDispatch();
   const bgClass = getBackgroundImageClass(city.value);
   const heightClass = getHeightClass(small);
   const paddingYaxis = getPaddingYaxisClass(small);
   const paddingXaxis = getPaddingXaxisClass(small);
 
   return (
-    <div
-      className={`bg-white ${paddingXaxis} ${paddingYaxis} mb-2 shadow cursor-pointer`}
-      onClick={() => dispatch(toggleCity(city.value))}
-    >
+    <Link to={`/${city.value}`}>
       <div
-        className={`bg-cover ${bgClass} bg-no-repeat bg-center w-[177px] ${heightClass}`}
+        className={`bg-white ${paddingXaxis} ${paddingYaxis} mb-2 shadow cursor-pointer`}
       >
-        <div className="bg-[rgba(0,0,0,0.2)] w-full h-full flex flex-col justify-center items-center space-y-2 group">
-          <LocationMarkerIcon className="text-white w-5 group-hover:text-custom-pink" />
-          <h3 className="text-white text-xl group-hover:text-custom-pink">
-            {city.label}
-          </h3>
+        <div
+          className={`bg-cover ${bgClass} bg-no-repeat bg-center w-[177px] ${heightClass}`}
+        >
+          <div className="bg-[rgba(0,0,0,0.2)] w-full h-full flex flex-col justify-center items-center space-y-2 group">
+            <LocationMarkerIcon className="text-white w-5 group-hover:text-custom-pink" />
+            <h3 className="text-white text-xl group-hover:text-custom-pink">
+              {city.label}
+            </h3>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

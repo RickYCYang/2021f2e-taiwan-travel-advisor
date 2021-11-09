@@ -5,7 +5,6 @@ import { openModal } from "redux/slices/modalSlice";
 
 const ScenicSpotThumbnail = ({ scenicSpot }) => {
   const dispatch = useDispatch();
-  console.log("scenicSpot", scenicSpot);
   const { Name, Description, Phone, Address, Picture, SrcUpdateTime, City } =
     scenicSpot;
   const payload = {

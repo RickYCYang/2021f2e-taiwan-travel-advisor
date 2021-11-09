@@ -1,15 +1,26 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { getRestaurants } from "api/restaurant";
+import { getRestaurants, getRestaurantsByCity } from "api/restaurant";
 
 // components
 import RestaurantThumbnail from "./RestaurantThumbnail";
 
-const RestaurantCollection = ({ defaultCount }) => {
+const getApi = (city) => {
+  if (!city) {
+    return { apiKey: "getRestaurants", apiFunc: getRestaurants };
+  } else {
+    return {
+      apiKey: `getRestaurantsByCity/${city}`,
+      apiFunc: getRestaurantsByCity,
+    };
+  }
+};
+
+const RestaurantCollection = ({ city, defaultCount }) => {
   const [restaurantCount, setRestaurantCount] = useState(defaultCount || 10);
-  const { isLoading, error, data } = useQuery(
-    ["getRestaurants", restaurantCount],
-    () => getRestaurants(restaurantCount)
+  const { apiKey, apiFunc } = getApi(city);
+  const { isLoading, error, data } = useQuery([apiKey, restaurantCount], () =>
+    apiFunc(restaurantCount, city)
   );
 
   const loadMoreRestaurant = () => {

@@ -1,13 +1,24 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { getNewestAcitivities } from "api/activity";
+import { getNewestAcitivities, getNewestAcitivitiesByCity } from "api/activity";
 import ActivityThumbnail from "./ActivityThumbnail";
 
-const ActivityCollection = () => {
-  const [activityCount, setActivityCount] = useState(10);
-  const { isLoading, error, data } = useQuery(
-    ["getNewestAcitivities", activityCount],
-    () => getNewestAcitivities(activityCount)
+const getApi = (city) => {
+  if (!city) {
+    return { apiKey: "getNewestAcitivities", apiFunc: getNewestAcitivities };
+  } else {
+    return {
+      apiKey: `getNewestAcitivitiesByCity/${city}`,
+      apiFunc: getNewestAcitivitiesByCity,
+    };
+  }
+};
+
+const ActivityCollection = ({ city, defaultCount }) => {
+  const [activityCount, setActivityCount] = useState(defaultCount || 10);
+  const { apiKey, apiFunc } = getApi(city);
+  const { isLoading, error, data } = useQuery([apiKey, activityCount], () =>
+    apiFunc(activityCount, city)
   );
 
   const loadMoreActivity = () => {
@@ -21,11 +32,9 @@ const ActivityCollection = () => {
   ) : (
     <>
       <div className="flex flex-wrap gap-12 mb-12">
-        {data
-          .filter((activity) => Object.keys(activity.Picture).length > 0)
-          .map((activity) => (
-            <ActivityThumbnail activity={activity} key={activity.Name} />
-          ))}
+        {data.map((activity, index) => (
+          <ActivityThumbnail activity={activity} key={index} />
+        ))}
       </div>
       <div className="text-center">
         <button

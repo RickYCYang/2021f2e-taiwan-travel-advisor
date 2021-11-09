@@ -17,6 +17,7 @@ module.exports = {
         hotel: "url('assets/images/banner/banner-hotel.png')",
         restaurant: "url('assets/images/banner/banner-restaurant.jpeg')",
         scenicspot: "url('assets/images/banner/banner-scenicspot.jpeg')",
+        activity: "url('assets/images/banner/banner-activity.jpeg')",
 
         // cities
         ChanghuaCounty: "url('assets/images/cities/ChanghuaCounty.jpeg')",

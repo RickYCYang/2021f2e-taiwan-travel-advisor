@@ -2,11 +2,11 @@ import SubTitle from "../common/SubTitle";
 import ScenicSpotCollection from "./ScenicSpotCollection";
 import Modal from "components/common/Modal";
 
-const ScenicSpots = ({ defaultCount }) => {
+const ScenicSpots = ({ city, defaultCount }) => {
   return (
     <section className="container m-auto ">
       <SubTitle subTitle="觀光景點" icon="triangle" />
-      <ScenicSpotCollection defaultCount={defaultCount} />
+      <ScenicSpotCollection city={city} defaultCount={defaultCount} />
       <Modal />
     </section>
   );

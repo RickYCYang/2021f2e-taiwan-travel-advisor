@@ -55,5 +55,5 @@ const postSlice = createSlice({
 });
 
 export const { openModal, closeModal } = postSlice.actions;
-export const postSelector = (state) => state.modal;
+export const modalSelector = (state) => state.modal;
 export default postSlice.reducer;

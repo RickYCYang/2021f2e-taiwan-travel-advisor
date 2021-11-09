@@ -3,6 +3,7 @@ import "lazysizes/plugins/parent-fit/ls.parent-fit";
 // components
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 import ReactTooltip from "react-tooltip";
+import altImage from "assets/images/alt.jpeg";
 
 const Card = ({ title, address, picture, city, onClick }) => {
   return (
@@ -12,7 +13,7 @@ const Card = ({ title, address, picture, city, onClick }) => {
     >
       <img
         className="lazyload rounded block w-full h-[137px] object-cover shadow mb-[10px] transition hover:scale-110 duration-500"
-        data-src={picture}
+        data-src={picture ?? altImage}
         alt={title}
       />
       <h4 className="text-sm ">{title}</h4>

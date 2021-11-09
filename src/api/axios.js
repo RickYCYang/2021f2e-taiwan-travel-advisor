@@ -17,6 +17,7 @@ const request = (method, url, data = null, config) => {
   method = method.toLowerCase();
   axios.defaults.headers["Authorization"] = getAuthorization();
   axios.defaults.headers["X-Date"] = getGMTString();
+  axios.defaults.timeout = 2500;
   switch (method) {
     case "post":
       return axios.post(url, data, config);

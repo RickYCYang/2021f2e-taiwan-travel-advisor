@@ -1,14 +1,25 @@
 import { useState } from "react";
 
-import { getHotels } from "api/hotel";
+import { getHotels, getHotelsByCity } from "api/hotel";
 import { useQuery } from "react-query";
 import HotelThumbnail from "components/hotel/HotelThumbnail";
 
-const HotelCollection = ({ defaultCount }) => {
-  const [hotelCount, setHotelCount] = useState(defaultCount || 10);
+const getApi = (city) => {
+  if (!city) {
+    return { apiKey: "getHotels", apiFunc: getHotels };
+  } else {
+    return {
+      apiKey: `getHotelsByCity/${city}`,
+      apiFunc: getHotelsByCity,
+    };
+  }
+};
 
-  const { isLoading, error, data } = useQuery(["useQueries", hotelCount], () =>
-    getHotels(hotelCount)
+const HotelCollection = ({ city, defaultCount }) => {
+  const [hotelCount, setHotelCount] = useState(defaultCount || 10);
+  const { apiKey, apiFunc } = getApi(city);
+  const { isLoading, error, data } = useQuery([apiKey, hotelCount], () =>
+    apiFunc(hotelCount, city)
   );
 
   const loadMoreHotel = () => {
@@ -22,11 +33,9 @@ const HotelCollection = ({ defaultCount }) => {
   ) : (
     <>
       <div className="flex flex-wrap gap-x-2 gap-y-12 mb-12">
-        {data
-          .filter((hotel) => Object.keys(hotel.Picture).length > 0)
-          .map((hotel) => (
-            <HotelThumbnail hotel={hotel} key={hotel.ID} />
-          ))}
+        {data.map((hotel) => (
+          <HotelThumbnail hotel={hotel} key={hotel.ID} />
+        ))}
       </div>
       <div className="text-center">
         <button

@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { searchSelector } from "redux/slices/searchSlice";
 import { useQuery } from "react-query";
 import { getScenicSpots, getScenicSpotsByCity } from "api/scenicspot";
 
@@ -18,8 +16,7 @@ const getApi = (city) => {
   }
 };
 
-const ScenicSpotCollection = ({ defaultCount }) => {
-  const { city } = useSelector(searchSelector);
+const ScenicSpotCollection = ({ city, defaultCount }) => {
   const [scenicSpotCount, setScenicSpotCount] = useState(defaultCount || 10);
   const { apiKey, apiFunc } = getApi(city);
   const { isLoading, error, data } = useQuery([apiKey, scenicSpotCount], () =>

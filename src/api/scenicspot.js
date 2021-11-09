@@ -1,4 +1,5 @@
 import axios from "api/axios";
+import { getCount } from "./utils";
 
 export const getScenicSpots = async (count) => {
   count = getCount(count);
@@ -13,8 +14,4 @@ export const getScenicSpotsByCity = async (count, city) => {
     `ScenicSpot/${city}?$top=${count}&$format=JSON`
   );
   return data;
-};
-
-const getCount = (count) => {
-  return count ?? 10;
 };

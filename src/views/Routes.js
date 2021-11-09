@@ -7,6 +7,7 @@ const Restaurant = React.lazy(() => import("views/Restaurant"));
 const ScenicSpot = React.lazy(() => import("views/ScenicSpot"));
 const Hotel = React.lazy(() => import("views/Hotel"));
 const Traffic = React.lazy(() => import("views/Traffic"));
+const Activity = React.lazy(() => import("views/Activity"));
 
 const Routes = () => {
   return (
@@ -17,24 +18,59 @@ const Routes = () => {
             <Home />
           </Suspense>
         </Route>
-        <Route exact path="/scenicSpot">
+        <Route exact path="/scenicSpot/">
           <Suspense fallback={<div>Loading...</div>}>
             <ScenicSpot />
           </Suspense>
         </Route>
-        <Route exact path="/restaurant">
+        <Route exact path="/scenicSpot/:city">
+          <Suspense fallback={<div>Loading...</div>}>
+            <ScenicSpot />
+          </Suspense>
+        </Route>
+        <Route exact path="/restaurant/">
           <Suspense fallback={<div>Loading...</div>}>
             <Restaurant />
           </Suspense>
         </Route>
-        <Route exact path="/hotel">
+        <Route exact path="/restaurant/:city">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Restaurant />
+          </Suspense>
+        </Route>
+        <Route exact path="/hotel/">
           <Suspense fallback={<div>Loading...</div>}>
             <Hotel />
           </Suspense>
         </Route>
-        <Route exact path="/traffic">
+        <Route exact path="/hotel/:city">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Hotel />
+          </Suspense>
+        </Route>
+        <Route exact path="/traffic/">
           <Suspense fallback={<div>Loading...</div>}>
             <Traffic />
+          </Suspense>
+        </Route>
+        <Route exact path="/traffic/:city">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Traffic />
+          </Suspense>
+        </Route>
+        <Route exact path="/activity/">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Activity />
+          </Suspense>
+        </Route>
+        <Route exact path="/activity/:city">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Activity />
+          </Suspense>
+        </Route>
+        <Route exact path="/:city">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home />
           </Suspense>
         </Route>
         <Route exact path="*">

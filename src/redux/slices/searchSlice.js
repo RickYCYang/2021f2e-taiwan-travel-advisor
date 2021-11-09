@@ -17,10 +17,10 @@ const searchSlice = createSlice({
     toggleCategory: (state, { payload }) => {
       state.category = payload;
     },
-    toggleCity: (state, { payload }) => {
-      console.log("payload", payload);
-      state.city = payload;
-    },
+    // toggleCity: (state, { payload }) => {
+    //   console.log("payload", payload);
+    //   state.city = payload;
+    // },
   },
 });
 

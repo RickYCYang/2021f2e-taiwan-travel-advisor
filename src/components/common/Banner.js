@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setKeyword,
@@ -19,9 +20,13 @@ const createOptions = (options, firstOption) => {
   return selectOptions;
 };
 
-const Banner = ({ bgImageClass }) => {
+const Banner = ({ className }) => {
+  const history = useHistory();
   /// Create selector options pool
-  const selectCities = createOptions(cities, { label: "不分縣市", value: "" });
+  const selectCities = createOptions(cities, {
+    label: "不分縣市",
+    value: null,
+  });
   const selectCategories = createOptions(categories, {
     label: "類別",
     value: null,
@@ -36,22 +41,14 @@ const Banner = ({ bgImageClass }) => {
   /// Global states, set these states after click search button
   const { keyword, category, city } = useSelector(searchSelector);
 
-  // useEffect(() => {
-  //   dispatch(toggleCategory(selectCategories[0]));
-  //   dispatch(toggleCity(selectCities[0]));
-  // }, []);
-
   const categorySearch = () => {
-    console.log("tmpCategory", tmpCategory);
-    if (!tmpCategory.value) {
-      return alert("請選擇類別");
-    }
+    history.push(`/${tmpCategory.value}/${tmpCity.value}`);
   };
 
   return (
     <section className="bg-white px-[27px] py-[23px] mb-[90px] relative after:shadow-corner-l before:shadow-corner-r">
       <div
-        className={`${bgImageClass} bg-cover bg-no-repeat bg-center w-full min-h-[490px] flex justify-center items-center`}
+        className={`${className} bg-cover bg-no-repeat bg-center w-full min-h-[490px] flex justify-center items-center`}
       >
         <div className="flex flex-col justify-center items-stretch">
           <div className="mb-4">
