@@ -18,3 +18,12 @@ export const getHotelsByCity = async (count, city) => {
   );
   return data;
 };
+
+export const getHotelsByKeyword = async (count, keyword) => {
+  count = getCount(count);
+  const { data } = await axios(
+    "get",
+    `Hotel?$filter=contains(Name%2C'${keyword}')&$orderby=ZipCode%20desc&$top=${count}&$format=JSON`
+  );
+  return data;
+};

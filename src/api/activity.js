@@ -18,3 +18,12 @@ export const getNewestAcitivitiesByCity = async (count, city) => {
   );
   return data;
 };
+
+export const getNewestAcitivitiesByKeyword = async (count, keyword) => {
+  count = getCount(count);
+  const { data } = await axios(
+    "get",
+    `Activity?$filter=contains(Name%2C'${keyword}')&$orderby=StartTime%20desc&$top=${count}&$format=JSON`
+  );
+  return data;
+};

@@ -15,3 +15,12 @@ export const getScenicSpotsByCity = async (count, city) => {
   );
   return data;
 };
+
+export const getScenicSpotsByKeyword = async (count, keyword) => {
+  count = getCount(count);
+  const { data } = await axios(
+    "get",
+    `ScenicSpot?$filter=contains(Name%2C'${keyword}')&$top=${count}&$format=JSON`
+  );
+  return data;
+};

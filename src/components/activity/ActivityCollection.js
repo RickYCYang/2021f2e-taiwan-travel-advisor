@@ -1,24 +1,29 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { getNewestAcitivities, getNewestAcitivitiesByCity } from "api/activity";
+import {
+  getNewestAcitivities,
+  getNewestAcitivitiesByCity,
+  getNewestAcitivitiesByKeyword,
+} from "api/activity";
 import ActivityThumbnail from "./ActivityThumbnail";
 
-const getApi = (city) => {
-  if (!city) {
-    return { apiKey: "getNewestAcitivities", apiFunc: getNewestAcitivities };
-  } else {
-    return {
-      apiKey: `getNewestAcitivitiesByCity/${city}`,
-      apiFunc: getNewestAcitivitiesByCity,
-    };
-  }
-};
-
-const ActivityCollection = ({ city, defaultCount }) => {
+const ActivityCollection = ({ city, defaultCount, keyword }) => {
   const [activityCount, setActivityCount] = useState(defaultCount || 10);
-  const { apiKey, apiFunc } = getApi(city);
-  const { isLoading, error, data } = useQuery([apiKey, activityCount], () =>
-    apiFunc(activityCount, city)
+  const { isLoading, error, data } = useQuery(
+    [
+      city
+        ? `getNewestAcitivitiesByCity/${city}`
+        : keyword
+        ? `getNewestAcitivitiesByKeyword/${keyword}`
+        : "getNewestAcitivities",
+      activityCount,
+    ],
+    () =>
+      city
+        ? getNewestAcitivitiesByCity(activityCount, city)
+        : keyword
+        ? getNewestAcitivitiesByKeyword(activityCount, keyword)
+        : getNewestAcitivities(activityCount)
   );
 
   const loadMoreActivity = () => {
@@ -36,15 +41,19 @@ const ActivityCollection = ({ city, defaultCount }) => {
           <ActivityThumbnail activity={activity} key={index} />
         ))}
       </div>
-      <div className="text-center">
-        <button
-          className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
+      {data.length < activityCount ? (
+        ""
+      ) : (
+        <div className="text-center">
+          <button
+            className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
                           hover:text-custom-pink hover:border hover:border-custom-pink"
-          onClick={loadMoreActivity}
-        >
-          Load More
-        </button>
-      </div>
+            onClick={loadMoreActivity}
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </>
   );
 };

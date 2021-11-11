@@ -1,26 +1,31 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { getScenicSpots, getScenicSpotsByCity } from "api/scenicspot";
+import {
+  getScenicSpots,
+  getScenicSpotsByCity,
+  getScenicSpotsByKeyword,
+} from "api/scenicspot";
 
 // components
 import ScenicSpotThumbnail from "./ScenicSpotThumbnail";
 
-const getApi = (city) => {
-  if (!city) {
-    return { apiKey: "getScenicSpots", apiFunc: getScenicSpots };
-  } else {
-    return {
-      apiKey: `getScenicSpotsByCity/${city}`,
-      apiFunc: getScenicSpotsByCity,
-    };
-  }
-};
-
-const ScenicSpotCollection = ({ city, defaultCount }) => {
+const ScenicSpotCollection = ({ city, defaultCount, keyword }) => {
   const [scenicSpotCount, setScenicSpotCount] = useState(defaultCount || 10);
-  const { apiKey, apiFunc } = getApi(city);
-  const { isLoading, error, data } = useQuery([apiKey, scenicSpotCount], () =>
-    apiFunc(scenicSpotCount, city)
+  const { isLoading, error, data } = useQuery(
+    [
+      city
+        ? `getScenicSpotsByCity/${city}`
+        : keyword
+        ? `getScenicSpotsByKeyword/${keyword}`
+        : "getScenicSpots",
+      scenicSpotCount,
+    ],
+    () =>
+      city
+        ? getScenicSpotsByCity(scenicSpotCount, city)
+        : keyword
+        ? getScenicSpotsByKeyword(scenicSpotCount, keyword)
+        : getScenicSpots(scenicSpotCount)
   );
 
   const loadMoreScenicSpots = () => {
@@ -38,15 +43,19 @@ const ScenicSpotCollection = ({ city, defaultCount }) => {
           <ScenicSpotThumbnail scenicSpot={scenicSpot} key={scenicSpot.ID} />
         ))}
       </div>
-      <div className="text-center">
-        <button
-          className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
+      {data.length < scenicSpotCount ? (
+        ""
+      ) : (
+        <div className="text-center">
+          <button
+            className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
                       hover:text-custom-pink hover:border hover:border-custom-pink"
-          onClick={loadMoreScenicSpots}
-        >
-          Load More
-        </button>
-      </div>
+            onClick={loadMoreScenicSpots}
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </>
   );
 };

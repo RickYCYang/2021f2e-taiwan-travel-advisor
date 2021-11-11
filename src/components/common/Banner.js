@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setKeyword,
-  toggleCategory,
-  toggleCity,
-  searchSelector,
-} from "redux/slices/searchSlice";
 // third-party components
 import { SearchIcon } from "@heroicons/react/solid";
 import Select from "react-select";
@@ -31,18 +24,17 @@ const Banner = ({ className }) => {
     label: "類別",
     value: null,
   });
-  const dispatch = useDispatch();
-
   /// local temproal state
-  const [tmpKeyword, setTmpKeyword] = useState();
-  const [tmpCategory, setTmpCategory] = useState(selectCategories[0]);
-  const [tmpCity, setTmpCity] = useState(selectCities[0]);
-
-  /// Global states, set these states after click search button
-  const { keyword, category, city } = useSelector(searchSelector);
+  const [keyword, setKeyword] = useState("");
+  const [category, setCategory] = useState(selectCategories[0]);
+  const [city, setCity] = useState(selectCities[0]);
 
   const categorySearch = () => {
-    history.push(`/${tmpCategory.value}/${tmpCity.value}`);
+    history.push(`/${category.value}/${city.value}`);
+  };
+
+  const keywordSearch = () => {
+    history.push(`/search?q=${keyword}`);
   };
 
   return (
@@ -65,12 +57,25 @@ const Banner = ({ className }) => {
               placeholder="搜尋關鍵字"
               onChange={(e) =>
                 //dispatch(pressKeyword({ payload: e.target.value }))
-                setTmpKeyword(e.target.value)
+                setKeyword(e.target.value)
               }
-              value={tmpKeyword}
+              value={keyword}
+              list="euroCountries"
               className="pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide"
             ></input>
-            <button className="bg-[#FF1D6C] h-10 w-10 rounded">
+            <datalist id="euroCountries">
+              <option value="Austria" />
+              <option value="Belgium" />
+              <option value="Czech Republic" />
+              <option value="Denmark" />
+              <option value="Estonia" />
+              <option value="France" />
+              <option value="Germany" />
+            </datalist>
+            <button
+              className="bg-[#FF1D6C] h-10 w-10 rounded"
+              onClick={keywordSearch}
+            >
               <SearchIcon className="w-4 h-4 text-white m-auto" />
             </button>
           </div>
@@ -78,21 +83,21 @@ const Banner = ({ className }) => {
             <Select
               className="flex-grow"
               options={selectCategories}
-              value={tmpCategory}
+              value={category}
               defaultValue={selectCategories[0]}
               onChange={
                 //(e) => dispatch(toggleCategory(e))
-                (e) => setTmpCategory(e)
+                (e) => setCategory(e)
               }
             />
             <Select
               className="flex-grow tracking-wider"
               options={selectCities}
-              value={tmpCity}
+              value={city}
               defaultValue={selectCities[0]}
               onChange={
                 //(e) => dispatch(toggleCity(e))
-                (e) => setTmpCity(e)
+                (e) => setCity(e)
               }
             />
             <button

@@ -15,3 +15,12 @@ export const getRestaurantsByCity = async (count, city) => {
   );
   return data;
 };
+
+export const getRestaurantsByKeyword = async (count, keyword) => {
+  count = getCount(count);
+  const { data } = await axios(
+    "get",
+    `Restaurant?$filter=contains(Name%2C'${keyword}')&$top=${count}&$format=JSON`
+  );
+  return data;
+};

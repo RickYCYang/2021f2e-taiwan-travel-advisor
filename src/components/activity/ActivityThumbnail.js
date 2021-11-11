@@ -47,18 +47,18 @@ const ActivityThumbnail = ({ activity }) => {
           className="lazyload rounded block w-1/3 h-full object-cover mr-4 shadow"
           data-src={photo ?? altImage}
         />
-        <div className="flex flex-col justify-between w-full">
+        <div className="flex flex-col justify-between max-w-[calc(100%-33%-16px)]">
           <h4 className="font-semibold mb-[14px]">{Name}</h4>
           <p className="line-clamp-5 text-sm text-gray-400 mb-3">
             {Description}
           </p>
           <div className="flex items-center justify-between">
-            <div>
+            <div className=" w-1/2">
               <LocationMarkerIcon className=" w-5 text-custom-pink inline mr-2" />
               <h6 className="text-sm inline">{Location}</h6>
             </div>
             <button
-              className="border border-custom-pink px-8 py-2 text-custom-pink rounded-xl text-sm hover:bg-custom-pink hover:text-white"
+              className="border border-custom-pink px-8 py-2 text-custom-pink rounded-xl text-sm w-1/2 hover:bg-custom-pink hover:text-white"
               onClick={() => dispatch(openModal(payload))}
             >
               活動詳情

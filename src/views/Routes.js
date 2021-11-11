@@ -8,6 +8,7 @@ const ScenicSpot = React.lazy(() => import("views/ScenicSpot"));
 const Hotel = React.lazy(() => import("views/Hotel"));
 const Traffic = React.lazy(() => import("views/Traffic"));
 const Activity = React.lazy(() => import("views/Activity"));
+const Search = React.lazy(() => import("views/Search"));
 
 const Routes = () => {
   return (
@@ -58,6 +59,7 @@ const Routes = () => {
             <Traffic />
           </Suspense>
         </Route>
+
         <Route exact path="/activity/">
           <Suspense fallback={<div>Loading...</div>}>
             <Activity />
@@ -66,6 +68,11 @@ const Routes = () => {
         <Route exact path="/activity/:city">
           <Suspense fallback={<div>Loading...</div>}>
             <Activity />
+          </Suspense>
+        </Route>
+        <Route exact path="/search">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Search />
           </Suspense>
         </Route>
         <Route exact path="/:city">

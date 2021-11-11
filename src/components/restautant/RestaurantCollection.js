@@ -1,26 +1,31 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { getRestaurants, getRestaurantsByCity } from "api/restaurant";
+import {
+  getRestaurants,
+  getRestaurantsByCity,
+  getRestaurantsByKeyword,
+} from "api/restaurant";
 
 // components
 import RestaurantThumbnail from "./RestaurantThumbnail";
 
-const getApi = (city) => {
-  if (!city) {
-    return { apiKey: "getRestaurants", apiFunc: getRestaurants };
-  } else {
-    return {
-      apiKey: `getRestaurantsByCity/${city}`,
-      apiFunc: getRestaurantsByCity,
-    };
-  }
-};
-
-const RestaurantCollection = ({ city, defaultCount }) => {
+const RestaurantCollection = ({ city, defaultCount, keyword }) => {
   const [restaurantCount, setRestaurantCount] = useState(defaultCount || 10);
-  const { apiKey, apiFunc } = getApi(city);
-  const { isLoading, error, data } = useQuery([apiKey, restaurantCount], () =>
-    apiFunc(restaurantCount, city)
+  const { isLoading, error, data } = useQuery(
+    [
+      city
+        ? `getRestaurantsByCity/${city}`
+        : keyword
+        ? `getRestaurantsByKeyword/${keyword}`
+        : "getRestaurants",
+      restaurantCount,
+    ],
+    () =>
+      city
+        ? getRestaurantsByCity(restaurantCount, city)
+        : keyword
+        ? getRestaurantsByKeyword(restaurantCount, keyword)
+        : getRestaurants(restaurantCount)
   );
 
   const loadMoreRestaurant = () => {
@@ -38,15 +43,19 @@ const RestaurantCollection = ({ city, defaultCount }) => {
           <RestaurantThumbnail restaurant={restaurant} key={restaurant.ID} />
         ))}
       </div>
-      <div className="text-center">
-        <button
-          className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
+      {data.length < restaurantCount ? (
+        ""
+      ) : (
+        <div className="text-center">
+          <button
+            className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
                       hover:text-custom-pink hover:border hover:border-custom-pink"
-          onClick={loadMoreRestaurant}
-        >
-          Load More
-        </button>
-      </div>
+            onClick={loadMoreRestaurant}
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </>
   );
 };
