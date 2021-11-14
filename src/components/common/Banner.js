@@ -6,14 +6,10 @@ import Select from "react-select";
 // constant
 import cities from "const/cities";
 import categories from "const/categories";
+// utils
+import { createOptions } from "utils/option";
 
-const createOptions = (options, firstOption) => {
-  const selectOptions = options.slice();
-  selectOptions.unshift(firstOption);
-  return selectOptions;
-};
-
-const Banner = ({ className }) => {
+const Banner = ({ className, search }) => {
   const history = useHistory();
   /// Create selector options pool
   const selectCities = createOptions(cities, {
@@ -25,7 +21,7 @@ const Banner = ({ className }) => {
     value: null,
   });
   /// local temproal state
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState(search);
   const [category, setCategory] = useState(selectCategories[0]);
   const [city, setCity] = useState(selectCities[0]);
 
@@ -38,7 +34,7 @@ const Banner = ({ className }) => {
   };
 
   return (
-    <section className="bg-white px-[27px] py-[23px] mb-[90px] relative after:shadow-corner-l before:shadow-corner-r">
+    <section className="bg-white px-[27px] py-[23px] mb-[90px] relative after:shadow-corner-l before:shadow-corner-r shadow-sm">
       <div
         className={`${className} bg-cover bg-no-repeat bg-center w-full min-h-[490px] flex justify-center items-center`}
       >
@@ -73,7 +69,7 @@ const Banner = ({ className }) => {
               <option value="Germany" />
             </datalist>
             <button
-              className="bg-[#FF1D6C] h-10 w-10 rounded"
+              className="bg-[#FF1D6C] w-10 rounded-md"
               onClick={keywordSearch}
             >
               <SearchIcon className="w-4 h-4 text-white m-auto" />
@@ -101,7 +97,7 @@ const Banner = ({ className }) => {
               }
             />
             <button
-              className="bg-custom-yellow h-10 w-10 rounded"
+              className="bg-custom-yellow w-10 rounded-md"
               onClick={categorySearch}
             >
               <SearchIcon className="w-4 h-4 text-white m-auto" />

@@ -8,6 +8,7 @@ import {
 
 // components
 import RestaurantThumbnail from "./RestaurantThumbnail";
+import WarningMsg from "components/common/WarningMsg";
 
 const RestaurantCollection = ({ city, defaultCount, keyword }) => {
   const [restaurantCount, setRestaurantCount] = useState(defaultCount || 10);
@@ -36,7 +37,7 @@ const RestaurantCollection = ({ city, defaultCount, keyword }) => {
     <h1>Loading...</h1>
   ) : error ? (
     <h1>{error.message}</h1>
-  ) : (
+  ) : data.length > 0 ? (
     <>
       <div className="flex flex-wrap gap-x-2 gap-y-12 mb-12">
         {data.map((restaurant) => (
@@ -57,6 +58,8 @@ const RestaurantCollection = ({ city, defaultCount, keyword }) => {
         </div>
       )}
     </>
+  ) : (
+    <WarningMsg />
   );
 };
 

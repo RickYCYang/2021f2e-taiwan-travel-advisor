@@ -6,6 +6,7 @@ import {
   getNewestAcitivitiesByKeyword,
 } from "api/activity";
 import ActivityThumbnail from "./ActivityThumbnail";
+import WarningMsg from "components/common/WarningMsg";
 
 const ActivityCollection = ({ city, defaultCount, keyword }) => {
   const [activityCount, setActivityCount] = useState(defaultCount || 10);
@@ -34,7 +35,7 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
     <h1>Loading...</h1>
   ) : error ? (
     <h1>{error.message}</h1>
-  ) : (
+  ) : data.length > 0 ? (
     <>
       <div className="flex flex-wrap gap-12 mb-12">
         {data.map((activity, index) => (
@@ -47,7 +48,7 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
         <div className="text-center">
           <button
             className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
-                          hover:text-custom-pink hover:border hover:border-custom-pink"
+                              hover:text-custom-pink hover:border hover:border-custom-pink"
             onClick={loadMoreActivity}
           >
             Load More
@@ -55,6 +56,8 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
         </div>
       )}
     </>
+  ) : (
+    <WarningMsg />
   );
 };
 

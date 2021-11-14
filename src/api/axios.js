@@ -30,7 +30,7 @@ const request = (method, url, data = null, config) => {
     case "patch":
       return axios.patch(url, data);
     default:
-      console.log(`未知的 method: ${method}`);
+      console.log(`unknown method: ${method}`);
       return false;
   }
 };

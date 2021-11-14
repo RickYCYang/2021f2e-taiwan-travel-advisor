@@ -78,7 +78,7 @@ const Modal = () => {
       <div
         style={{ top: `${scrollPosition - 80}px` }}
         className={`absolute top-[${scrollPosition}] left-[calc(50%-338px)] w-[676px] max-h-[730px] bg-white rounded p-8 transform transition 
-                    duration-1000 shadow-xl
+                    duration-700 shadow-xl
                     ${
                       show ? "opacity-100 z-40" : "opacity-0 z-n1"
                     } overflow-auto space-y-[22px]`}
@@ -91,7 +91,7 @@ const Modal = () => {
                 .filter((photo) => photo.includes("https"))
                 .map((photo) => (
                   <img
-                    className={`absolute inset-0 lazyload rounded block h-[459px] w-auto object-cover shadow transform transition duration-700
+                    className={`m-auto lazyload rounded block h-[459px] w-auto object-cover shadow transform transition duration-700
                         ${
                           photos[photoIndex] === photo
                             ? "opacity-100 z-40"
@@ -103,7 +103,7 @@ const Modal = () => {
                 ))
             ) : (
               <img
-                className={`absolute inset-0 lazyload rounded block h-[459px] w-auto object-cover shadow transform transition duration-700 opacity-100 z-40`}
+                className={`m-auto lazyload rounded block h-[459px] w-auto object-cover shadow transform transition duration-700 opacity-100 z-40`}
                 src={altImage}
               />
             )

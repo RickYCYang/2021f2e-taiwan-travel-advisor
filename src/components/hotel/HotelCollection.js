@@ -3,6 +3,7 @@ import { useState } from "react";
 import { getHotels, getHotelsByCity, getHotelsByKeyword } from "api/hotel";
 import { useQuery } from "react-query";
 import HotelThumbnail from "components/hotel/HotelThumbnail";
+import WarningMsg from "components/common/WarningMsg";
 
 const HotelCollection = ({ city, defaultCount, keyword }) => {
   const [hotelCount, setHotelCount] = useState(defaultCount || 10);
@@ -31,7 +32,7 @@ const HotelCollection = ({ city, defaultCount, keyword }) => {
     <h1>Loading...</h1>
   ) : error ? (
     <h1>{error.message}</h1>
-  ) : (
+  ) : data.length > 0 ? (
     <>
       <div className="flex flex-wrap gap-x-2 gap-y-12 mb-12">
         {data.map((hotel) => (
@@ -52,6 +53,8 @@ const HotelCollection = ({ city, defaultCount, keyword }) => {
         </div>
       )}
     </>
+  ) : (
+    <WarningMsg />
   );
 };
 

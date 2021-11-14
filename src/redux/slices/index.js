@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
 import modalReducer from "./modalSlice";
-import searchReducer from "./searchSlice";
+import routeReducer from "./routeSlice";
 
 const rootReducer = combineReducers({
   modal: modalReducer,
-  search: searchReducer,
+  route: routeReducer,
 });
 
 export default rootReducer;

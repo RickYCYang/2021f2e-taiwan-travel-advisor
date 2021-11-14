@@ -8,6 +8,7 @@ import {
 
 // components
 import ScenicSpotThumbnail from "./ScenicSpotThumbnail";
+import WarningMsg from "components/common/WarningMsg";
 
 const ScenicSpotCollection = ({ city, defaultCount, keyword }) => {
   const [scenicSpotCount, setScenicSpotCount] = useState(defaultCount || 10);
@@ -36,7 +37,7 @@ const ScenicSpotCollection = ({ city, defaultCount, keyword }) => {
     <h1>Loading...</h1>
   ) : error ? (
     <h1>{error.message}</h1>
-  ) : (
+  ) : data.length > 0 ? (
     <>
       <div className="flex flex-wrap gap-x-2 gap-y-12 mb-12">
         {data.map((scenicSpot) => (
@@ -57,6 +58,8 @@ const ScenicSpotCollection = ({ city, defaultCount, keyword }) => {
         </div>
       )}
     </>
+  ) : (
+    <WarningMsg />
   );
 };
 

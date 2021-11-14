@@ -6,6 +6,7 @@ import Activities from "components/activity/Activities";
 import ScenicSpots from "components/scenicspot/ScenicSpots";
 import Restaurants from "components/restautant/Restaurants";
 import Hotels from "components/hotel/Hotels";
+import Main from "components/common/Main";
 
 const Search = () => {
   const queryParam = useQueryParam();
@@ -17,13 +18,13 @@ const Search = () => {
   }, [queryKeyword]);
 
   return (
-    <main className="space-y-[80px] pb-20 relative overflow-hidden">
-      <Banner className="bg-home" />
+    <Main>
+      <Banner className="bg-search" search={keyword} />
       <Activities keyword={keyword} />
       <ScenicSpots keyword={keyword} />
       <Restaurants keyword={keyword} />
       <Hotels keyword={keyword} />
-    </main>
+    </Main>
   );
 };
 

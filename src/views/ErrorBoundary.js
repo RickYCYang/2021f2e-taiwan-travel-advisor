@@ -1,4 +1,6 @@
 import React from "react";
+import Main from "components/common/Main";
+import WarningMsg from "components/common/WarningMsg";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
+      return <WarningMsg />;
     }
 
     return this.props.children;
