@@ -4,6 +4,39 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
+      keyframes: {
+        show_25: {
+          "0%": { opacity: "0" },
+          "25%": { opacity: "1" },
+          "50%": { opacity: "1" },
+          "75%": { opacity: "1" },
+        },
+        show_50: {
+          "0%": { opacity: "0" },
+          "25%": { opacity: "0" },
+          "50%": { opacity: "1" },
+          "75%": { opacity: "1" },
+        },
+        show_75: {
+          "0%": { opacity: "0" },
+          "25%": { opacity: "0" },
+          "50%": { opacity: "0" },
+          "75%": { opacity: "1" },
+        },
+        show_90: {
+          "0%": { opacity: "0" },
+          "25%": { opacity: "0" },
+          "50%": { opacity: "0" },
+          "75%": { opacity: "0" },
+          "90%": { opacity: "1" },
+        },
+      },
+      animation: {
+        show_25: "show_25 4s linear infinite",
+        show_50: "show_50 4s linear infinite",
+        show_75: "show_75 4s linear infinite",
+        show_90: "show_90 4s linear infinite",
+      },
       colors: {
         "custom-pink": "#FF1D6C",
         "custom-yellow": "#FFB72C",

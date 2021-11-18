@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
+
+// api
 import {
   getNewestAcitivities,
   getNewestAcitivitiesByCity,
   getNewestAcitivitiesByKeyword,
 } from "api/activity";
+
+// components
 import ActivityThumbnail from "./ActivityThumbnail";
 import WarningMsg from "components/common/WarningMsg";
+import Loading from "components/common/Loading";
 
 const ActivityCollection = ({ city, defaultCount, keyword }) => {
   const [activityCount, setActivityCount] = useState(defaultCount || 10);
@@ -32,7 +37,7 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
   };
 
   return isLoading ? (
-    <h1>Loading...</h1>
+    <Loading />
   ) : error ? (
     <h1>{error.message}</h1>
   ) : data.length > 0 ? (

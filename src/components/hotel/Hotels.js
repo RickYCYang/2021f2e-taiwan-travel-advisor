@@ -1,10 +1,12 @@
 import SubTitle from "components/common/SubTitle";
 import HotelCollection from "./HotelCollection";
 import Modal from "components/common/Modal";
+// components
+import Container from "components/common/Container";
 
 const Hotels = ({ city, defaultCount, keyword }) => {
   return (
-    <section className="container m-auto ">
+    <Container>
       <SubTitle subTitle="推薦住宿" icon="cloud" />
       <HotelCollection
         city={city}
@@ -12,7 +14,7 @@ const Hotels = ({ city, defaultCount, keyword }) => {
         keyword={keyword}
       />
       <Modal />
-    </section>
+    </Container>
   );
 };
 

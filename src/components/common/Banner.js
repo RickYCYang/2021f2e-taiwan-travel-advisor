@@ -8,6 +8,10 @@ import cities from "const/cities";
 import categories from "const/categories";
 // utils
 import { createOptions } from "utils/option";
+import {
+  getLocalStorageWithExpiry,
+  setLocalStorageWithExpiry,
+} from "utils/localStorage";
 
 const Banner = ({ className, search }) => {
   const history = useHistory();
@@ -24,12 +28,22 @@ const Banner = ({ className, search }) => {
   const [keyword, setKeyword] = useState(search);
   const [category, setCategory] = useState(selectCategories[0]);
   const [city, setCity] = useState(selectCities[0]);
+  const [searchHistory, setSearchHistory] = useState(
+    getLocalStorageWithExpiry("searchHistory")
+      ? getLocalStorageWithExpiry("searchHistory").split(",")
+      : []
+  );
 
   const categorySearch = () => {
     history.push(`/${category.value}/${city.value}`);
   };
 
   const keywordSearch = () => {
+    setSearchHistory([...searchHistory, keyword]);
+    setLocalStorageWithExpiry(
+      "searchHistory",
+      [...searchHistory, keyword].toString()
+    );
     history.push(`/search?q=${keyword}`);
   };
 
@@ -56,17 +70,22 @@ const Banner = ({ className, search }) => {
                 setKeyword(e.target.value)
               }
               value={keyword}
-              list="euroCountries"
+              list="searchHistory"
               className="pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide"
             ></input>
-            <datalist id="euroCountries">
-              <option value="Austria" />
+            <datalist id="searchHistory">
+              {
+                /* <option value="Austria" />
               <option value="Belgium" />
               <option value="Czech Republic" />
               <option value="Denmark" />
               <option value="Estonia" />
               <option value="France" />
-              <option value="Germany" />
+              <option value="Germany" /> */
+                searchHistory.map((item) => (
+                  <option value={item} key={item} />
+                ))
+              }
             </datalist>
             <button
               className="bg-[#FF1D6C] w-10 rounded-md"

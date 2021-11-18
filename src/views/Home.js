@@ -7,6 +7,7 @@ import ScenicSpots from "components/scenicspot/ScenicSpots";
 import Restaurants from "components/restautant/Restaurants";
 import Hotels from "components/hotel/Hotels";
 import Main from "components/common/Main";
+import Loading from "components/common/Loading";
 
 const Home = () => {
   const { city } = useParams();

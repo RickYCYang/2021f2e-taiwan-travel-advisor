@@ -91,7 +91,7 @@ const Modal = () => {
                 .filter((photo) => photo.includes("https"))
                 .map((photo) => (
                   <img
-                    className={`m-auto lazyload rounded block h-[459px] w-auto object-cover shadow transform transition duration-700
+                    className={`absolute inset-0 lazyload rounded block h-[459px] w-full object-cover shadow transform transition duration-700
                         ${
                           photos[photoIndex] === photo
                             ? "opacity-100 z-40"
@@ -103,7 +103,7 @@ const Modal = () => {
                 ))
             ) : (
               <img
-                className={`m-auto lazyload rounded block h-[459px] w-auto object-cover shadow transform transition duration-700 opacity-100 z-40`}
+                className={`absolute inset-0 lazyload rounded block h-[459px] w-full object-cover shadow transform transition duration-700 opacity-100 z-40`}
                 src={altImage}
               />
             )

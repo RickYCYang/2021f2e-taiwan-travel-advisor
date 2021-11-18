@@ -1,10 +1,11 @@
 import SubTitle from "../common/SubTitle";
 import RestaurantCollection from "./RestaurantCollection";
 import Modal from "components/common/Modal";
+import Container from "components/common/Container";
 
 const Restaurant = ({ city, defaultCount, keyword }) => {
   return (
-    <section className="container m-auto ">
+    <Container>
       <SubTitle subTitle="熱門餐飲" icon="rectangle" />
       <RestaurantCollection
         city={city}
@@ -12,7 +13,7 @@ const Restaurant = ({ city, defaultCount, keyword }) => {
         keyword={keyword}
       />
       <Modal />
-    </section>
+    </Container>
   );
 };
 

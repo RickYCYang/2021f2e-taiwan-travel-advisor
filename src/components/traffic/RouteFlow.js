@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { routeSelector } from "redux/slices/routeSlice";
 import { getHoursAndMinuteStr, addSeconds } from "utils/dateTime";
+// components
+import Container from "components/common/Container";
 
 const RouteFlow = () => {
   const date = new Date();
@@ -17,7 +19,7 @@ const RouteFlow = () => {
   }, [stops]);
 
   return (
-    <section className="container m-auto">
+    <Container>
       <p className="text-custom-pink text-right mb-3">*每隔15秒自動更新</p>
       <div
         className={
@@ -51,7 +53,7 @@ const RouteFlow = () => {
           <h3 className="text-gray-400">請選擇公車路線</h3>
         )}
       </div>
-    </section>
+    </Container>
   );
 };
 

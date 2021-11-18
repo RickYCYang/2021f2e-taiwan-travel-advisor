@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { useDispatch } from "react-redux";
+import { openModal } from "redux/slices/modalSlice";
+
+// api
 import {
   getRestaurants,
   getRestaurantsByCity,
@@ -7,10 +11,12 @@ import {
 } from "api/restaurant";
 
 // components
-import RestaurantThumbnail from "./RestaurantThumbnail";
 import WarningMsg from "components/common/WarningMsg";
+import Loading from "components/common/Loading";
+import Card from "components/common/Card";
 
 const RestaurantCollection = ({ city, defaultCount, keyword }) => {
+  const dispatch = useDispatch();
   const [restaurantCount, setRestaurantCount] = useState(defaultCount || 10);
   const { isLoading, error, data } = useQuery(
     [
@@ -34,15 +40,32 @@ const RestaurantCollection = ({ city, defaultCount, keyword }) => {
   };
 
   return isLoading ? (
-    <h1>Loading...</h1>
+    <Loading />
   ) : error ? (
     <h1>{error.message}</h1>
   ) : data.length > 0 ? (
     <>
       <div className="flex flex-wrap gap-x-2 gap-y-12 mb-12">
-        {data.map((restaurant) => (
-          <RestaurantThumbnail restaurant={restaurant} key={restaurant.ID} />
-        ))}
+        {data.map((restaurant) => {
+          const payload = {
+            photos: Object.values(restaurant.Picture) || [],
+            thumbnail: restaurant.Picture.PictureUrl1,
+            title: restaurant.Name,
+            description: restaurant.Description,
+            phone: restaurant.Phone,
+            address: restaurant.Address,
+            time: restaurant.SrcUpdateTime,
+          };
+          return (
+            <Card
+              key={restaurant.ID}
+              title={payload.title}
+              address={payload.address}
+              picture={payload.thumbnail}
+              onClick={() => dispatch(openModal(payload))}
+            />
+          );
+        })}
       </div>
       {data.length < restaurantCount ? (
         ""
