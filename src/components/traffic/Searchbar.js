@@ -11,9 +11,8 @@ import {
   getArrivalTimeByCityAndRouteName,
 } from "api/traffic";
 
-// third-party components
-import { SearchIcon } from "@heroicons/react/solid";
-import Select from "react-select";
+// components
+import Selector from "components/common/Selector";
 
 // constant
 const cities = [
@@ -120,14 +119,14 @@ const Searchbar = () => {
   return (
     <section className="bg-white w-full pt-9 relative after:shadow-corner-l before:shadow-corner-r">
       <div className="flex justify-center gap-2 mb-10">
-        <Select
+        <Selector
           className="tracking-wider w-60"
           options={cities}
           value={city}
           defaultValue={city}
           onChange={(e) => setCity(e)}
         />
-        <Select
+        <Selector
           className="tracking-wider w-60"
           options={routeOptions}
           value={route}

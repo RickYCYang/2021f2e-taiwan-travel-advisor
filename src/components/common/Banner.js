@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-// third-party components
+// components
 import { SearchIcon } from "@heroicons/react/solid";
-import Select from "react-select";
+import Selector from "./Selector";
 // constant
 import cities from "const/cities";
 import categories from "const/categories";
@@ -12,18 +12,6 @@ import {
   getLocalStorageWithExpiry,
   setLocalStorageWithExpiry,
 } from "utils/localStorage";
-
-const customStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    color: state.isSelected || state.isFocused ? "white" : "black",
-    backgroundColor: state.isSelected
-      ? "#FF1D6C"
-      : state.isFocused
-      ? "#FFB72C"
-      : "white",
-  }),
-};
 
 const Banner = ({ className, search }) => {
   const history = useHistory();
@@ -98,8 +86,7 @@ const Banner = ({ className, search }) => {
             </button>
           </div>
           <div className="flex space-x-[6px] items-stretch">
-            <Select
-              styles={customStyles}
+            <Selector
               className="tracking-wider flex-grow"
               options={selectCategories}
               value={category}
@@ -109,8 +96,7 @@ const Banner = ({ className, search }) => {
                 (e) => setCategory(e)
               }
             />
-            <Select
-              styles={customStyles}
+            <Selector
               className="tracking-wider flex-grow"
               options={selectCities}
               value={city}

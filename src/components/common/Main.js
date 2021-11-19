@@ -4,7 +4,7 @@ const Main = ({ children, className }) => {
   return (
     <PerfectScrollbar>
       <main
-        className={`space-y-[80px] pb-20 relative overflow-hidden min-h-[500px] ${className}`}
+        className={`space-y-[80px] pb-40 relative overflow-hidden min-h-[500px] ${className}`}
       >
         {children}
       </main>

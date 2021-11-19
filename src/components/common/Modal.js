@@ -77,7 +77,7 @@ const Modal = () => {
       </button>
       <div
         style={{ top: `${scrollPosition - 80}px` }}
-        className={`absolute top-[${scrollPosition}] left-[calc(50%-338px)] w-[676px] max-h-[730px] bg-white rounded p-8 transform transition 
+        className={`absolute top-[${scrollPosition}] left-[calc(50%-338px)] w-[676px] max-h-[730px] bg-white rounded-lg shadow-lg p-8 transform transition 
                     duration-700 shadow-xl
                     ${
                       show ? "opacity-100 z-40" : "opacity-0 z-n1"
