@@ -7,7 +7,7 @@ const WarningMsg = ({ message }) => {
       <div>
         <h6 className="text-custom-yellow text-xl">Oops !</h6>
         <p className="text-gray-400">
-          {message || "很抱歉，找不到符合此搜尋相關的內容。"}{" "}
+          {message || "很抱歉，找不到符合此搜尋相關的內容。"}
         </p>
       </div>
     </div>

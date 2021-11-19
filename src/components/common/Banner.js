@@ -13,6 +13,18 @@ import {
   setLocalStorageWithExpiry,
 } from "utils/localStorage";
 
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    color: state.isSelected || state.isFocused ? "white" : "black",
+    backgroundColor: state.isSelected
+      ? "#FF1D6C"
+      : state.isFocused
+      ? "#FFB72C"
+      : "white",
+  }),
+};
+
 const Banner = ({ className, search }) => {
   const history = useHistory();
   /// Create selector options pool
@@ -55,7 +67,7 @@ const Banner = ({ className, search }) => {
         <div className="flex flex-col justify-center items-stretch">
           <div className="mb-4">
             <h2 className="text-white font-bold text-[50px] leading-[70px]">
-              Welcome to <span className="text-[#FF1D6C]">Taiwan°</span>
+              Welcome to <span className="text-custom-pink">Taiwan°</span>
             </h2>
             <h6 className="text-white text-sm">
               台北、台中、台南、屏東、宜蘭……遊遍台灣
@@ -74,21 +86,12 @@ const Banner = ({ className, search }) => {
               className="pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide"
             ></input>
             <datalist id="searchHistory">
-              {
-                /* <option value="Austria" />
-              <option value="Belgium" />
-              <option value="Czech Republic" />
-              <option value="Denmark" />
-              <option value="Estonia" />
-              <option value="France" />
-              <option value="Germany" /> */
-                searchHistory.map((item) => (
-                  <option value={item} key={item} />
-                ))
-              }
+              {searchHistory.map((item) => (
+                <option value={item} key={item} />
+              ))}
             </datalist>
             <button
-              className="bg-[#FF1D6C] w-10 rounded-md"
+              className="bg-custom-pink w-10 rounded-md"
               onClick={keywordSearch}
             >
               <SearchIcon className="w-4 h-4 text-white m-auto" />
@@ -96,7 +99,8 @@ const Banner = ({ className, search }) => {
           </div>
           <div className="flex space-x-[6px] items-stretch">
             <Select
-              className="flex-grow"
+              styles={customStyles}
+              className="tracking-wider flex-grow"
               options={selectCategories}
               value={category}
               defaultValue={selectCategories[0]}
@@ -106,7 +110,8 @@ const Banner = ({ className, search }) => {
               }
             />
             <Select
-              className="flex-grow tracking-wider"
+              styles={customStyles}
+              className="tracking-wider flex-grow"
               options={selectCities}
               value={city}
               defaultValue={selectCities[0]}

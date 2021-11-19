@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router"; // react-router v4/v5
 import ErrorBoundary from "./ErrorBoundary";
+import Loading from "components/common/Loading";
 
 const Home = React.lazy(() => import("views/Home"));
 const Restaurant = React.lazy(() => import("views/Restaurant"));
@@ -15,68 +16,68 @@ const Routes = () => {
     <ErrorBoundary>
       <Switch>
         <Route exact path="/">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Home />
           </Suspense>
         </Route>
         <Route exact path="/scenicSpot/">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <ScenicSpot />
           </Suspense>
         </Route>
         <Route exact path="/scenicSpot/:city">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <ScenicSpot />
           </Suspense>
         </Route>
         <Route exact path="/restaurant/">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Restaurant />
           </Suspense>
         </Route>
         <Route exact path="/restaurant/:city">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Restaurant />
           </Suspense>
         </Route>
         <Route exact path="/hotel/">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Hotel />
           </Suspense>
         </Route>
         <Route exact path="/hotel/:city">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Hotel />
           </Suspense>
         </Route>
         <Route exact path="/traffic/">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Traffic />
           </Suspense>
         </Route>
         <Route exact path="/traffic/:city">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Traffic />
           </Suspense>
         </Route>
 
         <Route exact path="/activity/">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Activity />
           </Suspense>
         </Route>
         <Route exact path="/activity/:city">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Activity />
           </Suspense>
         </Route>
         <Route exact path="/search">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Search />
           </Suspense>
         </Route>
         <Route exact path="/:city">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Home />
           </Suspense>
         </Route>

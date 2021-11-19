@@ -9,7 +9,7 @@ const SubTitle = ({ subTitle, icon }) => {
     );
   } else if (icon === "rectangle") {
     iconComponent = (
-      <svg width="20" height="20" className="mr-4">
+      <svg width="20" height="20" className="mr-6">
         <rect width="20" height="20" fill="#FFB72C" />
       </svg>
     );

@@ -42,7 +42,7 @@ const RestaurantCollection = ({ city, defaultCount, keyword }) => {
   return isLoading ? (
     <Loading />
   ) : error ? (
-    <h1>{error.message}</h1>
+    <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
       <div className="flex flex-wrap gap-x-2 gap-y-12 mb-12">

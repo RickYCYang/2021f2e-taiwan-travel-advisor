@@ -39,7 +39,7 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
   return isLoading ? (
     <Loading />
   ) : error ? (
-    <h1>{error.message}</h1>
+    <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
       <div className="flex flex-wrap gap-12 mb-12">

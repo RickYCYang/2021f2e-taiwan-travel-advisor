@@ -2,7 +2,7 @@ import { useRef } from "react";
 //components
 import CityThumbnail from "./CityThumbnail";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { CaretRightFilled } from "@ant-design/icons";
+import { CaretRightFilled, CaretLeftFilled } from "@ant-design/icons";
 
 //constant
 import cities from "const/cities";
@@ -10,15 +10,34 @@ import cities from "const/cities";
 const CityCollection = () => {
   const scrollbarRef = useRef();
 
-  function scrollRight() {
+  const scrollRight = () => {
     const curr = scrollbarRef.current;
     if (curr) {
-      curr.scrollLeft += 200;
+      curr.scrollTo({
+        behavior: "smooth",
+        left: curr.scrollLeft + 500,
+      });
     }
-  }
+  };
+
+  const scrollLeft = () => {
+    const curr = scrollbarRef.current;
+    if (curr) {
+      curr.scrollTo({
+        behavior: "smooth",
+        left: curr.scrollLeft - 500,
+      });
+    }
+  };
 
   return (
     <div className="relative">
+      <div
+        className="absolute top-[calc(50%-16px)] -left-12 rounded-lg w-8 h-8 bg-white flex justify-center items-center cursor-pointer hover:bg-gray-500 shadow-xl border border-gray-200"
+        onClick={scrollLeft}
+      >
+        <CaretLeftFilled className="text-black" />
+      </div>
       <div
         className="absolute top-[calc(50%-16px)] -right-12 rounded-lg w-8 h-8 bg-black flex justify-center items-center cursor-pointer hover:bg-gray-500"
         onClick={scrollRight}
