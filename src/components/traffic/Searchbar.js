@@ -117,7 +117,7 @@ const Searchbar = () => {
   };
 
   return (
-    <section className="bg-white w-full pt-9 relative after:shadow-corner-l before:shadow-corner-r">
+    <section className="bg-white w-full pt-9 relative lg:after:shadow-corner-l lg:before:shadow-corner-r">
       <div className="flex justify-center gap-2 mb-10">
         <Selector
           className="tracking-wider w-60"

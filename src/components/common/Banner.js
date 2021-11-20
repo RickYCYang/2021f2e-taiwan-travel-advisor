@@ -48,12 +48,12 @@ const Banner = ({ className, search }) => {
   };
 
   return (
-    <section className="bg-white px-[27px] py-[23px] mb-[90px] relative after:shadow-corner-l before:shadow-corner-r shadow-sm">
+    <section className="lg:bg-white px-[27px] py-[40px] relative lg:after:shadow-corner-l lg:before:shadow-corner-r lg:shadow-sm lg:py-[23px] lg:mb-[90px] ">
       <div
-        className={`${className} bg-cover bg-no-repeat bg-center w-full min-h-[490px] flex justify-center items-center`}
+        className={`${className} lg:bg-cover lg:bg-no-repeat lg:bg-center w-full lg:min-h-[490px] flex justify-center items-center z-10`}
       >
         <div className="flex flex-col justify-center items-stretch">
-          <div className="mb-4">
+          <div className="mb-4 hidden lg:block">
             <h2 className="text-white font-bold text-[50px] leading-[70px]">
               Welcome to <span className="text-custom-pink">Taiwan°</span>
             </h2>
@@ -71,7 +71,7 @@ const Banner = ({ className, search }) => {
               }
               value={keyword}
               list="searchHistory"
-              className="pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide"
+              className="w-[383px] text-sm lg:text-base pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide shadow-lg"
             ></input>
             <datalist id="searchHistory">
               {searchHistory.map((item) => (
@@ -87,7 +87,7 @@ const Banner = ({ className, search }) => {
           </div>
           <div className="flex space-x-[6px] items-stretch">
             <Selector
-              className="tracking-wider flex-grow"
+              className="tracking-wider flex-grow text-sm lg:text-base"
               options={selectCategories}
               value={category}
               defaultValue={selectCategories[0]}
@@ -97,7 +97,7 @@ const Banner = ({ className, search }) => {
               }
             />
             <Selector
-              className="tracking-wider flex-grow"
+              className="tracking-wider flex-grow text-sm lg:text-base"
               options={selectCities}
               value={city}
               defaultValue={selectCities[0]}

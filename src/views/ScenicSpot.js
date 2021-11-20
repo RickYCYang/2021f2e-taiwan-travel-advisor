@@ -8,7 +8,7 @@ const ScenicSpot = () => {
   const { city } = useParams();
   return (
     <Main>
-      <Banner className="bg-scenicspot" />
+      <Banner className="lg:bg-scenicspot" />
       <ScenicSpots city={city} defaultCount={40} />
     </Main>
   );

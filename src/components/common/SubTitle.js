@@ -18,7 +18,7 @@ const SubTitle = ({ subTitle, icon }) => {
   }
 
   return (
-    <h2 className="flex items-center text-xl mb-3">
+    <h2 className="flex items-center text-sm lg:text-xl mb-3">
       {iconComponent}
       {subTitle}
     </h2>

@@ -9,7 +9,7 @@ const Restaurant = () => {
   const { city } = useParams();
   return (
     <Main>
-      <Banner className="bg-restaurant" />
+      <Banner className="lg:bg-restaurant" />
       <Restaurtants city={city} defaultCount={40} />
     </Main>
   );

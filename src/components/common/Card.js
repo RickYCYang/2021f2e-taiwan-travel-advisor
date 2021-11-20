@@ -10,15 +10,15 @@ const Card = memo(
   ({ title, address, picture, city, onClick }) => {
     return (
       <div
-        className={`relative flex flex-col bg-white w-[206px] h-[243px] shadow after:shadow-corner-l before:shadow-corner-r p-3 cursor-pointer`}
+        className={`relative flex flex-col bg-white w-[152px] lg:w-[206px]  shadow after:shadow-corner-l before:shadow-corner-r p-3 cursor-pointer`}
         onClick={onClick}
       >
         <img
-          className="lazyload rounded block w-full h-[137px] object-cover shadow mb-[10px] transition hover:scale-110 duration-500"
+          className="lazyload rounded block w-full h-[128px] lg:h-[137px] object-cover shadow mb-[10px] transition hover:scale-110 duration-500"
           data-src={picture ?? altImage}
           alt={title}
         />
-        <h4 className="text-sm ">{title}</h4>
+        <h4 className="text-sm mb-3">{title}</h4>
         <div className="mt-auto flex">
           <LocationMarkerIcon className="w-4 text-custom-pink inline mr-1 mt-auto" />
           <p

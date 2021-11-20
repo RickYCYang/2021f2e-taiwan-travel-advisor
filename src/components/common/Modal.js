@@ -68,23 +68,23 @@ const Modal = () => {
         <div className="fixed z-30 -inset-10 bg-gray-500 bg-opacity-30 backdrop-blur w-100vw h-100vh overflow-hidden"></div>
       )}
       <button
-        style={{ top: `${scrollPosition - 80}px` }}
-        className={`absolute top-[${scrollPosition}] left-[calc(50%+350px)] transform transition duration-700
+        style={{ top: `${scrollPosition - 50}px` }}
+        className={`absolute md:left-[calc(50%+290px)] lg:left-[calc(50%+340px)] transform transition duration-700
         ${show ? "opacity-100 z-40" : "opacity-0 z-n1"}`}
         onClick={toggleModal}
       >
-        <CloseOutlined className=" bg-custom-pink text-white p-5 rounded-lg font-extrabold" />
+        <CloseOutlined className=" bg-custom-pink text-white p-3 lg:p-5 rounded-lg font-extrabold" />
       </button>
       <div
-        style={{ top: `${scrollPosition - 80}px` }}
-        className={`absolute top-[${scrollPosition}] left-[calc(50%-338px)] w-[676px] max-h-[730px] bg-white rounded-lg shadow-lg p-8 transform transition 
+        style={{ top: `${scrollPosition - 50}px` }}
+        className={`absolute md:left-[calc(50%-280px)] lg:left-[calc(50%-338px)] md:w-[560px] lg:w-[676px] max-h-[600px] lg:max-h-[730px] bg-white rounded-lg p-8 transform transition 
                     duration-700 shadow-xl
                     ${
                       show ? "opacity-100 z-40" : "opacity-0 z-n1"
                     } overflow-auto `}
       >
         <PerfectScrollbar className="space-y-[22px]">
-          <div className="relative h-[460px]">
+          <div className="relative h-[380px] lg:h-[460px]">
             {
               /// If there is no photo, render the default picture
               photos.length > 0 ? (
@@ -92,7 +92,7 @@ const Modal = () => {
                   .filter((photo) => photo.includes("https"))
                   .map((photo) => (
                     <img
-                      className={`absolute inset-0 lazyload rounded block h-[459px] w-full object-cover shadow transform transition duration-700
+                      className={`absolute inset-0 lazyload rounded block h-[380px] lg:h-[460px] w-full object-cover shadow transform transition duration-700
                         ${
                           photos[photoIndex] === photo
                             ? "opacity-100 z-40"

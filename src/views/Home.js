@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <Main>
-      <Banner className="bg-home" />
+      <Banner className="lg:bg-home" />
       <Cities />
       <Activities city={city} defaultCount={4} />
       <ScenicSpots city={city} />

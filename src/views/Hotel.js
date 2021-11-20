@@ -8,7 +8,7 @@ const Hotel = () => {
   const { city } = useParams();
   return (
     <Main>
-      <Banner className="bg-hotel" />
+      <Banner className="lg:bg-hotel" />
       <Hotels city={city} defaultCount={40} />
     </Main>
   );

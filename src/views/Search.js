@@ -19,7 +19,7 @@ const Search = () => {
 
   return (
     <Main>
-      <Banner className="bg-search" search={keyword} />
+      <Banner className="lg:bg-search" search={keyword} />
       <Activities keyword={keyword} />
       <ScenicSpots keyword={keyword} />
       <Restaurants keyword={keyword} />

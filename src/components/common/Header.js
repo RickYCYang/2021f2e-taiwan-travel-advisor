@@ -4,11 +4,12 @@ import { CaretUpOutlined, CloudFilled, YuqueFilled } from "@ant-design/icons";
 
 const Header = () => {
   return (
-    <header className="bg-white sticky top-0 z-20">
+    <header className="sticky top-0 z-20">
       <nav
-        className="relativ container m-auto py-3 flex justify-center items-center 
-                  md:justify-between md:items-end md:py-[17px] 
-                  lg:pt-[29px] lg:pb-[18px]"
+        className="relative container m-auto py-3 flex justify-center items-center 
+                  md:justify-between md:items-end md:py-[17px] md:px-10 
+                  bg-white
+                  lg:pt-[29px] lg:pb-[18px] "
       >
         <h1>
           <Link to="/" className="logo" alt="Taiwan Tourguide">

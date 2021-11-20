@@ -33,7 +33,7 @@ const RouteFlow = () => {
           >
             {stops.map((stop) => (
               <div
-                className="w-1/2 flex gap-12 justify-start items-center"
+                className="w-1/2 flex gap-6 lg:gap-12 justify-start items-center"
                 key={stop.StationID}
               >
                 {stop.estimateTime ? (

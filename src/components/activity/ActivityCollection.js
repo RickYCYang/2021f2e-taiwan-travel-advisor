@@ -42,7 +42,7 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
     <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
-      <div className="flex flex-wrap gap-12 mb-12">
+      <div className="flex flex-wrap items-center justify-between lg:justify-start gap-6 lg:gap-12 mb-12">
         {data.map((activity, index) => (
           <ActivityThumbnail activity={activity} key={index} />
         ))}
