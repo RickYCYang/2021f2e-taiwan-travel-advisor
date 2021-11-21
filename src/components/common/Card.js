@@ -10,7 +10,7 @@ const Card = memo(
   ({ title, address, picture, city, onClick }) => {
     return (
       <div
-        className={`relative flex flex-col bg-white w-[152px] lg:w-[206px]  shadow after:shadow-corner-l before:shadow-corner-r p-3 cursor-pointer`}
+        className={`relative flex flex-col bg-white w-[calc(50%-8px)] md:w-[152px] lg:w-[206px] shadow after:shadow-corner-l before:shadow-corner-r p-3 cursor-pointer`}
         onClick={onClick}
       >
         <img

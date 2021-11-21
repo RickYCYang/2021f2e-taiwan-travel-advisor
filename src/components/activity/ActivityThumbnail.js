@@ -44,13 +44,13 @@ const ActivityThumbnail = memo(
     // };
     return (
       <>
-        <div className="w-[calc(50%-27px)] relative flex p-4 bg-white h-[150px] lg:h-[228px] shadow after:shadow-corner-l before:shadow-corner-r">
+        <div className="w-full md:w-[calc(50%-27px)] relative flex p-4 bg-white h-32 md:h-[150px] lg:h-[228px] shadow after:shadow-corner-l before:shadow-corner-r">
           <img
             className="lazyload rounded block w-1/3 h-full object-cover mr-4 shadow"
             data-src={photo ?? altImage}
           />
           <div className="flex flex-col justify-between max-w-[calc(100%-33%-16px)]">
-            <h4 className="font-semibold mb-[14px] md:text-sm lg:text-base">
+            <h4 className="font-semibold mb-[14px] text-sm lg:text-base">
               {Name}
             </h4>
             <p className="hidden lg:line-clamp-5 text-sm text-gray-400 mb-3">
@@ -59,7 +59,9 @@ const ActivityThumbnail = memo(
             <div className="flex items-center justify-between">
               <div className="lg:w-1/2">
                 <LocationMarkerIcon className=" w-5 text-custom-pink inline mr-2" />
-                <h6 className="text-sm inline ">{Location}</h6>
+                <h6 className="text-sm inline ">
+                  {Location || "to see the official site"}
+                </h6>
               </div>
               <button
                 className="hidden lg:block border border-custom-pink px-8 py-2 text-custom-pink rounded-xl text-sm w-1/2 hover:bg-custom-pink hover:text-white"

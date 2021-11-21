@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 // components
 import { SearchIcon } from "@heroicons/react/solid";
 import Selector from "./Selector";
+import MobileNavbar from "components/common/MobileNavbar";
 // constant
 import cities from "const/cities";
 import categories from "const/categories";
@@ -15,6 +16,7 @@ import {
 
 const Banner = ({ className, search }) => {
   const history = useHistory();
+  const location = useLocation();
   /// Create selector options pool
   const selectCities = createOptions(cities, {
     label: "不分縣市",
@@ -39,16 +41,18 @@ const Banner = ({ className, search }) => {
   };
 
   const keywordSearch = () => {
-    setSearchHistory([...searchHistory, keyword]);
-    setLocalStorageWithExpiry(
-      "searchHistory",
-      [...searchHistory, keyword].toString()
-    );
+    if (!searchHistory.includes(keyword)) {
+      setSearchHistory([...searchHistory, keyword]);
+      setLocalStorageWithExpiry(
+        "searchHistory",
+        [...searchHistory, keyword].toString()
+      );
+    }
     history.push(`/search?q=${keyword}`);
   };
 
   return (
-    <section className="lg:bg-white px-[27px] py-[40px] relative lg:after:shadow-corner-l lg:before:shadow-corner-r lg:shadow-sm lg:py-[23px] lg:mb-[90px] ">
+    <section className="bg-white md:bg-[#F6F7FB] lg:bg-white pb-5 px-3 md:px-[27px] md:py-[40px] relative lg:after:shadow-corner-l lg:before:shadow-corner-r lg:shadow-sm lg:py-[23px] lg:mb-[90px] ">
       <div
         className={`${className} lg:bg-cover lg:bg-no-repeat lg:bg-center w-full lg:min-h-[490px] flex justify-center items-center z-10`}
       >
@@ -61,7 +65,8 @@ const Banner = ({ className, search }) => {
               台北、台中、台南、屏東、宜蘭……遊遍台灣
             </h6>
           </div>
-          <div className="flex justify-between space-x-[6px] mb-[10px]">
+          {/* Below div won't show in mobile */}
+          <div className="hidden md:flex justify-between space-x-[6px] mb-[10px]">
             <input
               type="text"
               placeholder="搜尋關鍵字"
@@ -85,26 +90,22 @@ const Banner = ({ className, search }) => {
               <SearchIcon className="w-4 h-4 text-white m-auto" />
             </button>
           </div>
+          {/* Below ul shows in mobile only */}
+          <MobileNavbar />
           <div className="flex space-x-[6px] items-stretch">
             <Selector
               className="tracking-wider flex-grow text-sm lg:text-base"
               options={selectCategories}
               value={category}
               defaultValue={selectCategories[0]}
-              onChange={
-                //(e) => dispatch(toggleCategory(e))
-                (e) => setCategory(e)
-              }
+              onChange={(e) => setCategory(e)}
             />
             <Selector
               className="tracking-wider flex-grow text-sm lg:text-base"
               options={selectCities}
               value={city}
               defaultValue={selectCities[0]}
-              onChange={
-                //(e) => dispatch(toggleCity(e))
-                (e) => setCity(e)
-              }
+              onChange={(e) => setCity(e)}
             />
             <button
               className="bg-custom-yellow w-10 rounded-md"

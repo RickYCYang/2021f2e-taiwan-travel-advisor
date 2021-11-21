@@ -5,7 +5,7 @@ import RouteFlow from "components/traffic/RouteFlow";
 
 const Traffic = () => {
   return (
-    <Main className="space-y-[48px]">
+    <Main className="space-y-p[24px] md:space-y-[48px]">
       <Searchbar />
       <RouteFlow />
     </Main>

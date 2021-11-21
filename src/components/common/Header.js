@@ -19,7 +19,7 @@ const Header = () => {
         <button className="absolute right-[16px] bg-custom-pink h-[30px] w-[30px] rounded md:hidden">
           <SearchIcon className="w-4 h-4 text-white m-auto" />
         </button>
-
+        {/* Below ul won't show in mobile */}
         <ul className="hidden md:flex space-x-[17px]">
           <li>
             <Link to="/scenicspot" className="nav-link text-custom-pink">

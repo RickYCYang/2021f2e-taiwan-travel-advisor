@@ -33,13 +33,13 @@ const CityCollection = () => {
   return (
     <div className="relative">
       <div
-        className="absolute top-[calc(50%-16px)] -left-12 rounded-lg w-8 h-8 bg-white flex justify-center items-center cursor-pointer hover:bg-gray-500 shadow-xl border border-gray-200"
+        className="hidden md:flex absolute top-[calc(50%-16px)] -left-12 rounded-lg w-8 h-8 bg-white justify-center items-center cursor-pointer hover:bg-gray-500 shadow-xl border border-gray-200"
         onClick={scrollLeft}
       >
         <CaretLeftFilled className="text-black" />
       </div>
       <div
-        className="absolute top-[calc(50%-16px)] -right-12 rounded-lg w-8 h-8 bg-black flex justify-center items-center cursor-pointer hover:bg-gray-500"
+        className="hidden md:flex absolute top-[calc(50%-16px)] -right-12 rounded-lg w-8 h-8 bg-black  justify-center items-center cursor-pointer hover:bg-gray-500"
         onClick={scrollRight}
       >
         <CaretRightFilled className="text-white" />

@@ -14,7 +14,7 @@ const Citythumbnail = ({ city, small }) => {
         className={`bg-white ${paddingXaxis} ${paddingYaxis} mb-2 shadow cursor-pointer`}
       >
         <div
-          className={`bg-cover ${bgClass} bg-no-repeat bg-center md:w-[159px] lg:w-[177px] ${heightClass}`}
+          className={`bg-cover ${bgClass} bg-no-repeat bg-center w-[159px] lg:w-[177px] ${heightClass}`}
         >
           <div className="bg-[rgba(0,0,0,0.2)] w-full h-full flex flex-col justify-center items-center space-y-2 group">
             <LocationMarkerIcon className="text-white w-5 group-hover:text-custom-pink" />
@@ -32,25 +32,25 @@ export default Citythumbnail;
 
 const getHeightClass = (small) => {
   if (small) {
-    return "lg:h-[106px] md:h-[92px]";
+    return "h-[92px] lg:h-[106px]";
   } else {
-    return "lg:h-[217px] md:h-[192px]";
+    return "h-[192px] lg:h-[217px]";
   }
 };
 
 const getPaddingYaxisClass = (small) => {
   if (small) {
-    return "lg:py-[7px] md:py-[5px]";
+    return "py-[5px] lg:py-[7px] ";
   } else {
-    return "lg:py-[14px] md:py-[10px]";
+    return "py-[10px] lg:py-[14px]";
   }
 };
 
 const getPaddingXaxisClass = (small) => {
   if (small) {
-    return "lg:px-[8px] md:px-[5px]";
+    return "px-[5px] lg:px-[8px] ";
   } else {
-    return "lg:px-[13px] md:px-[10px]";
+    return "px-[10px] lg:px-[13px] ";
   }
 };
 

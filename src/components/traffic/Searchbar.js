@@ -13,6 +13,7 @@ import {
 
 // components
 import Selector from "components/common/Selector";
+import MobileNavbar from "components/common/MobileNavbar";
 
 // constant
 const cities = [
@@ -117,8 +118,9 @@ const Searchbar = () => {
   };
 
   return (
-    <section className="bg-white w-full pt-9 relative lg:after:shadow-corner-l lg:before:shadow-corner-r">
-      <div className="flex justify-center gap-2 mb-10">
+    <section className="bg-white flex flex-col items-stretch  w-full px-4 md:px-0 md:pt-9 relative lg:after:shadow-corner-l lg:before:shadow-corner-r">
+      <MobileNavbar />
+      <div className="flex justify-center gap-2 mb-4 md:mb-10">
         <Selector
           className="tracking-wider w-60"
           options={cities}
@@ -133,9 +135,9 @@ const Searchbar = () => {
           onChange={toggleRoute}
         />
       </div>
-      <div className="flex justify-center gap-20">
+      <div className="flex justify-center gap-10 md:gap-20">
         <button
-          className={`px-24 py-3 hover:bg-gray-100 ${
+          className={`text-sm md:text-base px-8 md:px-24 py-3 hover:bg-gray-100 ${
             direction === 0 && "border-b-2 border-b-custom-pink"
           }`}
           onClick={() => setDirection(0)}
@@ -143,7 +145,7 @@ const Searchbar = () => {
           往 <span className="text-custom-pink ml-2">{departure}</span>
         </button>
         <button
-          className={`px-24 py-3 hover:bg-gray-100 ${
+          className={`text-sm md:text-base px-8 md:px-24 py-3 hover:bg-gray-100 ${
             direction === 1 && "border-b-2 border-b-custom-pink"
           }`}
           onClick={() => setDirection(1)}
