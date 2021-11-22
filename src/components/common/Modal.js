@@ -13,8 +13,11 @@ import {
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { useSelector, useDispatch } from "react-redux";
+import useWindowSize from "hooks/useWindowSize";
 import { closeModal, modalSelector } from "redux/slices/modalSlice";
 import altImage from "assets/images/alt.jpeg";
+
+const topOffset = 70;
 
 const Modal = () => {
   const {
@@ -33,7 +36,7 @@ const Modal = () => {
   const dispatch = useDispatch();
   const scrollPosition = useScrollPosition();
   const [photoIndex, setPhotoIndex] = useState(0);
-
+  const size = useWindowSize();
   ///Disable the scrollbar when modal is opening
   if (show) {
     document.body.style.overflow = "hidden";
@@ -68,23 +71,23 @@ const Modal = () => {
         <div className="fixed z-30 -inset-10 bg-gray-500 bg-opacity-30 backdrop-blur w-100vw h-100vh overflow-hidden"></div>
       )}
       <button
-        style={{ top: `${scrollPosition - 50}px` }}
-        className={`absolute md:left-[calc(50%+290px)] lg:left-[calc(50%+340px)] transform transition duration-700
-        ${show ? "opacity-100 z-40" : "opacity-0 z-n1"}`}
+        style={{ top: `${scrollPosition - (size.width > 375 ? 70 : 0)}px` }}
+        className={`absolute left-[calc(50%+148px)] md:left-[calc(50%+290px)] lg:left-[calc(50%+340px)] transform transition duration-700
+        ${show ? "opacity-100 z-50" : "opacity-0 z-n1"}`}
         onClick={toggleModal}
       >
-        <CloseOutlined className=" bg-custom-pink text-white p-3 lg:p-5 rounded-lg font-extrabold" />
+        <CloseOutlined className=" bg-custom-pink text-white p-2 md:p-3 lg:p-5 rounded-lg font-extrabold" />
       </button>
       <div
-        style={{ top: `${scrollPosition - 50}px` }}
-        className={`absolute md:left-[calc(50%-280px)] lg:left-[calc(50%-338px)] md:w-[560px] lg:w-[676px] max-h-[600px] lg:max-h-[730px] bg-white rounded-lg p-8 transform transition 
+        style={{ top: `${scrollPosition - (size.width > 375 ? 70 : 0)}px` }}
+        className={`absolute left-[calc(50%-148px)] md:left-[calc(50%-280px)] lg:left-[calc(50%-338px)] w-[296px] md:w-[560px] lg:w-[676px] max-h-[600px] lg:max-h-[700px] bg-white rounded-lg p-4 md:p-8 transform transition 
                     duration-700 shadow-xl
                     ${
                       show ? "opacity-100 z-40" : "opacity-0 z-n1"
                     } overflow-auto `}
       >
-        <PerfectScrollbar className="space-y-[22px]">
-          <div className="relative h-[380px] lg:h-[460px]">
+        <PerfectScrollbar className="space-y-4 md:space-y-[22px]">
+          <div className="relative h-[195px] md:h-[380px] lg:h-[460px]">
             {
               /// If there is no photo, render the default picture
               photos.length > 0 ? (
@@ -92,7 +95,7 @@ const Modal = () => {
                   .filter((photo) => photo.includes("https"))
                   .map((photo) => (
                     <img
-                      className={`absolute inset-0 lazyload rounded block h-[380px] lg:h-[460px] w-full object-cover shadow transform transition duration-700
+                      className={`absolute inset-0 lazyload rounded block h-[195px] md:h-[380px] lg:h-[460px] w-full object-cover shadow transform transition duration-700
                         ${
                           photos[photoIndex] === photo
                             ? "opacity-100 z-40"
@@ -104,7 +107,7 @@ const Modal = () => {
                   ))
               ) : (
                 <img
-                  className={`absolute inset-0 lazyload rounded block h-[459px] w-full object-cover shadow transform transition duration-700 opacity-100 z-40`}
+                  className={`absolute inset-0 lazyload rounded block h-[195px] md:h-[380px] lg:h-[460px] w-full object-cover shadow transform transition duration-700 opacity-100 z-40`}
                   src={altImage}
                 />
               )
@@ -114,7 +117,7 @@ const Modal = () => {
             <div className="text-right">
               <button>
                 <CaretLeftFilled
-                  className="bg-white text-black leading-none align-middle shadow  w-8 h-8 rounded-lg flex items-center justify-center mr-4  "
+                  className="bg-white text-black leading-none align-middle shadow w-8 h-8 rounded-lg flex items-center justify-center mr-4  "
                   onClick={() => togglePhoto("backward")}
                 />
               </button>
@@ -129,25 +132,25 @@ const Modal = () => {
 
           <h4 className="text-lg">{title}</h4>
           <p className="text-sm">{description}</p>
-          <div className="flex">
-            <h6 className="flex items-center w-2/3">
+          <div className="flex flex-col md:flex-row">
+            <h6 className="flex items-center md:w-2/3">
               <ClockCircleOutlined className=" text-custom-pink w-5 align-middle mr-3" />
               {nonCycle ? nonCycle : cycle ? cycle : time.slice(0, 10)}
             </h6>
             {charge && (
-              <h6 className="flex items-center w-1/3">
+              <h6 className="flex items-center md:w-1/3">
                 <MoneyCollectOutlined className=" text-custom-pink w-5 align-middle mr-3" />
                 {charge}
               </h6>
             )}
           </div>
-          <div className="flex">
-            <h6 className="flex items-center w-2/3">
+          <div className="flex flex-col md:flex-row">
+            <h6 className="flex items-center md:w-2/3">
               <LocationMarkerIcon className=" text-custom-pink w-5 align-middle mr-3" />
               {location || address}
             </h6>
             {phone && (
-              <h6 className="flex items-center w-1/3">
+              <h6 className="flex items-center md:w-1/3">
                 <PhoneOutlined className=" text-custom-pink w-5 align-middle mr-3" />
                 <a href={`tel:+${phone}`}>{phone}</a>
               </h6>

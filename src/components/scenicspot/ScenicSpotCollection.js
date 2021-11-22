@@ -14,6 +14,7 @@ import {
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 import Card from "components/common/Card";
+import Button from "components/common/Button";
 
 const ScenicSpotCollection = ({ city, defaultCount, keyword }) => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const ScenicSpotCollection = ({ city, defaultCount, keyword }) => {
     <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
-      <div className="flex flex-wrap gap-x-2 gap-y-12 mb-12">
+      <div className="flex flex-wrap gap-x-2 gap-y-6 md:gap-y-12 mb-6 md:mb-12">
         {data.map((scenicSpot) => {
           const payload = {
             photos: Object.values(scenicSpot.Picture) || [],
@@ -73,13 +74,7 @@ const ScenicSpotCollection = ({ city, defaultCount, keyword }) => {
         ""
       ) : (
         <div className="text-center">
-          <button
-            className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
-                      hover:text-custom-pink hover:border hover:border-custom-pink"
-            onClick={loadMoreScenicSpots}
-          >
-            Load More
-          </button>
+          <Button onClick={loadMoreScenicSpots} title={"Load More"} />
         </div>
       )}
     </>

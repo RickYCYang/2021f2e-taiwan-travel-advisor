@@ -32,10 +32,10 @@ module.exports = {
         },
       },
       animation: {
-        show_25: "show_25 4s linear infinite",
-        show_50: "show_50 4s linear infinite",
-        show_75: "show_75 4s linear infinite",
-        show_90: "show_90 4s linear infinite",
+        show_25: "show_25 3s linear infinite",
+        show_50: "show_50 3s linear infinite",
+        show_75: "show_75 3s linear infinite",
+        show_90: "show_90 3s linear infinite",
       },
       colors: {
         "custom-pink": "#FF1D6C",

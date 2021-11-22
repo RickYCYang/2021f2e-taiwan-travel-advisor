@@ -10,6 +10,7 @@ import { getHotels, getHotelsByCity, getHotelsByKeyword } from "api/hotel";
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 import Card from "components/common/Card";
+import Button from "components/common/Button";
 
 const HotelCollection = ({ city, defaultCount, keyword }) => {
   const [hotelCount, setHotelCount] = useState(defaultCount || 10);
@@ -41,7 +42,7 @@ const HotelCollection = ({ city, defaultCount, keyword }) => {
     <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
-      <div className="flex flex-wrap gap-x-2 gap-y-12 mb-12">
+      <div className="flex flex-wrap gap-x-2 gap-y-6 md:gap-y-12 mb-6 md:mb-12">
         {data.map((hotel) => {
           const payload = {
             photos: Object.values(hotel.Picture) || [],
@@ -68,13 +69,7 @@ const HotelCollection = ({ city, defaultCount, keyword }) => {
         ""
       ) : (
         <div className="text-center">
-          <button
-            className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
-                          hover:text-custom-pink hover:border hover:border-custom-pink"
-            onClick={loadMoreHotel}
-          >
-            Load More
-          </button>
+          <Button onClick={loadMoreHotel} title={"Load More"} />
         </div>
       )}
     </>

@@ -18,7 +18,7 @@ const RouteFlow = () => {
     } else {
       setMaxHeight(`${stops.length * 100}px`);
     }
-  }, [stops]);
+  }, [stops, width]);
 
   return (
     <Container>

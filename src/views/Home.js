@@ -40,7 +40,7 @@ const Home = () => {
       <Activities city={city} defaultCount={4} />
       <ScenicSpots city={city} />
       <Restaurants city={city} />
-      <Hotels />
+      <Hotels city={city} />
     </Main>
   );
 };

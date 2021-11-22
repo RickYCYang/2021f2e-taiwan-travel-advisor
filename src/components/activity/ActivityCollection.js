@@ -12,6 +12,7 @@ import {
 import ActivityThumbnail from "./ActivityThumbnail";
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
+import Button from "components/common/Button";
 
 const ActivityCollection = ({ city, defaultCount, keyword }) => {
   const [activityCount, setActivityCount] = useState(defaultCount || 10);
@@ -42,7 +43,7 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
     <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
-      <div className="flex flex-wrap items-center justify-between lg:justify-start gap-6 lg:gap-12 mb-12">
+      <div className="flex flex-wrap items-center justify-between lg:justify-start gap-6 lg:gap-12 mb-6 md:mb-12">
         {data.map((activity, index) => (
           <ActivityThumbnail activity={activity} key={index} />
         ))}
@@ -51,13 +52,7 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
         ""
       ) : (
         <div className="text-center">
-          <button
-            className="text-sm cursor-pointer bg-custom-pink text-white px-5 py-2 rounded-lg shadow hover:bg-white 
-                              hover:text-custom-pink hover:border hover:border-custom-pink"
-            onClick={loadMoreActivity}
-          >
-            Load More
-          </button>
+          <Button title="Load More" onClick={loadMoreActivity} />
         </div>
       )}
     </>

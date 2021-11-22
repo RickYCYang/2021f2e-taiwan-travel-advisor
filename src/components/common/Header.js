@@ -4,11 +4,10 @@ import { CaretUpOutlined, CloudFilled, YuqueFilled } from "@ant-design/icons";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-20">
+    <header className="sticky top-0 z-20 bg-white">
       <nav
         className="relative container m-auto py-3 flex justify-center items-center 
                   md:justify-between md:items-end md:py-[17px] md:px-10 
-                  bg-white
                   lg:pt-[29px] lg:pb-[18px] "
       >
         <h1>
@@ -16,9 +15,9 @@ const Header = () => {
             Taiwan Tourguide
           </Link>
         </h1>
-        <button className="absolute right-[16px] bg-custom-pink h-[30px] w-[30px] rounded md:hidden">
+        {/* <button className="absolute right-[16px] bg-custom-pink h-[30px] w-[30px] rounded md:hidden">
           <SearchIcon className="w-4 h-4 text-white m-auto" />
-        </button>
+        </button> */}
         {/* Below ul won't show in mobile */}
         <ul className="hidden md:flex space-x-[17px]">
           <li>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // components
 import { SearchIcon } from "@heroicons/react/solid";
 import Selector from "./Selector";
@@ -16,7 +16,6 @@ import {
 
 const Banner = ({ className, search }) => {
   const history = useHistory();
-  const location = useLocation();
   /// Create selector options pool
   const selectCities = createOptions(cities, {
     label: "不分縣市",
@@ -65,8 +64,10 @@ const Banner = ({ className, search }) => {
               台北、台中、台南、屏東、宜蘭……遊遍台灣
             </h6>
           </div>
+          {/* Below ul shows in mobile only */}
+          <MobileNavbar />
           {/* Below div won't show in mobile */}
-          <div className="hidden md:flex justify-between space-x-[6px] mb-[10px]">
+          <div className="flex justify-between space-x-[6px] mb-[10px]">
             <input
               type="text"
               placeholder="搜尋關鍵字"
@@ -76,7 +77,7 @@ const Banner = ({ className, search }) => {
               }
               value={keyword}
               list="searchHistory"
-              className="w-[383px] text-sm lg:text-base pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide shadow-lg"
+              className="md:w-[383px] text-sm lg:text-base pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide shadow-lg"
             ></input>
             <datalist id="searchHistory">
               {searchHistory.map((item) => (
@@ -90,8 +91,6 @@ const Banner = ({ className, search }) => {
               <SearchIcon className="w-4 h-4 text-white m-auto" />
             </button>
           </div>
-          {/* Below ul shows in mobile only */}
-          <MobileNavbar />
           <div className="flex space-x-[6px] items-stretch">
             <Selector
               className="tracking-wider flex-grow text-sm lg:text-base"
