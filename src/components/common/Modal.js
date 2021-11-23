@@ -17,8 +17,6 @@ import useWindowSize from "hooks/useWindowSize";
 import { closeModal, modalSelector } from "redux/slices/modalSlice";
 import altImage from "assets/images/alt.jpeg";
 
-const topOffset = 70;
-
 const Modal = () => {
   const {
     show,

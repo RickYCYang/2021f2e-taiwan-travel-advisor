@@ -48,6 +48,7 @@ const ActivityThumbnail = memo(
           <img
             className="lazyload rounded block w-1/3 h-full object-cover mr-4 shadow"
             data-src={photo ?? altImage}
+            onClick={() => dispatch(openModal(payload))}
           />
           <div className="flex flex-col justify-between max-w-[calc(100%-33%-16px)]">
             <h4 className="font-semibold mb-[14px] text-sm lg:text-base">

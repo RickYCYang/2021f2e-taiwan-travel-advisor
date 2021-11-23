@@ -7,6 +7,7 @@
 import Routes from "views/Routes";
 import Header from "components/common/Header";
 import Footer from "components/common/Footer";
+import ScrollTopButton from "components/common/ScrollTopButton";
 import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { configureStore } from "@reduxjs/toolkit";
@@ -23,6 +24,7 @@ const App = () => {
         <Router>
           <Header />
           <Routes />
+          <ScrollTopButton />
           <Footer />
         </Router>
       </QueryClientProvider>

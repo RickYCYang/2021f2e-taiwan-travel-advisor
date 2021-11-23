@@ -10,6 +10,12 @@ const customStyles = {
       ? "#FFB72C"
       : "white",
   }),
+  control: (base, state) => ({
+    ...base,
+    border: "none", // default border color
+    boxShadow:
+      "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)", // no box-shadow
+  }),
 };
 
 const Selector = ({ className, options, value, defaultValue, onChange }) => {
