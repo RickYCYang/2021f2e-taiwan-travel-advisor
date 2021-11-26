@@ -22,11 +22,11 @@ const Card = memo(
           data-src={picture ?? altImage}
           alt={title}
         />
-        <h4 className="text-sm mb-3">{title}</h4>
-        <div className="mt-auto flex">
-          <LocationMarkerIcon className="w-4 text-custom-pink inline mr-1 mt-auto" />
+        <h4 className="text-sm mb-2">{title}</h4>
+        <div className="mt-auto flex items-center gap-2">
+          <LocationMarkerIcon className="w-4 text-custom-pink inline" />
           <p
-            className="text-custom-green text-xs inline line-clamp-1"
+            className="text-custom-green text-xs inline"
             data-for="main"
             data-tip={address ?? city}
             data-iscapture="true"
