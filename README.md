@@ -1,5 +1,7 @@
-# 2021 Front to End Practice 1 - Taiwan Travel Advisor.  
-Practice for React, Tailwind, React-Query
+# 2021 Front to End Practice 1 - Taiwan Travel Advisor, Deploy in Vercel.com
+https://taiwan-travel.vercel.app/
+
+# Practice for React, Tailwind, React-Query, Redux-toolkit
 
 # Getting Started with Create React App
 
