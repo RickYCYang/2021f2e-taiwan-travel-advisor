@@ -13,10 +13,11 @@ import cities from "const/cities";
 
 const checkCityParam = (city) => {
   let exist = false;
+  // eslint-disable-next-line
   cities.map(({ value }) => {
     if (city === value) {
       exist = true;
-      return;
+      return null;
     }
   });
   return exist;

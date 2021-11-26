@@ -4,17 +4,21 @@ import "lazysizes/plugins/parent-fit/ls.parent-fit";
 // components
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 import ReactTooltip from "react-tooltip";
+// assets
 import altImage from "assets/images/alt.jpeg";
 
 const Card = memo(
   ({ title, address, picture, city, onClick }) => {
     return (
       <div
-        className={`relative flex flex-col bg-white w-[calc(50%-8px)] md:w-[152px] lg:w-[206px] shadow after:shadow-corner-l before:shadow-corner-r p-3 cursor-pointer`}
+        className={`relative flex flex-col bg-white w-[calc(50%-8px)] shadow 
+                    after:shadow-corner-l before:shadow-corner-r p-3 cursor-pointer 
+                    md:w-[152px] lg:w-[206px] `}
         onClick={onClick}
       >
         <img
-          className="lazyload rounded block w-full h-[128px] lg:h-[137px] object-cover shadow mb-[10px] transition hover:scale-110 duration-500"
+          className="lazyload rounded block w-full h-[128px] object-cover shadow transition 
+                    hover:scale-110 duration-500 mb-[10px] lg:h-[137px]"
           data-src={picture ?? altImage}
           alt={title}
         />
@@ -45,6 +49,7 @@ const Card = memo(
     );
   },
   (prevProps, nextProps) => {
+    // if return true, the component won't re-render
     return prevProps.title === nextProps.title;
   }
 );

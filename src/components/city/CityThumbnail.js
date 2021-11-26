@@ -5,20 +5,17 @@ import { LocationMarkerIcon } from "@heroicons/react/solid";
 const Citythumbnail = ({ city, small }) => {
   const bgClass = getBackgroundImageClass(city.value);
   const heightClass = getHeightClass(small);
-  const paddingYaxis = getPaddingYaxisClass(small);
-  const paddingXaxis = getPaddingXaxisClass(small);
+  const padding = getPaddingClass(small);
 
   return (
     <Link to={`/${city.value}`}>
-      <div
-        className={`bg-white ${paddingXaxis} ${paddingYaxis} mb-2 shadow cursor-pointer`}
-      >
+      <div className={`bg-white box-border shadow cursor-pointer ${padding}`}>
         <div
-          className={`bg-cover ${bgClass} bg-no-repeat bg-center w-[159px] lg:w-[177px] ${heightClass}`}
+          className={`${bgClass} bg-cover box-border bg-no-repeat bg-center w-[159px] ${heightClass} lg:w-[177px]`}
         >
           <div className="bg-[rgba(0,0,0,0.2)] w-full h-full flex flex-col justify-center items-center space-y-2 group">
             <LocationMarkerIcon className="text-white w-5 group-hover:text-custom-pink" />
-            <h3 className="text-white md:text-sm lg:text-xl group-hover:text-custom-pink">
+            <h3 className="text-white group-hover:text-custom-pink md:text-sm lg:text-xl ">
               {city.label}
             </h3>
           </div>
@@ -34,23 +31,20 @@ const getHeightClass = (small) => {
   if (small) {
     return "h-[92px] lg:h-[106px]";
   } else {
-    return "h-[192px] lg:h-[217px]";
+    /* 
+      gap = 8px, 
+      92 * 2 + 8 = 192
+      106 * 2 + 8 = 220
+    */
+    return "h-[192px] lg:h-[220px]";
   }
 };
 
-const getPaddingYaxisClass = (small) => {
+const getPaddingClass = (small) => {
   if (small) {
-    return "py-[5px] lg:py-[7px] ";
+    return "p-[4px] lg:p-[8px] ";
   } else {
-    return "py-[10px] lg:py-[14px]";
-  }
-};
-
-const getPaddingXaxisClass = (small) => {
-  if (small) {
-    return "px-[5px] lg:px-[8px] ";
-  } else {
-    return "px-[10px] lg:px-[13px] ";
+    return "p-[8px] lg:p-[16px] ";
   }
 };
 

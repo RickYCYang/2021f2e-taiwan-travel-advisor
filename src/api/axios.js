@@ -2,7 +2,6 @@ import axios from "axios";
 import jsSHA from "jssha";
 
 axios.defaults.baseURL = process.env.REACT_APP_PTX_BASE_URL;
-//axios.defaults.headers["Accept-Encoding"] = "gzip";
 
 const getGMTString = () => new Date().toGMTString();
 const getAuthorization = () => {

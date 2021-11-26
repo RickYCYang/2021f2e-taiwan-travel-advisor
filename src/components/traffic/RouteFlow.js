@@ -25,11 +25,7 @@ const RouteFlow = () => {
       <p className="text-sm md:text-base text-custom-pink text-right mb-3">
         *每隔15秒自動更新
       </p>
-      <div
-        className={
-          "bg-white relative after:shadow-corner-l before:shadow-corner-r p-6 md:p-14"
-        }
-      >
+      <div className="bg-white relative after:shadow-corner-l before:shadow-corner-r p-6 md:p-14">
         {stops.length > 0 ? (
           <div
             className={`flex flex-col flex-wrap gap-8`}
@@ -37,15 +33,15 @@ const RouteFlow = () => {
           >
             {stops.map((stop) => (
               <div
-                className="w-full md:w-1/2 flex gap-6 lg:gap-12 justify-start items-center"
+                className="w-full flex justify-start items-center gap-6 md:w-1/2 lg:gap-12"
                 key={stop.StationID}
               >
                 {stop.estimateTime ? (
-                  <h6 className="border-2 border-black px-4 md:px-8 py-2 rounded-lg w-1/3 md:w-1/2 text-center">
+                  <h6 className="border-2 border-black px-4 py-2 rounded-lg w-1/3 text-center md:px-8 md:w-1/2">
                     {getHoursAndMinuteStr(addSeconds(date, stop.estimateTime))}
                   </h6>
                 ) : (
-                  <h6 className="border-2 border-gray-400 text-gray-400 px-4 md:px-8 py-2 rounded-lg w-1/3 md:w-1/2 text-center">
+                  <h6 className="border-2 border-gray-400 text-gray-400 px-4 py-2 rounded-lg w-1/3 text-center md:px-8 md:w-1/2">
                     未發車
                   </h6>
                 )}

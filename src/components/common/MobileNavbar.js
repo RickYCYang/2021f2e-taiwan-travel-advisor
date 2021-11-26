@@ -6,7 +6,10 @@ const MobileNavbar = () => {
   const location = useLocation();
 
   return (
-    <ul className="flex flex-nowrap justify-between items-center space-x-10 rounded-lg shadow-lg border border-gray-100 px-3 mb-3 text-sm w-full bg-white md:hidden">
+    <ul
+      className="flex flex-nowrap justify-between items-center space-x-10 rounded-lg shadow-lg 
+                  border border-gray-100 px-3 mb-3 text-sm w-full bg-white md:hidden"
+    >
       {categories.map((item) => (
         <li
           className={`py-2 hover:text-custom-pink ${

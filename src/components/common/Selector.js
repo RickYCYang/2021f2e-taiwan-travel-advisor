@@ -1,5 +1,18 @@
 import Select from "react-select";
 
+const Selector = ({ className, options, value, defaultValue, onChange }) => {
+  return (
+    <Select
+      styles={customStyles}
+      className={`${className}`}
+      options={options}
+      value={value}
+      defaultValue={defaultValue}
+      onChange={onChange}
+    />
+  );
+};
+
 const customStyles = {
   option: (provided, state) => ({
     ...provided,
@@ -14,21 +27,8 @@ const customStyles = {
     ...base,
     border: "none", // default border color
     boxShadow:
-      "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)", // no box-shadow
+      "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
   }),
-};
-
-const Selector = ({ className, options, value, defaultValue, onChange }) => {
-  return (
-    <Select
-      styles={customStyles}
-      className={className}
-      options={options}
-      value={value}
-      defaultValue={defaultValue}
-      onChange={onChange}
-    />
-  );
 };
 
 export default Selector;

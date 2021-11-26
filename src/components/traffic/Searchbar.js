@@ -15,7 +15,8 @@ import {
 import Selector from "components/common/Selector";
 import MobileNavbar from "components/common/MobileNavbar";
 
-// constant
+// constant,
+// Only five cities are supported by the API currently
 const cities = [
   { label: "臺北市", value: "Taipei" },
   { label: "新北市", value: "NewTaipei" },
@@ -109,7 +110,7 @@ const Searchbar = () => {
       });
       dispatch(setStops(data));
     }
-  }, [stops, direction, arrivalTimes]);
+  }, [stops, direction, arrivalTimes, dispatch]);
 
   const toggleRoute = (e) => {
     setRoute(e);
@@ -118,7 +119,10 @@ const Searchbar = () => {
   };
 
   return (
-    <section className="bg-white flex flex-col items-stretch  w-full px-4 md:px-0 md:pt-9 relative lg:after:shadow-corner-l lg:before:shadow-corner-r">
+    <section
+      className="relative bg-white flex flex-col items-stretch w-full px-4 
+                md:px-0 md:pt-9 lg:after:shadow-corner-l lg:before:shadow-corner-r"
+    >
       <MobileNavbar />
       <div className="flex justify-center gap-2 mb-4 md:mb-10">
         <Selector
@@ -137,17 +141,17 @@ const Searchbar = () => {
       </div>
       <div className="flex justify-center gap-10 md:gap-20">
         <button
-          className={`text-sm md:text-base px-8 md:px-24 py-3 hover:bg-gray-100 ${
-            direction === 0 && "border-b-2 border-b-custom-pink"
-          }`}
+          className={`text-sm px-8 py-3 hover:bg-gray-100 
+                    ${direction === 0 && "border-b-2 border-b-custom-pink"}
+                    md:px-24 md:text-base `}
           onClick={() => setDirection(0)}
         >
           往 <span className="text-custom-pink ml-2">{departure}</span>
         </button>
         <button
-          className={`text-sm md:text-base px-8 md:px-24 py-3 hover:bg-gray-100 ${
-            direction === 1 && "border-b-2 border-b-custom-pink"
-          }`}
+          className={`text-sm px-8 py-3 hover:bg-gray-100 
+                    ${direction === 1 && "border-b-2 border-b-custom-pink"}
+                    md:text-base md:px-24 `}
           onClick={() => setDirection(1)}
         >
           往 <span className="text-custom-pink ml-2">{destination}</span>

@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-
 // api
 import {
   getNewestAcitivities,
   getNewestAcitivitiesByCity,
   getNewestAcitivitiesByKeyword,
 } from "api/activity";
-
 // components
 import ActivityThumbnail from "./ActivityThumbnail";
 import WarningMsg from "components/common/WarningMsg";
@@ -33,8 +31,10 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
         : getNewestAcitivities(activityCount)
   );
 
+  const loadCityCount = 4;
+
   const loadMoreActivity = () => {
-    setActivityCount(activityCount + 4);
+    setActivityCount(activityCount + loadCityCount);
   };
 
   return isLoading ? (
@@ -43,7 +43,7 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
     <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
-      <div className="flex flex-wrap items-center justify-between lg:justify-start gap-6 lg:gap-12 mb-6 md:mb-12">
+      <div className="flex flex-wrap items-center justify-between gap-6 mb-6 md:mb-12 lg:justify-start lg:gap-12">
         {data.map((activity, index) => (
           <ActivityThumbnail activity={activity} key={index} />
         ))}

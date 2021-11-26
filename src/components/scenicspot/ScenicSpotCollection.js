@@ -2,14 +2,12 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { openModal } from "redux/slices/modalSlice";
-
 // api
 import {
   getScenicSpots,
   getScenicSpotsByCity,
   getScenicSpotsByKeyword,
 } from "api/scenicspot";
-
 // components
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";

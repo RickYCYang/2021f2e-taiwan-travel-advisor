@@ -2,10 +2,12 @@ import { memo } from "react";
 import { useDispatch } from "react-redux";
 import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
+
 // components
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 import { openModal } from "redux/slices/modalSlice";
 
+// assets
 import altImage from "assets/images/alt.jpeg";
 
 const ActivityThumbnail = memo(
@@ -35,37 +37,36 @@ const ActivityThumbnail = memo(
       nonCycle: NonCycle,
       charge: Charge,
     };
+
     const dispatch = useDispatch();
 
-    let photo = Object.values(Picture)[0];
-    //const [showModal, setShowModal] = useState(false);
-    // const toggleModal = () => {
-    //   setShowModal(true);
-    // };
+    let thumbnail = Object.values(Picture)[0];
+
     return (
       <>
-        <div className="w-full md:w-[calc(50%-27px)] relative flex p-4 bg-white h-32 md:h-[150px] lg:h-[228px] shadow after:shadow-corner-l before:shadow-corner-r">
+        <div className="relative bg-white flex w-full p-4 h-32 shadow before:shadow-corner-r after:shadow-corner-l  md:w-[calc(50%-27px)] md:h-[150px] lg:h-[228px] ">
           <img
             className="lazyload rounded block w-1/3 h-full object-cover mr-4 shadow"
-            data-src={photo ?? altImage}
+            data-src={thumbnail ?? altImage}
             onClick={() => dispatch(openModal(payload))}
+            alt={Name}
           />
           <div className="flex flex-col justify-between max-w-[calc(100%-33%-16px)]">
-            <h4 className="font-semibold mb-[14px] text-sm lg:text-base">
+            <h4 className="font-semibold text-sm mb-[14px] lg:text-base">
               {Name}
             </h4>
-            <p className="hidden lg:line-clamp-5 text-sm text-gray-400 mb-3">
+            <p className="hidden mb-3 lg:line-clamp-5 lg:text-sm lg:text-gray-400">
               {Description}
             </p>
             <div className="flex items-center justify-between">
               <div className="lg:w-1/2">
-                <LocationMarkerIcon className=" w-5 text-custom-pink inline mr-2" />
+                <LocationMarkerIcon className="w-5 text-custom-pink inline mr-2" />
                 <h6 className="text-sm inline ">
                   {Location || "to see the official site"}
                 </h6>
               </div>
               <button
-                className="hidden lg:block border border-custom-pink px-8 py-2 text-custom-pink rounded-xl text-sm w-1/2 hover:bg-custom-pink hover:text-white"
+                className="hidden lg:block lg:border lg:border-custom-pink lg:px-8 lg:py-2 lg:text-custom-pink lg:rounded-xl lg:text-sm lg:w-1/2 lg:hover:bg-custom-pink lg:hover:text-white"
                 onClick={() => dispatch(openModal(payload))}
               >
                 活動詳情
@@ -73,27 +74,11 @@ const ActivityThumbnail = memo(
             </div>
           </div>
         </div>
-        {/*       
-      <ActivityModal
-        show={showModal}
-        location={Location}
-        closeModal={() => setShowModal(false)}
-        setShowModal={setShowModal}
-        photos={Picture}
-        title={Name}
-        description={Description}
-        time={StartTime}
-        address={Address}
-        charge={Charge}
-        phone={Phone}
-        class1={Class1}
-        cycle={Cycle}
-        nonCycle={NonCycle}
-      /> */}
       </>
     );
   },
   (prevProps, nextProps) => {
+    // if return true, the component won't re-render
     return prevProps.activity.ActivityID === nextProps.activity.ActivityID;
   }
 );

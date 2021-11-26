@@ -60,7 +60,6 @@ const Routes = () => {
             <Traffic />
           </Suspense>
         </Route>
-
         <Route exact path="/activity/">
           <Suspense fallback={<Loading />}>
             <Activity />

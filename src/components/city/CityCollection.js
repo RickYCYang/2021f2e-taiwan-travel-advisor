@@ -3,29 +3,19 @@ import { useRef } from "react";
 import CityThumbnail from "./CityThumbnail";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { CaretRightFilled, CaretLeftFilled } from "@ant-design/icons";
-
 //constant
 import cities from "const/cities";
 
 const CityCollection = () => {
   const scrollbarRef = useRef();
 
-  const scrollRight = () => {
-    const curr = scrollbarRef.current;
-    if (curr) {
-      curr.scrollTo({
+  const scrollHorizontally = (direction) => {
+    const directionNum = direction === "right" ? 1 : -1;
+    const { current } = scrollbarRef;
+    if (current) {
+      current.scrollTo({
         behavior: "smooth",
-        left: curr.scrollLeft + 500,
-      });
-    }
-  };
-
-  const scrollLeft = () => {
-    const curr = scrollbarRef.current;
-    if (curr) {
-      curr.scrollTo({
-        behavior: "smooth",
-        left: curr.scrollLeft - 500,
+        left: current.scrollLeft + 500 * directionNum,
       });
     }
   };
@@ -33,28 +23,32 @@ const CityCollection = () => {
   return (
     <div className="relative">
       <div
-        className="hidden md:flex absolute top-[calc(50%-16px)] -left-12 rounded-lg w-8 h-8 bg-white justify-center items-center cursor-pointer hover:bg-gray-500 shadow-xl border border-gray-200"
-        onClick={scrollLeft}
+        className="hidden md:flex md:absolute md:top-[calc(50%-16px)] md:-left-12 md:rounded-lg md:w-8 md:h-8 md:bg-white md:justify-center md:items-center md:cursor-pointer md:hover:bg-gray-500 md:shadow-xl md:border md:border-gray-200"
+        onClick={() => scrollHorizontally("left")}
       >
         <CaretLeftFilled className="text-black" />
       </div>
       <div
-        className="hidden md:flex absolute top-[calc(50%-16px)] -right-12 rounded-lg w-8 h-8 bg-black  justify-center items-center cursor-pointer hover:bg-gray-500"
-        onClick={scrollRight}
+        className="hidden md:flex md:absolute md:top-[calc(50%-16px)] md:-right-12 md:rounded-lg md:w-8 md:h-8 md:bg-black md:justify-center md:items-center md:cursor-pointer md:hover:bg-gray-500"
+        onClick={() => scrollHorizontally("right")}
       >
         <CaretRightFilled className="text-white" />
       </div>
-      <PerfectScrollbar containerRef={(el) => (scrollbarRef.current = el)}>
-        <div className="relative flex flex-nowrap space-x-3">
+      <PerfectScrollbar
+        containerRef={(element) => (scrollbarRef.current = element)}
+      >
+        <div className="relative flex flex-nowrap items-stretch space-x-3">
           {
             // eslint-disable-next-line
             cities.map((city, index) => {
+              // If index % 3 === 0, return one CityThumbnail, full height
               if (index % 3 === 0) {
                 return <CityThumbnail key={city.value} city={city} />;
               } else if (index % 3 === 1) {
+                // If index % 3 === 1, return two CityThumbnail, half height of each
                 return (
                   <div
-                    className="flex flex-col"
+                    className="flex flex-col gap-2"
                     key={cities[index].value + cities[index + 1].value}
                   >
                     <CityThumbnail
@@ -69,8 +63,6 @@ const CityCollection = () => {
                     />
                   </div>
                 );
-              } else if (index % 3 === 2) {
-                return null;
               }
             })
           }

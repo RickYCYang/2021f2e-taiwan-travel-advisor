@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-
 // components
 import Banner from "components/common/Banner";
 import Restaurtants from "components/restautant/Restaurants";

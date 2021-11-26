@@ -47,10 +47,6 @@ const postSlice = createSlice({
       state.cycle = "";
       state.nonCycle = "";
     },
-    // getPostFailure: (state) => {
-    //   state.loading = false;
-    //   state.hasErrors = true;
-    // },
   },
 });
 

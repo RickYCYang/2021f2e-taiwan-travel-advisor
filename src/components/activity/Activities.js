@@ -1,7 +1,9 @@
+// components
 import SubTitle from "../common/SubTitle";
 import ActivityCollection from "./ActivityCollection";
 import Modal from "components/common/Modal";
 import Container from "components/common/Container";
+
 const Activities = ({ city, defaultCount, keyword }) => {
   return (
     <Container>

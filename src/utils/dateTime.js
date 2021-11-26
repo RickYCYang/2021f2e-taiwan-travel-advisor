@@ -7,7 +7,7 @@ export const getHoursAndMinuteStr = (date) => {
   return fillZero(date.getHours()) + " : " + fillZero(date.getMinutes());
 };
 
-export const fillZero = (digit) => {
+const fillZero = (digit) => {
   if (digit.toString().length < 2) {
     digit = "0" + digit;
   }

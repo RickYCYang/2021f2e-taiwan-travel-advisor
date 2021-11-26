@@ -2,10 +2,8 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { openModal } from "redux/slices/modalSlice";
-
 // api
 import { getHotels, getHotelsByCity, getHotelsByKeyword } from "api/hotel";
-
 // components
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
@@ -42,7 +40,7 @@ const HotelCollection = ({ city, defaultCount, keyword }) => {
     <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
-      <div className="flex flex-wrap gap-x-2 gap-y-6 md:gap-y-12 mb-6 md:mb-12">
+      <div className="flex flex-wrap gap-x-2 gap-y-6 mb-6 md:gap-y-12 md:mb-12">
         {data.map((hotel) => {
           const payload = {
             photos: Object.values(hotel.Picture) || [],
