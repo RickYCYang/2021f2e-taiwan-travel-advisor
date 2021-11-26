@@ -13,7 +13,7 @@ const RouteFlow = () => {
   const { width } = useWindowSize();
 
   useEffect(() => {
-    if (stops.length > 0 && width > 375) {
+    if (stops.length > 0 && width > 414) {
       setMaxHeight(`${(stops.length / 2) * 80}px`);
     } else {
       setMaxHeight(`${stops.length * 100}px`);

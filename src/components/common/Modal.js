@@ -67,14 +67,16 @@ const Modal = () => {
     }
   }, [show]);
 
+  console.log("size.width", size.width);
+
   return (
     <>
       {show && (
         <div className="fixed z-30 -inset-10 bg-gray-500 bg-opacity-30 backdrop-blur w-100vw h-100vh overflow-hidden"></div>
       )}
       <button
-        style={{ top: `${scrollPosition - (size.width > 375 ? 70 : 0)}px` }}
-        className={`absolute left-[calc(50%+148px)] transform transition duration-700  
+        style={{ top: `${scrollPosition - (size.width > 414 ? 70 : 30)}px` }}
+        className={`absolute left-[calc(50%+170px)] transform transition duration-700  
                   ${show ? "opacity-100 z-50" : "opacity-0 z-n1"}
                   md:left-[calc(50%+290px)] lg:left-[calc(50%+340px)]
                   `}
@@ -83,8 +85,8 @@ const Modal = () => {
         <CloseOutlined className=" bg-custom-pink text-white p-2 md:p-3 lg:p-5 rounded-lg font-extrabold" />
       </button>
       <div
-        style={{ top: `${scrollPosition - (size.width > 375 ? 70 : 0)}px` }}
-        className={`absolute left-[calc(50%-148px)] w-[296px] max-h-[600px] duration-700 shadow-xl
+        style={{ top: `${scrollPosition - (size.width > 414 ? 70 : 30)}px` }}
+        className={`absolute left-[calc(50%-170px)] w-[340px] max-h-[600px] duration-700 shadow-xl
                   bg-white rounded-lg p-4 transform transition
                     ${
                       show ? "opacity-100 z-40" : "opacity-0 z-n1"

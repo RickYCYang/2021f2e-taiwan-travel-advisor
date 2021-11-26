@@ -3,6 +3,13 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: "class", // or 'media' or 'class'
   theme: {
+    screens: {
+      sm: "414px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     extend: {
       keyframes: {
         show_25: {
@@ -93,7 +100,7 @@ module.exports = {
         ".container": {
           maxWidth: "100%",
           "@screen sm": {
-            maxWidth: "640px",
+            maxWidth: "414px",
           },
           "@screen md": {
             maxWidth: "768px",

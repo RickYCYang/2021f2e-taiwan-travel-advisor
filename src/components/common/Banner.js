@@ -77,7 +77,8 @@ const Banner = ({ className, search }) => {
               onChange={(e) => setKeyword(e.target.value)}
               value={keyword}
               list="searchHistory"
-              className="text-sm pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide shadow-lg md:w-[383px] lg:text-base "
+              className="text-sm pl-6 py-2 text-gray-500 rounded-lg flex-grow tracking-wide 
+                        shadow-lg border border-gray-200 md:w-[383px] lg:text-base "
             ></input>
             <datalist id="searchHistory">
               {searchHistory.map((item) => (
