@@ -1,17 +1,64 @@
+import { useState } from "react";
+import { useQuery } from "react-query";
+
+// api
+import {
+  getScenicSpots,
+  getScenicSpotsByCity,
+  getScenicSpotsByKeyword,
+} from "api/scenicspot";
+
+// components
 import SubTitle from "../common/SubTitle";
-import ScenicSpotCollection from "./ScenicSpotCollection";
+import ThumbnailCollection from "components/common/ThumbnailCollection";
 import Modal from "components/common/Modal";
 import Container from "components/common/Container";
+import Button from "components/common/Button";
+import WarningMsg from "components/common/WarningMsg";
+import Loading from "components/common/Loading";
 
 const ScenicSpots = ({ city, defaultCount, keyword }) => {
+  const [scenicSpotCount, setScenicSpotCount] = useState(defaultCount || 10);
+  const { isLoading, error, data } = useQuery(
+    [
+      city
+        ? `getScenicSpotsByCity/${city}`
+        : keyword
+        ? `getScenicSpotsByKeyword/${keyword}`
+        : "getScenicSpots",
+      scenicSpotCount,
+    ],
+    () =>
+      city
+        ? getScenicSpotsByCity(scenicSpotCount, city)
+        : keyword
+        ? getScenicSpotsByKeyword(scenicSpotCount, keyword)
+        : getScenicSpots(scenicSpotCount)
+  );
+
+  const loadMoreScenicSpots = () => {
+    setScenicSpotCount(scenicSpotCount + 10);
+  };
+
   return (
     <Container>
       <SubTitle subTitle="觀光景點" icon="triangle" />
-      <ScenicSpotCollection
-        city={city}
-        defaultCount={defaultCount}
-        keyword={keyword}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : error ? (
+        <WarningMsg message={error.message} />
+      ) : data.length > 0 ? (
+        <>
+          <ThumbnailCollection data={data} />
+          {data.length >= scenicSpotCount && (
+            <div className="text-center">
+              <Button onClick={loadMoreScenicSpots} title={"Load More"} />
+            </div>
+          )}
+        </>
+      ) : (
+        <WarningMsg />
+      )}
       <Modal />
     </Container>
   );

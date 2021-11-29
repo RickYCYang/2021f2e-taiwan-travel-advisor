@@ -4,6 +4,7 @@ import jsSHA from "jssha";
 axios.defaults.baseURL = process.env.REACT_APP_PTX_BASE_URL;
 
 const getGMTString = () => new Date().toGMTString();
+
 const getAuthorization = () => {
   let ShaObj = new jsSHA("SHA-1", "TEXT");
   ShaObj.setHMACKey(process.env.REACT_APP_PTX_APP_KEY, "TEXT");

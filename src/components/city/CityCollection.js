@@ -10,12 +10,12 @@ const CityCollection = () => {
   const scrollbarRef = useRef();
 
   const scrollHorizontally = (direction) => {
-    const directionNum = direction === "right" ? 1 : -1;
+    const _direction = direction === "right" ? 1 : -1;
     const { current } = scrollbarRef;
     if (current) {
       current.scrollTo({
         behavior: "smooth",
-        left: current.scrollLeft + 500 * directionNum,
+        left: current.scrollLeft + 500 * _direction,
       });
     }
   };
