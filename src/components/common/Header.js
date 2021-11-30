@@ -3,7 +3,7 @@ import { CaretUpOutlined, CloudFilled, YuqueFilled } from "@ant-design/icons";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-20 bg-white">
+    <header className="sticky top-0 z-10 bg-white">
       <nav
         className="relative container m-auto py-3 flex justify-center items-center 
                   md:justify-between md:items-end md:py-[17px] md:px-10 

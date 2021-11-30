@@ -3,9 +3,16 @@ import { useCallback } from "react";
 // components
 import { UpCircleFilled } from "@ant-design/icons";
 
-const ScrollTopButton = () => {
+const ScrollTopButton = ({scrollbarRef}) => {
   const scorllToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    const { current } = scrollbarRef;
+    if (current) {
+      current.scrollTo({
+        behavior: "smooth",
+        top: 0
+      });
+    }
   }, []);
 
   return (
