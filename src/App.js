@@ -10,7 +10,7 @@ import Routes from "views/Routes";
 import Header from "components/common/Header";
 import Footer from "components/common/Footer";
 import ScrollTopButton from "components/common/ScrollTopButton";
-import PerfectScrollbar from "react-perfect-scrollbar";
+import Scrollbar from "components/common/Scrollbar";
 
 const queryClient = new QueryClient();
 const store = configureStore({ reducer: rootReducer });
@@ -23,12 +23,12 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <Router>
           <div className="h-screen">
-            <PerfectScrollbar className="z-20" style={{zIndex: "31"}} containerRef={(element) => (scrollbarRef.current = element)}>
+            <Scrollbar scrollbarRef={scrollbarRef}>
               <Header />
               <Routes />
               <ScrollTopButton scrollbarRef={scrollbarRef} />
               <Footer />
-            </PerfectScrollbar>
+            </Scrollbar>
           </div>
         </Router>
       </QueryClientProvider>

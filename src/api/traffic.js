@@ -9,12 +9,10 @@ export const getRoutesByCity = async (city) => {
 };
 
 export const getStopsByCityAndRouteName = async (city, routeName) => {
-  console.log("getStopsByCityAndRouteName", city, routeName);
   const { data } = await axios(
     "get",
     `Bus/DisplayStopOfRoute/City/${city}/${routeName}?$select=RouteName%2CDirection%2CStops&$top=30&$format=JSON`
   );
-  console.log("data", data);
   return data;
 };
 

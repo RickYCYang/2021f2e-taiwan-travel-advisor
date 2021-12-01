@@ -59,7 +59,7 @@ const ActivityThumbnail = memo(
               {Description}
             </p>
             <div className="flex items-center justify-between">
-              <div className="lg:w-1/2">
+              <div className="lg:w-1/2 flex">
                 <LocationMarkerIcon className="w-5 text-custom-pink inline mr-2" />
                 <h6 className="text-sm inline ">
                   {Location || "to see the official site"}

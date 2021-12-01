@@ -5,7 +5,6 @@ import { UpCircleFilled } from "@ant-design/icons";
 
 const ScrollTopButton = ({scrollbarRef}) => {
   const scorllToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     const { current } = scrollbarRef;
     if (current) {
       current.scrollTo({
@@ -13,7 +12,7 @@ const ScrollTopButton = ({scrollbarRef}) => {
         top: 0
       });
     }
-  }, []);
+  }, [scrollbarRef]);
 
   return (
     <UpCircleFilled
