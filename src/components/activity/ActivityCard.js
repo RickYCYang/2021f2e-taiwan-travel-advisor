@@ -51,7 +51,7 @@ const ActivityCard = memo(
                         md:w-[calc(50%-27px)] lg:min-h-[228px] 
                        ">
           <img
-            className="lazyload rounded block w-1/3 h-full object-cover mr-4 shadow hover:scale-110 duration-500"
+            className="lazyload rounded block w-1/3 h-full max-h-[200px] object-cover mr-4 shadow hover:scale-110 duration-500"
             data-src={thumbnail ?? altImage}
             onClick={() => dispatch(openModal(payload))}
             alt={Name}
