@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
   show: false,
   location: "",
+  city: "",
   photos: [],
   title: "",
   description: "",
@@ -13,6 +14,8 @@ export const initialState = {
   class1: "",
   cycle: "",
   nonCycle: "",
+  website: "",
+  position: {},
 };
 
 const postSlice = createSlice({
@@ -32,6 +35,9 @@ const postSlice = createSlice({
       state.class1 = payload.class1;
       state.cycle = payload.cycle;
       state.nonCycle = payload.nonCycle;
+      state.city = payload.city;
+      state.website = payload.website;
+      state.position = payload.position;
     },
     closeModal: (state) => {
       state.show = false;
@@ -46,6 +52,9 @@ const postSlice = createSlice({
       state.class1 = "";
       state.cycle = "";
       state.nonCycle = "";
+      state.city = "";
+      state.website = "";
+      state.position = {}
     },
   },
 });

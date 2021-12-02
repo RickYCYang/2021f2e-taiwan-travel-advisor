@@ -10,7 +10,7 @@ import {
 
 // components
 import SubTitle from "../common/SubTitle";
-import ThumbnailCollection from "components/common/ThumbnailCollection";
+import CardCollection from "components/common/CardCollection";
 import Modal from "components/common/Modal";
 import Container from "components/common/Container";
 import Button from "components/common/Button";
@@ -49,7 +49,7 @@ const ScenicSpots = ({ city, defaultCount, keyword }) => {
         <WarningMsg message={error.message} />
       ) : data.length > 0 ? (
         <>
-          <ThumbnailCollection data={data} />
+          <CardCollection data={data} />
           {data.length >= scenicSpotCount && (
             <div className="text-center">
               <Button onClick={loadMoreScenicSpots} title={"Load More"} />

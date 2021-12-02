@@ -10,7 +10,7 @@ import { openModal } from "redux/slices/modalSlice";
 // assets
 import altImage from "assets/images/alt.jpeg";
 
-const ActivityThumbnail = memo(
+const ActivityCard = memo(
   ({ activity }) => {
     const {
       Address,
@@ -25,6 +25,8 @@ const ActivityThumbnail = memo(
       NonCycle,
       Charge,
       Phone,
+      WebsiteUrl,
+      Position
     } = activity;
     const payload = {
       photos: Object.values(Picture) || [],
@@ -36,17 +38,20 @@ const ActivityThumbnail = memo(
       cycle: Cycle,
       nonCycle: NonCycle,
       charge: Charge,
+      website: WebsiteUrl,
+      position: Position
     };
 
     const dispatch = useDispatch();
-
     let thumbnail = Object.values(Picture)[0];
 
     return (
       <>
-        <div className="relative bg-white flex w-full p-4 h-32 shadow before:shadow-corner-r after:shadow-corner-l  md:w-[calc(50%-27px)] md:h-[150px] lg:h-[228px] ">
+        <div className="relative bg-white flex w-full min-h-[150px] p-4 shadow before:shadow-corner-r after:shadow-corner-l  
+                        md:w-[calc(50%-27px)] lg:min-h-[228px] 
+                       ">
           <img
-            className="lazyload rounded block w-1/3 h-full object-cover mr-4 shadow"
+            className="lazyload rounded block w-1/3 h-full object-cover mr-4 shadow hover:scale-110 duration-500"
             data-src={thumbnail ?? altImage}
             onClick={() => dispatch(openModal(payload))}
             alt={Name}
@@ -59,9 +64,9 @@ const ActivityThumbnail = memo(
               {Description}
             </p>
             <div className="flex items-center justify-between">
-              <div className="lg:w-1/2 flex">
-                <LocationMarkerIcon className="w-5 text-custom-pink inline mr-2" />
-                <h6 className="text-sm inline ">
+              <div className="lg:w-1/2 space-x-2">
+                <LocationMarkerIcon className="w-1/12 text-custom-pink inline-block align-middle" />
+                <h6 className="text-sm inline-block align-middle w-10/12">
                   {Location || "to see the official site"}
                 </h6>
               </div>
@@ -83,4 +88,4 @@ const ActivityThumbnail = memo(
   }
 );
 
-export default ActivityThumbnail;
+export default ActivityCard;

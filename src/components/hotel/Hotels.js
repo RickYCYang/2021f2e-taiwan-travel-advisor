@@ -6,7 +6,7 @@ import { getHotels, getHotelsByCity, getHotelsByKeyword } from "api/hotel";
 
 // components
 import SubTitle from "../common/SubTitle";
-import ThumbnailCollection from "components/common/ThumbnailCollection";
+import CardCollection from "components/common/CardCollection";
 import Modal from "components/common/Modal";
 import Container from "components/common/Container";
 import Button from "components/common/Button";
@@ -45,7 +45,7 @@ const Hotels = ({ city, defaultCount, keyword }) => {
         <WarningMsg message={error.message} />
       ) : data.length > 0 ? (
         <>
-          <ThumbnailCollection data={data} />
+          <CardCollection data={data} />
           {data.length >= hotelCount && (
             <div className="text-center">
               <Button onClick={loadMoreHotel} title={"Load More"} />

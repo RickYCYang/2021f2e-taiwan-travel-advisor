@@ -3,7 +3,7 @@ import { openModal } from "redux/slices/modalSlice";
 
 import Card from "components/common/Card";
 
-const ThumbnailCollection = ({ data }) => {
+const CardCollection = ({ data }) => {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-wrap gap-x-2 gap-y-6 md:gap-y-12 mb-6 md:mb-12">
@@ -17,6 +17,8 @@ const ThumbnailCollection = ({ data }) => {
           address: item.Address,
           time: item.SrcUpdateTime,
           city: item.City,
+          website: item.WebsiteUrl,
+          position: item.Position
         };
         return (
           <Card
@@ -33,4 +35,4 @@ const ThumbnailCollection = ({ data }) => {
   );
 };
 
-export default ThumbnailCollection;
+export default CardCollection;

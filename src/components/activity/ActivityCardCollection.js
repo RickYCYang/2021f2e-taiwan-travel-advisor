@@ -7,12 +7,12 @@ import {
   getNewestAcitivitiesByKeyword,
 } from "api/activity";
 // components
-import ActivityThumbnail from "./ActivityThumbnail";
+import ActivityCard from "./ActivityCard";
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 import Button from "components/common/Button";
 
-const ActivityCollection = ({ city, defaultCount, keyword }) => {
+const ActivityCardCollection = ({ city, defaultCount, keyword }) => {
   const [activityCount, setActivityCount] = useState(defaultCount || 10);
   const { isLoading, error, data } = useQuery(
     [
@@ -43,9 +43,10 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
     <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
-      <div className="flex flex-wrap items-center justify-between gap-6 mb-6 md:mb-12 lg:justify-start lg:gap-12">
+      <div className="flex flex-wrap items-stretch justify-between gap-6 mb-6 
+                      md:mb-12 lg:justify-start lg:gap-12">
         {data.map((activity, index) => (
-          <ActivityThumbnail activity={activity} key={index} />
+          <ActivityCard activity={activity} key={index} />
         ))}
       </div>
       {data.length < activityCount ? (
@@ -61,4 +62,4 @@ const ActivityCollection = ({ city, defaultCount, keyword }) => {
   );
 };
 
-export default ActivityCollection;
+export default ActivityCardCollection;
