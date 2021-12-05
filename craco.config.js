@@ -5,4 +5,7 @@ module.exports = {
       plugins: [require("tailwindcss"), require("autoprefixer")],
     },
   },
+  resolve: {
+    extensions: [".ts", ".js", ".json", ".css"],
+  },
 };

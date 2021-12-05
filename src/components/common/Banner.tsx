@@ -14,7 +14,15 @@ import {
   setLocalStorageWithExpiry,
 } from "utils/localStorage";
 
-const Banner = ({ className, search }) => {
+type option = {
+  label: string;
+  value: string;
+};
+
+const Banner: React.FC<{ className?: string; search?: string }> = ({
+  className,
+  search,
+}) => {
   const history = useHistory();
 
   /// Create selector options pool
@@ -81,7 +89,7 @@ const Banner = ({ className, search }) => {
                         shadow-lg border border-gray-200 md:w-[383px] lg:text-base "
             ></input>
             <datalist id="searchHistory">
-              {searchHistory.map((item) => (
+              {searchHistory.map((item: string) => (
                 <option value={item} key={item} />
               ))}
             </datalist>
@@ -98,14 +106,14 @@ const Banner = ({ className, search }) => {
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={category}
               defaultValue={selectCategories[0]}
-              onChange={(e) => setCategory(e)}
+              onChange={(e: option) => setCategory(e)}
             />
             <Selector
               options={selectCities}
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={city}
               defaultValue={selectCities[0]}
-              onChange={(e) => setCity(e)}
+              onChange={(e: option) => setCity(e)}
             />
             <button
               className="bg-custom-yellow w-10 rounded-md"

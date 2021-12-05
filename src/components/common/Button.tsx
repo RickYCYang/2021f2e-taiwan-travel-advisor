@@ -1,4 +1,10 @@
-const Button = ({ className, onClick, title }) => {
+import React, { MouseEventHandler } from "react";
+
+const Button: React.FC<{
+  className?: string;
+  onClick: MouseEventHandler;
+  title: string;
+}> = ({ className, onClick, title }) => {
   return (
     <button
       className={`text-xs cursor-pointer bg-custom-pink text-white px-3 py-2 rounded-lg shadow hover:bg-white

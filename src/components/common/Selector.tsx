@@ -1,6 +1,17 @@
 import Select from "react-select";
 
-const Selector = ({ className, options, value, defaultValue, onChange }) => {
+type option = {
+  label: string;
+  value: string;
+};
+
+const Selector: React.FC<{
+  className?: string;
+  options: Array<option>;
+  value: option;
+  defaultValue?: option;
+  onChange: React.ChangeEvent | any;
+}> = ({ className, options, value, defaultValue, onChange }) => {
   return (
     <Select
       styles={customStyles}
@@ -14,7 +25,7 @@ const Selector = ({ className, options, value, defaultValue, onChange }) => {
 };
 
 const customStyles = {
-  option: (provided, state) => ({
+  option: (provided: any, state: any) => ({
     ...provided,
     color: state.isSelected || state.isFocused ? "white" : "black",
     backgroundColor: state.isSelected
@@ -23,7 +34,7 @@ const customStyles = {
       ? "#FFB72C"
       : "white",
   }),
-  control: (base, state) => ({
+  control: (base: any, state: any) => ({
     ...base,
     //border: "none", // default border color
     boxShadow:

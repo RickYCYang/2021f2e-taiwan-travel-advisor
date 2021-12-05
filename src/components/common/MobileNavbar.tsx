@@ -1,7 +1,7 @@
 import categories from "const/categories";
 import { useHistory, useLocation } from "react-router-dom";
 
-const MobileNavbar = () => {
+const MobileNavbar: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 

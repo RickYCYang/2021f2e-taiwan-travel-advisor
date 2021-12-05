@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, MouseEventHandler } from "react";
 import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
 // components
@@ -7,7 +7,13 @@ import ReactTooltip from "react-tooltip";
 // assets
 import altImage from "assets/images/alt.jpeg";
 
-const Card = memo(
+const Card: React.FC<{
+  title: string;
+  address?: string;
+  picture?: string;
+  city: string;
+  onClick: MouseEventHandler;
+}> = memo(
   ({ title, address, picture, city, onClick }) => {
     return (
       <div

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { CaretUpOutlined, CloudFilled, YuqueFilled } from "@ant-design/icons";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-10 bg-white">
       <nav
@@ -10,7 +10,7 @@ const Header = () => {
                   lg:pt-[29px] lg:pb-[18px] "
       >
         <h1>
-          <Link to="/" className="logo" alt="Taiwan Tourguide">
+          <Link to="/" className="logo">
             Taiwan Tourguide
           </Link>
         </h1>

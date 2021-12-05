@@ -15,8 +15,8 @@ import Scrollbar from "components/common/Scrollbar";
 const queryClient = new QueryClient();
 const store = configureStore({ reducer: rootReducer });
 
-const App = () => {
-  const scrollbarRef = useRef();
+const App: React.FC = () => {
+  const scrollbarRef = useRef<HTMLElement | null>(null);
 
   return (
     <Provider store={store}>

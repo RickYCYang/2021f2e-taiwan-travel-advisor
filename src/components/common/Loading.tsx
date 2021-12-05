@@ -1,7 +1,7 @@
 import { CaretUpOutlined, CloudFilled } from "@ant-design/icons";
 import Container from "./Container";
 
-const Rectangle = ({ className }) => {
+const Rectangle: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <svg width="20" height="20" className={className}>
       <rect width="20" height="20" fill="#FFB72C" />
@@ -9,7 +9,7 @@ const Rectangle = ({ className }) => {
   );
 };
 
-const Circle = ({ className }) => {
+const Circle: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <svg width="30" height="30" className={className}>
       <circle cx="50%" cy="50%" r="10" fill="#007350" />
@@ -17,7 +17,7 @@ const Circle = ({ className }) => {
   );
 };
 
-const Loading = () => {
+const Loading: React.FC = () => {
   return (
     <Container className="flex justify-center items-center">
       <CaretUpOutlined className="text-custom-pink mr-4 text-[40px] animate-show_25" />
