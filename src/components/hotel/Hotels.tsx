@@ -2,11 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 
 // api
-import {
-  getScenicSpots,
-  getScenicSpotsByCity,
-  getScenicSpotsByKeyword,
-} from "api/scenicspot";
+import { getHotels, getHotelsByCity, getHotelsByKeyword } from "api/hotel";
 
 // components
 import SubTitle from "../common/SubTitle";
@@ -17,32 +13,36 @@ import Button from "components/common/Button";
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 
-const ScenicSpots = ({ city, defaultCount, keyword }) => {
-  const [scenicSpotCount, setScenicSpotCount] = useState(defaultCount || 10);
-  const { isLoading, error, data } = useQuery(
+const Hotels: React.FC<{
+  city?: string;
+  defaultCount?: number;
+  keyword?: string;
+}> = ({ city, defaultCount, keyword }) => {
+  const [hotelCount, setHotelCount] = useState(defaultCount || 10);
+  const { isLoading, error, data }: any = useQuery(
     [
       city
-        ? `getScenicSpotsByCity/${city}`
+        ? `getHotelsByCity/${city}`
         : keyword
-        ? `getScenicSpotsByKeyword/${keyword}`
-        : "getScenicSpots",
-      scenicSpotCount,
+        ? `getHotelsByKeyword/${keyword}`
+        : "getHotels",
+      hotelCount,
     ],
     () =>
       city
-        ? getScenicSpotsByCity(scenicSpotCount, city)
+        ? getHotelsByCity(hotelCount, city)
         : keyword
-        ? getScenicSpotsByKeyword(scenicSpotCount, keyword)
-        : getScenicSpots(scenicSpotCount)
+        ? getHotelsByKeyword(hotelCount, keyword)
+        : getHotels(hotelCount)
   );
 
-  const loadMoreScenicSpots = () => {
-    setScenicSpotCount(scenicSpotCount + 10);
+  const loadMoreHotel = () => {
+    setHotelCount(hotelCount + 10);
   };
 
   return (
     <Container>
-      <SubTitle subTitle="觀光景點" icon="triangle" />
+      <SubTitle subTitle="推薦住宿" icon="cloud" />
       {isLoading ? (
         <Loading />
       ) : error ? (
@@ -50,9 +50,9 @@ const ScenicSpots = ({ city, defaultCount, keyword }) => {
       ) : data.length > 0 ? (
         <>
           <CardCollection data={data} />
-          {data.length >= scenicSpotCount && (
+          {data.length >= hotelCount && (
             <div className="text-center">
-              <Button onClick={loadMoreScenicSpots} title={"Load More"} />
+              <Button onClick={loadMoreHotel} title={"Load More"} />
             </div>
           )}
         </>
@@ -64,4 +64,4 @@ const ScenicSpots = ({ city, defaultCount, keyword }) => {
   );
 };
 
-export default ScenicSpots;
+export default Hotels;

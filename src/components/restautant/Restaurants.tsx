@@ -17,9 +17,13 @@ import Button from "components/common/Button";
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 
-const Restaurant = ({ city, defaultCount, keyword }) => {
+const Restaurant: React.FC<{
+  city?: string;
+  defaultCount?: number;
+  keyword?: string;
+}> = ({ city, defaultCount, keyword }) => {
   const [restaurantCount, setRestaurantCount] = useState(defaultCount || 10);
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data }: any = useQuery(
     [
       city
         ? `getRestaurantsByCity/${city}`
@@ -39,6 +43,8 @@ const Restaurant = ({ city, defaultCount, keyword }) => {
   const loadMoreRestaurant = () => {
     setRestaurantCount(restaurantCount + 10);
   };
+
+  console.log("data", data);
 
   return (
     <Container>

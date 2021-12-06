@@ -19,7 +19,26 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 // assets
 import altImage from "assets/images/alt.jpeg";
 
-const Modal = () => {
+type dataType = {
+  show: boolean;
+  photos: Array<string>;
+  title: string;
+  description: string;
+  phone?: string;
+  address?: string;
+  city: string;
+  time: string;
+  cycle?: string;
+  nonCycle?: string;
+  charge?: string;
+  website?: string;
+  position?: {
+    PositionLat: string;
+    PositionLon: string;
+  };
+};
+
+const Modal: React.FC = () => {
   const {
     show,
     photos,
@@ -34,7 +53,7 @@ const Modal = () => {
     charge,
     website,
     position,
-  } = useSelector(modalSelector);
+  }: dataType = useSelector(modalSelector);
   const { scrollTop } = useSelector(scrollSelector);
   const dispatch = useDispatch();
 
@@ -42,7 +61,7 @@ const Modal = () => {
   const size = useWindowSize();
 
   // Toggle photo
-  const togglePhoto = (direction) => {
+  const togglePhoto = (direction: string) => {
     const num = direction === "forward" ? 2 : -2;
     const index =
       (photoIndex + num) % photos.length < 0
@@ -64,7 +83,7 @@ const Modal = () => {
         <div className="fixed z-30 -inset-10 bg-gray-500 bg-opacity-30 backdrop-blur w-100vw h-100vh overflow-hidden"></div>
       )}
       <button
-        style={{ top: `${scrollTop - (size.width > 414 ? 70 : 30)}px` }}
+        style={{ top: `${scrollTop - (size.width || 1024 > 414 ? 70 : 30)}px` }}
         className={`absolute left-[calc(50%+170px)] transform transition duration-700  
                   ${show ? "opacity-100 z-50" : "opacity-0 z-n1"}
                   md:left-[calc(50%+290px)] lg:left-[calc(50%+340px)]
@@ -74,7 +93,7 @@ const Modal = () => {
         <CloseOutlined className=" bg-custom-pink text-white p-2 md:p-3 lg:p-5 rounded-lg font-extrabold" />
       </button>
       <div
-        style={{ top: `${scrollTop - (size.width > 414 ? 70 : 30)}px` }}
+        style={{ top: `${scrollTop - (size.width || 1024 > 414 ? 70 : 30)}px` }}
         className={`absolute left-[calc(50%-170px)] w-[340px] h-[650px] duration-700 shadow-xl
                   bg-white rounded-lg p-4 transform transition
                     ${
@@ -106,7 +125,8 @@ const Modal = () => {
               )
             }
           </div>
-          {photos.filter((photo) => photo.includes("https")).length > 1 && (
+          {photos.filter((photo: string) => photo.includes("https")).length >
+            1 && (
             <div className="text-right">
               <button>
                 <CaretLeftFilled
@@ -150,7 +170,10 @@ const Modal = () => {
           </div>
           <div className="flex flex-col gap-2 md:flex-row">
             <a
-              href={`https://www.google.com/maps/?q=${position.PositionLat},${position.PositionLon}`}
+              href={
+                position &&
+                `https://www.google.com/maps/?q=${position.PositionLat},${position.PositionLon}`
+              }
               target="_blank"
               rel="noreferrer"
               className="flex items-center md:w-2/3 gap-2 hover:text-custom-pink"

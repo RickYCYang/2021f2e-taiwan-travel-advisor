@@ -10,24 +10,47 @@ import { openModal } from "redux/slices/modalSlice";
 // assets
 import altImage from "assets/images/alt.jpeg";
 
-const ActivityCard = memo(
+type activityType = {
+  ID: string;
+  ActivityName: string;
+  Address?: string;
+  Charge?: string;
+  City: string;
+  Class1?: string;
+  Description?: string;
+  EndTime?: string;
+  Name: string;
+  Organizer: string;
+  Phone?: string;
+  Picture: object;
+  Position?: {
+    PositionLat: string;
+    PositionLon: string;
+  };
+  SrcUpdateTime?: string;
+  StartTime?: string;
+  Location?: string;
+  Cycle?: string;
+  NonCycle?: string;
+  WebsiteUrl?: string;
+};
+
+const ActivityCard: React.FC<{ activity: any }> = memo(
   ({ activity }) => {
     const {
       Address,
-      //Class1,
       Description,
       Location,
       Name,
       Picture,
       StartTime,
-      //EndTime,
       Cycle,
       NonCycle,
       Charge,
       Phone,
       WebsiteUrl,
-      Position
-    } = activity;
+      Position,
+    }: activityType = activity;
     const payload = {
       photos: Object.values(Picture) || [],
       title: Name,
@@ -39,7 +62,7 @@ const ActivityCard = memo(
       nonCycle: NonCycle,
       charge: Charge,
       website: WebsiteUrl,
-      position: Position
+      position: Position,
     };
 
     const dispatch = useDispatch();
@@ -47,9 +70,11 @@ const ActivityCard = memo(
 
     return (
       <>
-        <div className="relative bg-white flex w-full min-h-[150px] p-4 shadow before:shadow-corner-r after:shadow-corner-l  
-                        md:w-[calc(50%-27px)] lg:min-h-[228px] 
-                       ">
+        <div
+          className="relative bg-white flex w-full min-h-[150px] p-4 shadow before:shadow-corner-r after:shadow-corner-l  
+                      md:w-[calc(50%-27px)] lg:min-h-[228px] 
+                    "
+        >
           <img
             className="lazyload rounded block w-1/3 h-full max-h-[200px] object-cover mr-4 shadow hover:scale-110 duration-500"
             data-src={thumbnail ?? altImage}

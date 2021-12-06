@@ -12,9 +12,38 @@ import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 import Button from "components/common/Button";
 
-const ActivityCardCollection = ({ city, defaultCount, keyword }) => {
+type activityType = {
+  ID: string;
+  ActivityName: string;
+  Address?: string;
+  Charge?: string;
+  City: string;
+  Class1?: string;
+  Description?: string;
+  EndTime?: string;
+  Name: string;
+  Organizer: string;
+  Phone?: string;
+  Picture: object;
+  Position?: {
+    PositionLat: string;
+    PositionLon: string;
+  };
+  SrcUpdateTime?: string;
+  StartTime?: string;
+  Location?: string;
+  Cycle?: string;
+  NonCycle?: string;
+  WebsiteUrl?: string;
+};
+
+const ActivityCardCollection: React.FC<{
+  city?: string;
+  defaultCount?: number;
+  keyword?: string;
+}> = ({ city, defaultCount, keyword }) => {
   const [activityCount, setActivityCount] = useState(defaultCount || 10);
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data }: any = useQuery(
     [
       city
         ? `getNewestAcitivitiesByCity/${city}`
@@ -43,10 +72,12 @@ const ActivityCardCollection = ({ city, defaultCount, keyword }) => {
     <WarningMsg message={error.message} />
   ) : data.length > 0 ? (
     <>
-      <div className="flex flex-wrap items-stretch justify-between gap-6 mb-6 
-                      md:mb-12 lg:justify-start lg:gap-12">
-        {data.map((activity, index) => (
-          <ActivityCard activity={activity} key={index} />
+      <div
+        className="flex flex-wrap items-stretch justify-between gap-6 mb-6 
+                      md:mb-12 lg:justify-start lg:gap-12"
+      >
+        {data.map((activity: activityType) => (
+          <ActivityCard activity={activity} key={activity.ID} />
         ))}
       </div>
       {data.length < activityCount ? (

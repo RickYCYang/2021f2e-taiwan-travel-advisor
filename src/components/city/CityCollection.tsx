@@ -6,12 +6,14 @@ import { CaretRightFilled, CaretLeftFilled } from "@ant-design/icons";
 //constant
 import cities from "const/cities";
 
-const CityCollection = () => {
-  const scrollbarRef = useRef();
+const CityCollection: React.FC = () => {
+  const scrollbarRef = useRef<HTMLElement | null>(null);
 
-  const scrollHorizontally = (direction) => {
+  const scrollHorizontally = (direction: string) => {
     const _direction = direction === "right" ? 1 : -1;
-    const { current } = scrollbarRef;
+
+    //to-do: fixed any
+    const { current }: any = scrollbarRef;
     if (current) {
       current.scrollTo({
         behavior: "smooth",
