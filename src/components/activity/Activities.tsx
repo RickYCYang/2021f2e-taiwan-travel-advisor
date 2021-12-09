@@ -5,9 +5,9 @@ import Modal from "components/common/Modal";
 import Container from "components/common/Container";
 
 const Activities: React.FC<{
-  city?: string;
+  city?: string | null;
   defaultCount?: number;
-  keyword?: string;
+  keyword?: string | null;
 }> = ({ city, defaultCount, keyword }) => {
   return (
     <Container>

@@ -18,11 +18,13 @@ import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 
 const ScenicSpots: React.FC<{
-  city?: string;
-  defaultCount?: number;
-  keyword?: string;
+  city?: string | null;
+  defaultCount?: number | null;
+  keyword?: string | null;
 }> = ({ city, defaultCount, keyword }) => {
-  const [scenicSpotCount, setScenicSpotCount] = useState(defaultCount || 10);
+  const [scenicSpotCount, setScenicSpotCount] = useState<number>(
+    defaultCount || 10
+  );
   const { isLoading, error, data }: any = useQuery(
     [
       city

@@ -4,8 +4,8 @@ import Banner from "components/common/Banner";
 import Activities from "components/activity/Activities";
 import Main from "components/common/Main";
 
-const Activity = () => {
-  const { city } = useParams();
+const Activity: React.FC = () => {
+  const { city } = useParams<{ city?: string }>();
   return (
     <Main>
       <Banner className="lg:bg-activity" />

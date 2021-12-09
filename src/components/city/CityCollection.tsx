@@ -9,7 +9,7 @@ import cities from "const/cities";
 const CityCollection: React.FC = () => {
   const scrollbarRef = useRef<HTMLElement | null>(null);
 
-  const scrollHorizontally = (direction: string) => {
+  const scrollHorizontally = (direction: string): void => {
     const _direction = direction === "right" ? 1 : -1;
 
     //to-do: fixed any

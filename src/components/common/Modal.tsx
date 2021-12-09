@@ -3,7 +3,11 @@ import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
 import { useSelector, useDispatch } from "react-redux";
 import useWindowSize from "hooks/useWindowSize";
-import { closeModal, modalSelector } from "redux/slices/modalSlice";
+import {
+  closeModal,
+  modalSelector,
+  Modal as IModal,
+} from "redux/slices/modalSlice";
 import { scrollSelector } from "redux/slices/scrollSlice";
 // components
 import {
@@ -18,25 +22,6 @@ import { LocationMarkerIcon, ExternalLinkIcon } from "@heroicons/react/solid";
 import PerfectScrollbar from "react-perfect-scrollbar";
 // assets
 import altImage from "assets/images/alt.jpeg";
-
-type dataType = {
-  show: boolean;
-  photos: Array<string>;
-  title: string;
-  description: string;
-  phone?: string;
-  address?: string;
-  city: string;
-  time: string;
-  cycle?: string;
-  nonCycle?: string;
-  charge?: string;
-  website?: string;
-  position?: {
-    PositionLat: string;
-    PositionLon: string;
-  };
-};
 
 const Modal: React.FC = () => {
   const {
@@ -53,15 +38,15 @@ const Modal: React.FC = () => {
     charge,
     website,
     position,
-  }: dataType = useSelector(modalSelector);
+  }: IModal = useSelector(modalSelector);
   const { scrollTop } = useSelector(scrollSelector);
   const dispatch = useDispatch();
 
-  const [photoIndex, setPhotoIndex] = useState(0);
+  const [photoIndex, setPhotoIndex] = useState<number>(0);
   const size = useWindowSize();
 
   // Toggle photo
-  const togglePhoto = (direction: string) => {
+  const togglePhoto = (direction: string): void => {
     const num = direction === "forward" ? 2 : -2;
     const index =
       (photoIndex + num) % photos.length < 0

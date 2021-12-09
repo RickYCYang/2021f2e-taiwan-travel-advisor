@@ -13,13 +13,10 @@ import {
   getLocalStorageWithExpiry,
   setLocalStorageWithExpiry,
 } from "utils/localStorage";
+// types
+import { Option } from "utils/option";
 
-type option = {
-  label: string;
-  value: string;
-};
-
-const Banner: React.FC<{ className?: string; search?: string }> = ({
+const Banner: React.FC<{ className?: string; search?: string | null }> = ({
   className,
   search,
 }) => {
@@ -28,30 +25,30 @@ const Banner: React.FC<{ className?: string; search?: string }> = ({
   /// Create selector options pool
   const selectCities = createOptions(cities, {
     label: "不分縣市",
-    value: null,
+    value: "",
   });
   const selectCategories = createOptions(categories, {
     label: "類別",
-    value: null,
+    value: "",
   });
 
   /// States variables
-  const [keyword, setKeyword] = useState(search);
-  const [category, setCategory] = useState(selectCategories[0]);
-  const [city, setCity] = useState(selectCities[0]);
-  const [searchHistory, setSearchHistory] = useState(
+  const [keyword, setKeyword] = useState<string>(search || "");
+  const [category, setCategory] = useState<Option>(selectCategories[0]);
+  const [city, setCity] = useState<Option>(selectCities[0]);
+  const [searchHistory, setSearchHistory] = useState<Array<string>>(
     getLocalStorageWithExpiry("searchHistory")
-      ? getLocalStorageWithExpiry("searchHistory").split(",")
+      ? (getLocalStorageWithExpiry("searchHistory") || "").split(",")
       : []
   );
 
   // Search by category and city
-  const categorySearch = () => {
+  const categorySearch = (): void => {
     history.push(`/${category.value}/${city.value}`);
   };
 
   // Search by keyword
-  const keywordSearch = () => {
+  const keywordSearch = (): void => {
     // Save the keyword to localStorage if not existed
     if (!searchHistory.includes(keyword)) {
       const tmpSearchHistory = [...searchHistory, keyword];
@@ -106,14 +103,14 @@ const Banner: React.FC<{ className?: string; search?: string }> = ({
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={category}
               defaultValue={selectCategories[0]}
-              onChange={(e: option) => setCategory(e)}
+              onChange={(e: Option) => setCategory(e)}
             />
             <Selector
               options={selectCities}
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={city}
               defaultValue={selectCities[0]}
-              onChange={(e: option) => setCity(e)}
+              onChange={(e: Option) => setCity(e)}
             />
             <button
               className="bg-custom-yellow w-10 rounded-md"

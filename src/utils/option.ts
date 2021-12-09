@@ -1,15 +1,12 @@
-type optionType = {
+interface Option {
   label: string;
-  value: string | null;
+  value: string;
+}
+
+export const createOptions = (options: Array<Option>, option: Option) => {
+  const _options = options.slice();
+  _options.unshift(option);
+  return _options;
 };
 
-export const createOptions = (
-  options: Array<optionType>,
-  firstOption: optionType
-) => {
-  const selectOptions = options.slice();
-  selectOptions.unshift(firstOption);
-  return selectOptions;
-};
-
-export type { optionType };
+export type { Option };

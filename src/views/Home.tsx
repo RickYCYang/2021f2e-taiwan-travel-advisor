@@ -11,7 +11,7 @@ import Main from "components/common/Main";
 // const
 import cities from "const/cities";
 
-const checkCityParam = (city) => {
+const checkCityParam = (city?: string) => {
   let exist = false;
   // eslint-disable-next-line
   cities.map(({ value }) => {
@@ -23,8 +23,8 @@ const checkCityParam = (city) => {
   return exist;
 };
 
-const Home = () => {
-  const { city } = useParams();
+const Home: React.FC = () => {
+  const { city } = useParams<{ city?: string }>();
 
   /// If has path parameter {city}
   if (city) {

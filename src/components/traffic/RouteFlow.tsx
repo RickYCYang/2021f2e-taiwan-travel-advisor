@@ -6,14 +6,18 @@ import useWindowSize from "hooks/useWindowSize";
 // components
 import Container from "components/common/Container";
 
-const RouteFlow = () => {
+interface Size {
+  width: number | undefined;
+}
+
+const RouteFlow: React.FC = () => {
   const date = new Date();
   const { stops } = useSelector(routeSelector);
-  const [maxHeight, setMaxHeight] = useState("1000px");
-  const { width } = useWindowSize();
+  const [maxHeight, setMaxHeight] = useState<string>("1000px");
+  const { width }: Size = useWindowSize();
 
   useEffect(() => {
-    if (stops.length > 0 && width > 414) {
+    if ((stops.length > 0 && width) || 1024 > 414) {
       setMaxHeight(`${(stops.length / 2) * 80}px`);
     } else {
       setMaxHeight(`${stops.length * 100}px`);
@@ -31,7 +35,7 @@ const RouteFlow = () => {
             className={`flex flex-col flex-wrap gap-8`}
             style={{ maxHeight: maxHeight }}
           >
-            {stops.map((stop) => (
+            {stops.map((stop: any) => (
               <div
                 className="w-full flex justify-start items-center gap-6 md:w-1/2 lg:gap-12"
                 key={stop.StationID}

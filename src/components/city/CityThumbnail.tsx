@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 /// components
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 
-type cityType = {
+interface City {
   label: string;
   value: string;
-};
+}
 
-const Citythumbnail: React.FC<{ city: cityType; small?: boolean }> = ({
+const Citythumbnail: React.FC<{ city: City; small?: boolean }> = ({
   city,
   small = false,
 }) => {

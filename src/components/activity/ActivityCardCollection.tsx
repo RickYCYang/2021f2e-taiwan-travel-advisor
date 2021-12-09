@@ -12,7 +12,7 @@ import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 import Button from "components/common/Button";
 
-type activityType = {
+interface Activity {
   ID: string;
   ActivityName: string;
   Address?: string;
@@ -35,14 +35,16 @@ type activityType = {
   Cycle?: string;
   NonCycle?: string;
   WebsiteUrl?: string;
-};
+}
 
 const ActivityCardCollection: React.FC<{
-  city?: string;
-  defaultCount?: number;
-  keyword?: string;
+  city?: string | null;
+  defaultCount?: number | null;
+  keyword?: string | null;
 }> = ({ city, defaultCount, keyword }) => {
-  const [activityCount, setActivityCount] = useState(defaultCount || 10);
+  const [activityCount, setActivityCount] = useState<number>(
+    defaultCount || 10
+  );
   const { isLoading, error, data }: any = useQuery(
     [
       city
@@ -62,7 +64,7 @@ const ActivityCardCollection: React.FC<{
 
   const loadCityCount = 4;
 
-  const loadMoreActivity = () => {
+  const loadMoreActivity = (): void => {
     setActivityCount(activityCount + loadCityCount);
   };
 
@@ -76,7 +78,7 @@ const ActivityCardCollection: React.FC<{
         className="flex flex-wrap items-stretch justify-between gap-6 mb-6 
                       md:mb-12 lg:justify-start lg:gap-12"
       >
-        {data.map((activity: activityType) => (
+        {data.map((activity: Activity) => (
           <ActivityCard activity={activity} key={activity.ID} />
         ))}
       </div>

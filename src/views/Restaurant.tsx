@@ -4,8 +4,8 @@ import Banner from "components/common/Banner";
 import Restaurtants from "components/restautant/Restaurants";
 import Main from "components/common/Main";
 
-const Restaurant = () => {
-  const { city } = useParams();
+const Restaurant: React.FC = () => {
+  const { city } = useParams<{ city?: string }>();
   return (
     <Main>
       <Banner className="lg:bg-restaurant" />

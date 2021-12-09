@@ -8,10 +8,10 @@ import Restaurants from "components/restautant/Restaurants";
 import Hotels from "components/hotel/Hotels";
 import Main from "components/common/Main";
 
-const Search = () => {
+const Search: React.FC = () => {
   const queryParam = useQueryParam();
-  const queryKeyword = queryParam.get("q");
-  const [keyword, setKeyword] = useState(queryKeyword);
+  const queryKeyword: string | null = queryParam.get("q");
+  const [keyword, setKeyword] = useState<string | null>(queryKeyword);
 
   useEffect(() => {
     setKeyword(queryKeyword);

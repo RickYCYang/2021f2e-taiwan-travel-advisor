@@ -1,4 +1,8 @@
-export const setLocalStorageWithExpiry = (key, value, ttl = 30) => {
+export const setLocalStorageWithExpiry = (
+  key: string,
+  value: string,
+  ttl: number = 30
+): void => {
   const now = new Date();
   // `item` is an object which contains the original value as well as the time when it's supposed to expire
   const item = {
@@ -8,11 +12,11 @@ export const setLocalStorageWithExpiry = (key, value, ttl = 30) => {
   localStorage.setItem(key, JSON.stringify(item));
 };
 
-export const removeLocalStorage = (key) => {
+export const removeLocalStorage = (key: string): void => {
   localStorage.removeItem(key);
 };
 
-export const getLocalStorageWithExpiry = (key) => {
+export const getLocalStorageWithExpiry = (key: string): string | null => {
   const itemStr = localStorage.getItem(key);
   // if the item doesn't exist, return null
   if (!itemStr) {

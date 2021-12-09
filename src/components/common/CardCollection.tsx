@@ -3,7 +3,7 @@ import { openModal } from "redux/slices/modalSlice";
 
 import Card from "components/common/Card";
 
-type dataType = {
+interface Data {
   Picture: { PictureUrl1: string; [key: string]: unknown };
   Name: string;
   Description: string;
@@ -28,13 +28,13 @@ type dataType = {
   Remarks: string;
   TicketInfo: string;
   TravelInfo: string;
-};
+}
 
-const CardCollection: React.FC<{ data: Array<dataType> }> = ({ data }) => {
+const CardCollection: React.FC<{ data: Array<Data> }> = ({ data }) => {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-wrap gap-x-2 gap-y-6 md:gap-y-12 mb-6 md:mb-12">
-      {data.map((item: dataType) => {
+      {data.map((item: Data) => {
         const payload = {
           photos: Object.values(item.Picture) || [],
           thumbnail: item.Picture.PictureUrl1,

@@ -4,8 +4,8 @@ import Banner from "components/common/Banner";
 import Hotels from "components/hotel/Hotels";
 import Main from "components/common/Main";
 
-const Hotel = () => {
-  const { city } = useParams();
+const Hotel: React.FC = () => {
+  const { city } = useParams<{ city?: string }>();
   return (
     <Main>
       <Banner className="lg:bg-hotel" />

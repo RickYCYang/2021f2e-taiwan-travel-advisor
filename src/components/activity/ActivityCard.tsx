@@ -10,7 +10,7 @@ import { openModal } from "redux/slices/modalSlice";
 // assets
 import altImage from "assets/images/alt.jpeg";
 
-type activityType = {
+interface Activity {
   ID: string;
   ActivityName: string;
   Address?: string;
@@ -33,7 +33,7 @@ type activityType = {
   Cycle?: string;
   NonCycle?: string;
   WebsiteUrl?: string;
-};
+}
 
 const ActivityCard: React.FC<{ activity: any }> = memo(
   ({ activity }) => {
@@ -50,7 +50,7 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
       Phone,
       WebsiteUrl,
       Position,
-    }: activityType = activity;
+    }: Activity = activity;
     const payload = {
       photos: Object.values(Picture) || [],
       title: Name,
@@ -66,7 +66,7 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
     };
 
     const dispatch = useDispatch();
-    let thumbnail = Object.values(Picture)[0];
+    let thumbnail: string = Object.values(Picture)[0];
 
     return (
       <>

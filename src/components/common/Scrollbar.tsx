@@ -8,7 +8,7 @@ const Scrollbar: React.FC<{
   scrollbarRef: any;
 }> = ({ children, scrollbarRef }) => {
   const dispatch = useDispatch();
-  const _onScollY = (container: HTMLElement) => {
+  const _onScollY = (container: HTMLElement): void => {
     dispatch(setScrollTop(container.scrollTop));
   };
 

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { Route, Switch } from "react-router"; // react-router v4/v5
 import ErrorBoundary from "./ErrorBoundary";
 import LoadingView from "views/LoadingView";

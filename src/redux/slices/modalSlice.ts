@@ -1,6 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialState = {
+interface Modal {
+  show: boolean;
+  location: string;
+  photos: Array<string>;
+  title: string;
+  description: string;
+  phone?: string;
+  address?: string;
+  city: string;
+  time: string;
+  class1: string;
+  cycle?: string;
+  nonCycle?: string;
+  charge?: string;
+  website?: string;
+  position?: {
+    PositionLat: string;
+    PositionLon: string;
+  };
+}
+
+interface State {
+  modal: Modal;
+}
+
+export const initialState: Modal = {
   show: false,
   location: "",
   city: "",
@@ -15,7 +40,10 @@ export const initialState = {
   cycle: "",
   nonCycle: "",
   website: "",
-  position: {},
+  position: {
+    PositionLat: "",
+    PositionLon: "",
+  },
 };
 
 const postSlice = createSlice({
@@ -54,11 +82,15 @@ const postSlice = createSlice({
       state.nonCycle = "";
       state.city = "";
       state.website = "";
-      state.position = {}
+      state.position = {
+        PositionLat: "",
+        PositionLon: "",
+      };
     },
   },
 });
 
 export const { openModal, closeModal } = postSlice.actions;
-export const modalSelector = (state) => state.modal;
+export const modalSelector = (state: State) => state.modal;
 export default postSlice.reducer;
+export type { Modal };

@@ -1,11 +1,11 @@
 import Select from "react-select";
-import { optionType } from "utils/option";
+import { Option } from "utils/option";
 
 const Selector: React.FC<{
   className?: string;
-  options: Array<optionType>;
-  value: optionType;
-  defaultValue?: optionType;
+  options: Array<Option>;
+  value: Option;
+  defaultValue?: Option;
   onChange: React.ChangeEvent | any;
 }> = ({ className, options, value, defaultValue, onChange }) => {
   return (
