@@ -29,7 +29,7 @@ export const getNewestAcitivitiesByKeyword = async (
   count = getCount(count);
   const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
     "get",
-    `Tourism/Activity?$filter=contains(Name%2C'${keyword}')&$orderby=StartTime%20desc&$top=${count}&$format=JSON`
+    `Tourism/Activity?$filter=contains(ActivityName%2C'${keyword}')&$orderby=StartTime%20desc&$top=${count}&$format=JSON`
   );
   return data;
 };

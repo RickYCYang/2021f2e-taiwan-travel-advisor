@@ -166,6 +166,7 @@ const Searchbar: React.FC = () => {
 
   return (
     <section
+      data-testid="searchbar"
       className="relative bg-white flex flex-col items-stretch w-full px-4 
                 md:px-0 md:pt-9 lg:after:shadow-corner-l lg:before:shadow-corner-r"
     >
@@ -175,6 +176,7 @@ const Searchbar: React.FC = () => {
           className="tracking-wider w-60"
           options={cities}
           value={city}
+          name={"citySelector"}
           defaultValue={city}
           onChange={(e: Option) => setCity(e)}
         />
@@ -182,6 +184,7 @@ const Searchbar: React.FC = () => {
           className="tracking-wider w-60"
           options={routeOptions}
           value={route}
+          name={"routeSelector"}
           onChange={toggleRoute}
         />
       </div>
@@ -208,3 +211,4 @@ const Searchbar: React.FC = () => {
 };
 
 export default Searchbar;
+export type { Route, RouteOption, Stop, ArriveTime };

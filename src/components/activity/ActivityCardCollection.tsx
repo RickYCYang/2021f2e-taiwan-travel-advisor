@@ -13,7 +13,7 @@ import Loading from "components/common/Loading";
 import Button from "components/common/Button";
 
 interface Activity {
-  ID: string;
+  ActivityID: string;
   ActivityName: string;
   Address?: string;
   Charge?: string;
@@ -36,6 +36,8 @@ interface Activity {
   NonCycle?: string;
   WebsiteUrl?: string;
 }
+
+const loadCityCount = 4;
 
 const ActivityCardCollection: React.FC<{
   city?: string | null;
@@ -62,8 +64,6 @@ const ActivityCardCollection: React.FC<{
         : getNewestAcitivities(activityCount)
   );
 
-  const loadCityCount = 4;
-
   const loadMoreActivity = (): void => {
     setActivityCount(activityCount + loadCityCount);
   };
@@ -79,7 +79,7 @@ const ActivityCardCollection: React.FC<{
                       md:mb-12 lg:justify-start lg:gap-12"
       >
         {data.map((activity: Activity) => (
-          <ActivityCard activity={activity} key={activity.ID} />
+          <ActivityCard activity={activity} key={activity.ActivityID} />
         ))}
       </div>
       {data.length < activityCount ? (
@@ -96,3 +96,4 @@ const ActivityCardCollection: React.FC<{
 };
 
 export default ActivityCardCollection;
+export type { Activity };

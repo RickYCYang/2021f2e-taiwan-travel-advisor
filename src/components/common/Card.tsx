@@ -17,6 +17,7 @@ const Card: React.FC<{
   ({ title, address, picture, city, onClick }) => {
     return (
       <div
+        data-testid="card"
         className={`relative flex flex-col bg-white w-[calc(50%-8px)] shadow 
                     after:shadow-corner-l before:shadow-corner-r p-3 cursor-pointer 
                     md:w-[152px] lg:w-[206px] `}

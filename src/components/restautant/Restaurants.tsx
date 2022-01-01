@@ -46,8 +46,6 @@ const Restaurant: React.FC<{
     setRestaurantCount(restaurantCount + 10);
   };
 
-  console.log("data", data);
-
   return (
     <Container>
       <SubTitle subTitle="熱門餐飲" icon="rectangle" />

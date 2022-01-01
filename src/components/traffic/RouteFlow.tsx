@@ -17,7 +17,7 @@ const RouteFlow: React.FC = () => {
   const { width }: Size = useWindowSize();
 
   useEffect(() => {
-    if ((stops.length > 0 && width) || 1024 > 414) {
+    if (stops.length > 0 && (width || 1024) > 414) {
       setMaxHeight(`${(stops.length / 2) * 80}px`);
     } else {
       setMaxHeight(`${stops.length * 100}px`);
@@ -29,7 +29,10 @@ const RouteFlow: React.FC = () => {
       <p className="text-sm md:text-base text-custom-pink text-right mb-3">
         *每隔15秒自動更新
       </p>
-      <div className="bg-white relative after:shadow-corner-l before:shadow-corner-r p-6 md:p-14">
+      <div
+        className="bg-white relative after:shadow-corner-l before:shadow-corner-r p-6 md:p-14"
+        data-testid="routeFlow"
+      >
         {stops.length > 0 ? (
           <div
             className={`flex flex-col flex-wrap gap-8`}

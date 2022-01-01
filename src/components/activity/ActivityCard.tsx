@@ -42,6 +42,7 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
       Description,
       Location,
       Name,
+      ActivityName,
       Picture,
       StartTime,
       Cycle,
@@ -53,7 +54,7 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
     }: Activity = activity;
     const payload = {
       photos: Object.values(Picture) || [],
-      title: Name,
+      title: ActivityName,
       description: Description,
       phone: Phone,
       address: Address,
@@ -71,6 +72,7 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
     return (
       <>
         <div
+          data-testid="activityCard"
           className="relative bg-white flex w-full min-h-[150px] p-4 shadow before:shadow-corner-r after:shadow-corner-l  
                       md:w-[calc(50%-27px)] lg:min-h-[228px] 
                     "
@@ -83,7 +85,7 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
           />
           <div className="flex flex-col justify-between max-w-[calc(100%-33%-16px)]">
             <h4 className="font-semibold text-sm mb-[14px] lg:text-base">
-              {Name}
+              {Name ?? ActivityName}
             </h4>
             <p className="hidden mb-3 lg:line-clamp-5 lg:text-sm lg:text-gray-400">
               {Description}
@@ -92,7 +94,7 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
               <div className="lg:w-1/2 space-x-2">
                 <LocationMarkerIcon className="w-1/12 text-custom-pink inline-block align-middle" />
                 <h6 className="text-sm inline-block align-middle w-10/12">
-                  {Location || "to see the official site"}
+                  {Location ?? Address ?? "to see the official site"}
                 </h6>
               </div>
               <button

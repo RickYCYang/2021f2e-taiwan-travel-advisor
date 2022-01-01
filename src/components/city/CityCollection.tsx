@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 //components
 import CityThumbnail from "./CityThumbnail";
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -9,21 +9,24 @@ import cities from "const/cities";
 const CityCollection: React.FC = () => {
   const scrollbarRef = useRef<HTMLElement | null>(null);
 
-  const scrollHorizontally = (direction: string): void => {
-    const _direction = direction === "right" ? 1 : -1;
+  const scrollHorizontally = useCallback(
+    (direction: string): void => {
+      const _direction = direction === "right" ? 1 : -1;
 
-    //to-do: fixed any
-    const { current }: any = scrollbarRef;
-    if (current) {
-      current.scrollTo({
-        behavior: "smooth",
-        left: current.scrollLeft + 500 * _direction,
-      });
-    }
-  };
+      //to-do: fixed any
+      const { current }: any = scrollbarRef;
+      if (current) {
+        current.scrollTo({
+          behavior: "smooth",
+          left: current.scrollLeft + 500 * _direction,
+        });
+      }
+    },
+    [scrollbarRef]
+  );
 
   return (
-    <div className="relative">
+    <div data-testid="cityCollection" className="relative">
       <div
         className="hidden md:flex md:absolute md:top-[calc(50%-16px)] md:-left-12 md:rounded-lg md:w-8 md:h-8 md:bg-white md:justify-center md:items-center md:cursor-pointer md:hover:bg-gray-500 md:shadow-xl md:border md:border-gray-200"
         onClick={() => scrollHorizontally("left")}

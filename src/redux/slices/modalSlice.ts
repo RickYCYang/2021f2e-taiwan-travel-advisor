@@ -25,7 +25,7 @@ interface State {
   modal: Modal;
 }
 
-export const initialState: Modal = {
+const initialState: Modal = {
   show: false,
   location: "",
   city: "",

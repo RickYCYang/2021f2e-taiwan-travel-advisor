@@ -27,10 +27,13 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
     label: "不分縣市",
     value: "",
   });
-  const selectCategories = createOptions(categories, {
-    label: "類別",
-    value: "",
-  });
+  const selectCategories = createOptions(
+    categories.filter(({ label, value }) => label !== "交通"),
+    {
+      label: "類別",
+      value: "",
+    }
+  );
 
   /// States variables
   const [keyword, setKeyword] = useState<string>(search || "");
@@ -59,7 +62,10 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
   };
 
   return (
-    <section className="relative bg-white pb-5 px-3 md:px-[27px] md:py-[40px] md:bg-[#F6F7FB] lg:bg-white lg:after:shadow-corner-l lg:before:shadow-corner-r lg:shadow-sm lg:py-[23px] lg:mb-[90px]">
+    <section
+      data-testid="banner"
+      className="relative bg-white pb-5 px-3 md:px-[27px] md:py-[40px] md:bg-[#F6F7FB] lg:bg-white lg:after:shadow-corner-l lg:before:shadow-corner-r lg:shadow-sm lg:py-[23px] lg:mb-[90px]"
+    >
       <div
         className={`${className} flex justify-center items-center z-10 w-full lg:bg-cover lg:bg-no-repeat lg:bg-center lg:min-h-[490px]`}
       >
@@ -72,9 +78,7 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
               台北、台中、台南、屏東、宜蘭……遊遍台灣
             </h6>
           </div>
-          {/* Below ul shows in mobile only */}
           <MobileNavbar />
-          {/* Below div won't show in mobile */}
           <div className="flex justify-between space-x-[6px] mb-[10px]">
             <input
               type="text"
@@ -100,6 +104,7 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
           <div className="flex space-x-[6px] items-stretch">
             <Selector
               options={selectCategories}
+              name={"catgSelector"}
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={category}
               defaultValue={selectCategories[0]}
@@ -107,6 +112,7 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
             />
             <Selector
               options={selectCities}
+              name={"citySelector"}
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={city}
               defaultValue={selectCities[0]}

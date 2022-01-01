@@ -54,11 +54,6 @@ const Routes = () => {
             <Traffic />
           </Suspense>
         </Route>
-        <Route exact path="/traffic/:city">
-          <Suspense fallback={<LoadingView />}>
-            <Traffic />
-          </Suspense>
-        </Route>
         <Route exact path="/activity/">
           <Suspense fallback={<LoadingView />}>
             <Activity />

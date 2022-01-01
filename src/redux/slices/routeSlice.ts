@@ -28,7 +28,7 @@ interface State {
   };
 }
 
-export const initialState: Route = {
+const initialState: Route = {
   stops: [],
 };
 

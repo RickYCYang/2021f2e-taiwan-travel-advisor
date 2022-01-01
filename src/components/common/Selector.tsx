@@ -3,17 +3,20 @@ import { Option } from "utils/option";
 
 const Selector: React.FC<{
   className?: string;
+  name: string;
   options: Array<Option>;
   value: Option;
   defaultValue?: Option;
   onChange: React.ChangeEvent | any;
-}> = ({ className, options, value, defaultValue, onChange }) => {
+}> = ({ className, name, options, value, defaultValue, onChange }) => {
   return (
     <Select
+      name={name}
       styles={customStyles}
       className={`${className}`}
       options={options}
       value={value}
+      inputId={name}
       defaultValue={defaultValue}
       onChange={onChange}
     />

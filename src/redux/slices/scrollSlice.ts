@@ -9,7 +9,7 @@ interface State {
   scroll: Scroll;
 }
 
-export const initialState: Scroll = {
+const initialState: Scroll = {
   scrollTop: 0,
   scrollLeft: 0,
 };

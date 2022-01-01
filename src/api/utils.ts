@@ -1,3 +1,3 @@
-export const getCount = (count: number): number => {
+export const getCount = (count?: number): number => {
   return count ?? 10;
 };

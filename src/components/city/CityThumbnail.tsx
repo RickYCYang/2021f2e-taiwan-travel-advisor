@@ -17,7 +17,10 @@ const Citythumbnail: React.FC<{ city: City; small?: boolean }> = ({
 
   return (
     <Link to={`/${city.value}`}>
-      <div className={`bg-white box-border shadow cursor-pointer ${padding}`}>
+      <div
+        data-testid="citythumbnail"
+        className={`bg-white box-border shadow cursor-pointer ${padding}`}
+      >
         <div
           className={`${bgClass} bg-cover box-border bg-no-repeat bg-center w-[159px] ${heightClass} lg:w-[177px]`}
         >

@@ -26,7 +26,7 @@ export const getScenicSpotsByKeyword = async (
   count = getCount(count);
   const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
     "get",
-    `Tourism/ScenicSpot?$filter=contains(Name%2C'${keyword}')&$top=${count}&$format=JSON`
+    `Tourism/ScenicSpot?$filter=contains(ScenicSpotName%2C'${keyword}')&$top=${count}&$format=JSON`
   );
   return data;
 };

@@ -65,10 +65,14 @@ const Modal: React.FC = () => {
   return (
     <>
       {show && (
-        <div className="fixed z-30 -inset-10 bg-gray-500 bg-opacity-30 backdrop-blur w-100vw h-100vh overflow-hidden"></div>
+        <div
+          data-testid="modalBg"
+          className="fixed z-30 -inset-10 bg-gray-500 bg-opacity-30 backdrop-blur w-100vw h-100vh overflow-hidden"
+        ></div>
       )}
       <button
-        style={{ top: `${scrollTop - (size.width || 1024 > 414 ? 70 : 30)}px` }}
+        data-testid="closeModalBtn"
+        style={{ top: `${scrollTop - (size.width || 1024 > 414 ? 90 : 30)}px` }}
         className={`absolute left-[calc(50%+170px)] transform transition duration-700  
                   ${show ? "opacity-100 z-50" : "opacity-0 z-n1"}
                   md:left-[calc(50%+290px)] lg:left-[calc(50%+340px)]
@@ -78,7 +82,8 @@ const Modal: React.FC = () => {
         <CloseOutlined className=" bg-custom-pink text-white p-2 md:p-3 lg:p-5 rounded-lg font-extrabold" />
       </button>
       <div
-        style={{ top: `${scrollTop - (size.width || 1024 > 414 ? 70 : 30)}px` }}
+        data-testid="modal"
+        style={{ top: `${scrollTop - (size.width || 1024 > 414 ? 90 : 30)}px` }}
         className={`absolute left-[calc(50%-170px)] w-[340px] h-[650px] duration-700 shadow-xl
                   bg-white rounded-lg p-4 transform transition
                     ${

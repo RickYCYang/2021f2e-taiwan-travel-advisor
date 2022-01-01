@@ -26,7 +26,7 @@ export const getRestaurantsByKeyword = async (
   count = getCount(count);
   const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
     "get",
-    `Tourism/Restaurant?$filter=contains(Name%2C'${keyword}')&$top=${count}&$format=JSON`
+    `Tourism/Restaurant?$filter=contains(RestaurantName%2C'${keyword}')&$top=${count}&$format=JSON`
   );
   return data;
 };

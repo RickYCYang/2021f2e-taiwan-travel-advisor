@@ -5,7 +5,10 @@ const Container: React.FC<{ className?: string }> = ({
   children,
 }) => {
   return (
-    <section className={`container m-auto px-3 md:px-16 lg:px-0 ${className}`}>
+    <section
+      className={`container m-auto px-3 md:px-16 lg:px-0 ${className}`}
+      data-testid="container"
+    >
       {children}
     </section>
   );

@@ -23,7 +23,7 @@ export const getHotelsByKeyword = async (count: number, keyword: string) => {
   count = getCount(count);
   const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
     "get",
-    `Tourism/Hotel?$filter=contains(Name%2C'${keyword}')&$orderby=ZipCode%20desc&$top=${count}&$format=JSON`
+    `Tourism/Hotel?$filter=contains(HotelName%2C'${keyword}')&$orderby=ZipCode%20desc&$top=${count}&$format=JSON`
   );
   return data;
 };
