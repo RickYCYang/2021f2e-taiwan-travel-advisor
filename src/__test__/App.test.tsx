@@ -1,14 +1,16 @@
 import { fireEvent, cleanup, render, screen } from "@testing-library/react";
-import App from "../App";
+import App from "App";
 
-describe("Test <App/>", () => {
+describe("/App", () => {
   beforeEach(cleanup);
-  // const { getByText, getByTestId } = render(
-  //   <Provider store={store}>
-  //     <MessageBoxText {...userMessageString} />
-  //   </Provider>
-  // );
-  test("test", () => {
-    expect(1 + 1).toBe(2);
+
+  test("Header", () => {
+    render(<App />);
+    expect(screen.getByRole("navigation")).toBeInTheDocument;
+  });
+
+  test("Home", () => {
+    render(<App />);
+    expect(screen.getByTestId("banner").firstChild).toHaveClass("lg:bg-home");
   });
 });
