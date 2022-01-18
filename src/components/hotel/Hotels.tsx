@@ -33,7 +33,8 @@ const Hotels: React.FC<{
         ? getHotelsByCity(hotelCount, city)
         : keyword
         ? getHotelsByKeyword(hotelCount, keyword)
-        : getHotels(hotelCount)
+        : getHotels(hotelCount),
+    { keepPreviousData: true }
   );
 
   const loadMoreHotel = () => {

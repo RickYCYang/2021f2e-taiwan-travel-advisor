@@ -39,7 +39,8 @@ const Restaurant: React.FC<{
         ? getRestaurantsByCity(restaurantCount, city)
         : keyword
         ? getRestaurantsByKeyword(restaurantCount, keyword)
-        : getRestaurants(restaurantCount)
+        : getRestaurants(restaurantCount),
+    { keepPreviousData: true }
   );
 
   const loadMoreRestaurant = () => {

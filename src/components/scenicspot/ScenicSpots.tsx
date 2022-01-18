@@ -39,7 +39,8 @@ const ScenicSpots: React.FC<{
         ? getScenicSpotsByCity(scenicSpotCount, city)
         : keyword
         ? getScenicSpotsByKeyword(scenicSpotCount, keyword)
-        : getScenicSpots(scenicSpotCount)
+        : getScenicSpots(scenicSpotCount),
+    { keepPreviousData: true }
   );
 
   const loadMoreScenicSpots = () => {

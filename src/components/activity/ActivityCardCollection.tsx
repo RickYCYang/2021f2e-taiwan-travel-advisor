@@ -61,7 +61,8 @@ const ActivityCardCollection: React.FC<{
         ? getNewestAcitivitiesByCity(activityCount, city)
         : keyword
         ? getNewestAcitivitiesByKeyword(activityCount, keyword)
-        : getNewestAcitivities(activityCount)
+        : getNewestAcitivities(activityCount),
+    { keepPreviousData: true }
   );
 
   const loadMoreActivity = (): void => {
