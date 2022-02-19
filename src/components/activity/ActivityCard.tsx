@@ -10,38 +10,15 @@ import { openModal } from "redux/slices/modalSlice";
 // assets
 import altImage from "assets/images/alt.jpeg";
 
-interface Activity {
-  ID: string;
-  ActivityName: string;
-  Address?: string;
-  Charge?: string;
-  City: string;
-  Class1?: string;
-  Description?: string;
-  EndTime?: string;
-  Name: string;
-  Organizer: string;
-  Phone?: string;
-  Picture: object;
-  Position?: {
-    PositionLat: string;
-    PositionLon: string;
-  };
-  SrcUpdateTime?: string;
-  StartTime?: string;
-  Location?: string;
-  Cycle?: string;
-  NonCycle?: string;
-  WebsiteUrl?: string;
-}
+// types
+import { motcTourismActivity } from "types/tourism";
 
-const ActivityCard: React.FC<{ activity: any }> = memo(
+const ActivityCard: React.FC<{ activity: motcTourismActivity }> = memo(
   ({ activity }) => {
     const {
       Address,
       Description,
       Location,
-      Name,
       ActivityName,
       Picture,
       StartTime,
@@ -51,9 +28,10 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
       Phone,
       WebsiteUrl,
       Position,
-    }: Activity = activity;
+    } = activity;
+
     const payload = {
-      photos: Object.values(Picture) || [],
+      photos: Object.values(Picture || {}),
       title: ActivityName,
       description: Description,
       phone: Phone,
@@ -67,7 +45,7 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
     };
 
     const dispatch = useDispatch();
-    let thumbnail: string = Object.values(Picture)[0];
+    let thumbnail: string = Object.values(Picture || {})[0];
 
     return (
       <>
@@ -81,11 +59,11 @@ const ActivityCard: React.FC<{ activity: any }> = memo(
             className="lazyload rounded block w-1/3 h-full max-h-[200px] object-cover mr-4 shadow hover:scale-110 duration-500"
             data-src={thumbnail ?? altImage}
             onClick={() => dispatch(openModal(payload))}
-            alt={Name}
+            alt={ActivityName}
           />
           <div className="flex flex-col justify-between max-w-[calc(100%-33%-16px)]">
             <h4 className="font-semibold text-sm mb-[14px] lg:text-base">
-              {Name ?? ActivityName}
+              {ActivityName}
             </h4>
             <p className="hidden mb-3 lg:line-clamp-5 lg:text-sm lg:text-gray-400">
               {Description}

@@ -1,10 +1,14 @@
-import axios, { AxiosResponse } from "api/axios";
+import axios from "api/axios";
+import { route, stopOfRoute, routeStopArriveTime } from "types/traffic";
 
 export const getRoutesByCity = async (city: string) => {
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Bus/Route/City/${city}?$select=RouteUID%2CRouteName%2CDepartureStopNameZh%2C%20DestinationStopNameZh&$orderby=RouteUID&$format=JSON`
-  );
+  const { data } = (await axios.get(`Bus/Route/City/${city}`, {
+    params: {
+      $select: `RouteUID,RouteName,DepartureStopNameZh,DestinationStopNameZh`,
+      $orderby: "RouteUID",
+      $format: "JSON",
+    },
+  })) as { data: Array<route> };
   return data;
 };
 
@@ -12,10 +16,16 @@ export const getStopsByCityAndRouteName = async (
   city: string,
   routeName: string
 ) => {
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Bus/DisplayStopOfRoute/City/${city}/${routeName}?$select=RouteName%2CDirection%2CStops&$top=30&$format=JSON`
-  );
+  const { data } = (await axios.get(
+    `Bus/DisplayStopOfRoute/City/${city}/${routeName}`,
+    {
+      params: {
+        $select: "RouteName,Direction,Stops",
+        $top: 30,
+        $format: "JSON",
+      },
+    } //?$select=RouteName%2CDirection%2CStops&$top=30&$format=JSON`
+  )) as { data: Array<stopOfRoute> };
   return data;
 };
 
@@ -23,9 +33,13 @@ export const getArrivalTimeByCityAndRouteName = async (
   city: string,
   routeName: string
 ) => {
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Bus/EstimatedTimeOfArrival/City/${city}/${routeName}?$format=JSON`
-  );
+  const { data } = (await axios.get(
+    `Bus/EstimatedTimeOfArrival/City/${city}/${routeName}`,
+    {
+      params: {
+        $format: "JSON",
+      },
+    }
+  )) as { data: Array<routeStopArriveTime> };
   return data;
 };

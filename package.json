@@ -40,7 +40,8 @@
     "build": "craco build",
     "test": "craco test",
     "test:watch": "craco test --watch",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:cypress": "npx cypress open"
   },
   "eslintConfig": {
     "extends": [

@@ -1,12 +1,16 @@
-import axios, { AxiosResponse } from "api/axios";
+import axios from "api/axios";
 import { getCount } from "./utils";
+import { motcTourismActivity } from "types/tourism";
 
 export const getNewestAcitivities = async (count: number) => {
   count = getCount(count);
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Tourism/Activity?$orderby=StartTime%20desc&$top=${count}&$format=JSON`
-  );
+  const { data } = (await axios.get(`Tourism/Activity`, {
+    params: {
+      $orderby: "StartTime desc",
+      $top: count,
+      $format: JSON,
+    },
+  })) as { data: Array<motcTourismActivity> };
   return data;
 };
 
@@ -15,10 +19,13 @@ export const getNewestAcitivitiesByCity = async (
   city: string
 ) => {
   count = getCount(count);
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Tourism/Activity/${city}?$orderby=StartTime%20desc&$top=${count}&$format=JSON`
-  );
+  const { data } = (await axios.get(`Tourism/Activity/${city}`, {
+    params: {
+      $orderby: "StartTime desc",
+      $top: count,
+      $format: JSON,
+    },
+  })) as { data: Array<motcTourismActivity> };
   return data;
 };
 
@@ -27,9 +34,13 @@ export const getNewestAcitivitiesByKeyword = async (
   keyword: string
 ) => {
   count = getCount(count);
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Tourism/Activity?$filter=contains(ActivityName%2C'${keyword}')&$orderby=StartTime%20desc&$top=${count}&$format=JSON`
-  );
+  const { data } = (await axios.get(`Tourism/Activity`, {
+    params: {
+      $filter: `contains(ActivityName,'${keyword}')`,
+      $orderby: "StartTime desc",
+      $top: count,
+      $format: "JSON",
+    },
+  })) as { data: Array<motcTourismActivity> };
   return data;
 };

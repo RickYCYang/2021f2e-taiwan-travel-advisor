@@ -13,6 +13,9 @@ import Button from "components/common/Button";
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 
+// types
+import { motcTourismHotel } from "types/tourism";
+
 const Hotels: React.FC<{
   city?: string | null;
   defaultCount?: number | null;
@@ -35,7 +38,11 @@ const Hotels: React.FC<{
         ? getHotelsByKeyword(hotelCount, keyword)
         : getHotels(hotelCount),
     { keepPreviousData: true }
-  );
+  ) as {
+    isLoading: boolean;
+    error: { message: string };
+    data: motcTourismHotel;
+  };
 
   const loadMoreHotel = () => {
     setHotelCount(hotelCount + 10);

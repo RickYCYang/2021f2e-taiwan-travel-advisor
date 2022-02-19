@@ -14,7 +14,7 @@ import {
   setLocalStorageWithExpiry,
 } from "utils/localStorage";
 // types
-import { Option } from "utils/option";
+import { option } from "types/common";
 
 const Banner: React.FC<{ className?: string; search?: string | null }> = ({
   className,
@@ -37,8 +37,8 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
 
   /// States variables
   const [keyword, setKeyword] = useState<string>(search || "");
-  const [category, setCategory] = useState<Option>(selectCategories[0]);
-  const [city, setCity] = useState<Option>(selectCities[0]);
+  const [category, setCategory] = useState<option>(selectCategories[0]);
+  const [city, setCity] = useState<option>(selectCities[0]);
   const [searchHistory, setSearchHistory] = useState<Array<string>>(
     getLocalStorageWithExpiry("searchHistory")
       ? (getLocalStorageWithExpiry("searchHistory") || "").split(",")
@@ -108,7 +108,7 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={category}
               defaultValue={selectCategories[0]}
-              onChange={(e: Option) => setCategory(e)}
+              onChange={(e: option) => setCategory(e)}
             />
             <Selector
               options={selectCities}
@@ -116,7 +116,7 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={city}
               defaultValue={selectCities[0]}
-              onChange={(e: Option) => setCity(e)}
+              onChange={(e: option) => setCity(e)}
             />
             <button
               className="bg-custom-yellow w-10 rounded-md"

@@ -1,34 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { stopOfRouteAndArrival } from "types/traffic";
 
-interface Stop {
-  StationID: string;
-  StopBoarding: number;
-  StopID: string;
-  StopName: {
-    En: string;
-    Zh_tw: string;
-  };
-  StopPosition: {
-    PositionLat: number;
-    PositionLon: number;
-  };
-  StopSequence: number;
-  StopUID: string;
-  estimateTime: number;
-  stopStatus: number;
-}
+type routeState = {
+  stops: Array<stopOfRouteAndArrival>;
+};
 
-interface Route {
-  stops: Array<Stop>;
-}
-
-interface State {
-  route: {
-    stops: Array<any>;
-  };
-}
-
-const initialState: Route = {
+const initialState: routeState = {
   stops: [],
 };
 
@@ -43,5 +20,5 @@ const routeSlice = createSlice({
 });
 
 export const { setStops } = routeSlice.actions;
-export const routeSelector = (state: State) => state.route;
+export const routeSelector = (state: { route: routeState }) => state.route;
 export default routeSlice.reducer;

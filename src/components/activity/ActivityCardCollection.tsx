@@ -12,30 +12,8 @@ import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 import Button from "components/common/Button";
 
-interface Activity {
-  ActivityID: string;
-  ActivityName: string;
-  Address?: string;
-  Charge?: string;
-  City: string;
-  Class1?: string;
-  Description?: string;
-  EndTime?: string;
-  Name: string;
-  Organizer: string;
-  Phone?: string;
-  Picture: object;
-  Position?: {
-    PositionLat: string;
-    PositionLon: string;
-  };
-  SrcUpdateTime?: string;
-  StartTime?: string;
-  Location?: string;
-  Cycle?: string;
-  NonCycle?: string;
-  WebsiteUrl?: string;
-}
+// types
+import { motcTourismActivity } from "types/tourism";
 
 const loadCityCount = 4;
 
@@ -47,7 +25,7 @@ const ActivityCardCollection: React.FC<{
   const [activityCount, setActivityCount] = useState<number>(
     defaultCount || 10
   );
-  const { isLoading, error, data }: any = useQuery(
+  const { isLoading, error, data } = useQuery(
     [
       city
         ? `getNewestAcitivitiesByCity/${city}`
@@ -63,7 +41,11 @@ const ActivityCardCollection: React.FC<{
         ? getNewestAcitivitiesByKeyword(activityCount, keyword)
         : getNewestAcitivities(activityCount),
     { keepPreviousData: true }
-  );
+  ) as {
+    isLoading: boolean;
+    error: { message: string };
+    data: Array<motcTourismActivity>;
+  };
 
   const loadMoreActivity = (): void => {
     setActivityCount(activityCount + loadCityCount);
@@ -79,7 +61,7 @@ const ActivityCardCollection: React.FC<{
         className="flex flex-wrap items-stretch justify-between gap-6 mb-6 
                       md:mb-12 lg:justify-start lg:gap-12"
       >
-        {data.map((activity: Activity) => (
+        {data.map((activity: motcTourismActivity) => (
           <ActivityCard activity={activity} key={activity.ActivityID} />
         ))}
       </div>
@@ -97,4 +79,3 @@ const ActivityCardCollection: React.FC<{
 };
 
 export default ActivityCardCollection;
-export type { Activity };

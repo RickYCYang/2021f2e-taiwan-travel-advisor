@@ -1,15 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Scroll {
+type scrollState = {
   scrollTop: number;
   scrollLeft: number;
-}
+};
 
-interface State {
-  scroll: Scroll;
-}
-
-const initialState: Scroll = {
+const initialState: scrollState = {
   scrollTop: 0,
   scrollLeft: 0,
 };
@@ -25,5 +21,5 @@ const scrollSlice = createSlice({
 });
 
 export const { setScrollTop } = scrollSlice.actions;
-export const scrollSelector = (state: State) => state.scroll;
+export const scrollSelector = (state: { scroll: scrollState }) => state.scroll;
 export default scrollSlice.reducer;

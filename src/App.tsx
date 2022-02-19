@@ -16,7 +16,7 @@ const queryClient = new QueryClient();
 const store = configureStore({ reducer: rootReducer });
 
 const App: React.FC = () => {
-  const scrollbarRef = useRef<HTMLElement | null>(null);
+  const scrollbarRef = useRef(null) as {current: HTMLElement | null};
 
   return (
     <Provider store={store}>

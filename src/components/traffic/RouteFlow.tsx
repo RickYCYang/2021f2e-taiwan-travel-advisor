@@ -6,15 +6,15 @@ import useWindowSize from "hooks/useWindowSize";
 // components
 import Container from "components/common/Container";
 
-interface Size {
+type size = {
   width: number | undefined;
-}
+};
 
 const RouteFlow: React.FC = () => {
   const date = new Date();
   const { stops } = useSelector(routeSelector);
   const [maxHeight, setMaxHeight] = useState<string>("1000px");
-  const { width }: Size = useWindowSize();
+  const { width }: size = useWindowSize();
 
   useEffect(() => {
     if (stops.length > 0 && (width || 1024) > 414) {

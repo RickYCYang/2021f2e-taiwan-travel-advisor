@@ -11,16 +11,14 @@ import Main from "components/common/Main";
 // const
 import cities from "const/cities";
 
-const checkCityParam = (city?: string) => {
-  let exist = false;
+const checkCityParam = (city: string) => {
   // eslint-disable-next-line
-  cities.map(({ value }) => {
-    if (city === value) {
-      exist = true;
-      return null;
+  for (let i = 0; i < cities.length; i++) {
+    if (cities[i].value === city) {
+      return true;
     }
-  });
-  return exist;
+  }
+  return false;
 };
 
 const Home: React.FC = () => {

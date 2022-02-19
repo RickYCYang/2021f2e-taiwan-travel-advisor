@@ -3,11 +3,7 @@ import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
 import { useSelector, useDispatch } from "react-redux";
 import useWindowSize from "hooks/useWindowSize";
-import {
-  closeModal,
-  modalSelector,
-  Modal as IModal,
-} from "redux/slices/modalSlice";
+import { closeModal, modalSelector, modalState } from "redux/slices/modalSlice";
 import { scrollSelector } from "redux/slices/scrollSlice";
 // components
 import {
@@ -38,7 +34,7 @@ const Modal: React.FC = () => {
     charge,
     website,
     position,
-  }: IModal = useSelector(modalSelector);
+  }: modalState = useSelector(modalSelector);
   const { scrollTop } = useSelector(scrollSelector);
   const dispatch = useDispatch();
 

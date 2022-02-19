@@ -3,7 +3,15 @@ import usePrevious from "hooks/usePrevious";
 import { useQuery } from "react-query";
 import { setStops } from "redux/slices/routeSlice";
 import { useDispatch } from "react-redux";
-import { Option } from "utils/option";
+
+// types
+import {
+  route,
+  stopOfRoute,
+  stopOfRouteAndArrival,
+  routeStopArriveTime,
+} from "types/traffic";
+import { option } from "types/common";
 
 // api
 import {
@@ -20,72 +28,26 @@ import MobileNavbar from "components/common/MobileNavbar";
 // Only five cities are supported by the API currently
 import cities from "const/trafficCities";
 
-interface Route {
-  RouteName: { Zh_tw: string };
-  DepartureStopNameZh: string;
-  DestinationStopNameZh: string;
-}
-
-interface RouteOption {
-  label: string;
-  value: string;
+type optionRouteStop = option & {
   routeName: string;
   departureStopNameZh: string;
   destinationStopNameZh: string;
-}
-
-interface Stop {
-  StationID: string;
-  StopBoarding: number;
-  StopID: string;
-  StopName: {
-    En: string;
-    Zh_tw: string;
-  };
-  StopPosition: {
-    PositionLat: number;
-    PositionLon: number;
-  };
-  StopSequence: number;
-  StopUID: string;
-  estimateTime: number;
-  stopStatus: number;
-}
-
-interface ArriveTime {
-  Direction: number;
-  EstimateTime: number;
-  RouteID: string;
-  RouteName: {
-    En: string;
-    Zh_tw: string;
-  };
-  RouteUID: string;
-  SrcUpdateTime: string;
-  StopID: string;
-  StopName: {
-    En: string;
-    Zh_tw: string;
-  };
-  StopStatus: number;
-  StopUID: string;
-  UpdateTime: string;
-}
+};
 
 const Searchbar: React.FC = () => {
   const dispatch = useDispatch();
-  const [city, setCity] = useState<Option>(cities[0]);
+  const [city, setCity] = useState<option>(cities[0]);
   const [departure, setDeparture] = useState<string>("");
   const [destination, setDestination] = useState<string>("");
-  const [routeOptions, setRouteOptions] = useState<RouteOption[]>([]);
-  const [route, setRoute] = useState<Option>({ label: "", value: "" });
+  const [routeOptions, setRouteOptions] = useState<optionRouteStop[]>([]);
+  const [route, setRoute] = useState<option>({ label: "", value: "" });
   const [direction, setDirection] = useState<number>(0);
 
-  const prevRoute: Option | undefined = usePrevious(route);
+  const prevRoute: option | undefined = usePrevious(route);
 
   const { data: routes } = useQuery(["getRoutesByCity", city.value], () =>
     getRoutesByCity(city.value)
-  );
+  ) as { data: Array<route> };
 
   const { data: stops } = useQuery(
     ["getStopsByCityAndRouteName", city.value, route.value],
@@ -94,7 +56,7 @@ const Searchbar: React.FC = () => {
       // The query will not execute until the userId exists
       enabled: !!route.value && prevRoute !== route,
     }
-  );
+  ) as { data: Array<stopOfRoute> };
 
   const { data: arrivalTimes } = useQuery(
     ["getArrivalTimeByCityAndRouteName", city.value, route.value],
@@ -105,7 +67,7 @@ const Searchbar: React.FC = () => {
       // Refetch the data every second
       refetchInterval: 15,
     }
-  );
+  ) as { data: Array<routeStopArriveTime> };
 
   /// Set route options after fetching data
   useEffect(() => {
@@ -116,7 +78,7 @@ const Searchbar: React.FC = () => {
             RouteName: { Zh_tw },
             DepartureStopNameZh,
             DestinationStopNameZh,
-          }: Route) => ({
+          }) => ({
             label: Zh_tw,
             value: Zh_tw,
             routeName: Zh_tw,
@@ -139,26 +101,26 @@ const Searchbar: React.FC = () => {
 
   useEffect(() => {
     if (stops && arrivalTimes) {
-      const data = stops[direction].Stops.map((stop: Stop) => {
-        arrivalTimes.forEach((arrivalTime: ArriveTime) => {
+      const data: Array<stopOfRouteAndArrival> = [];
+      stops[direction].Stops.forEach((stop) => {
+        arrivalTimes.forEach((arrivalTime) => {
           if (
             arrivalTime.Direction === direction &&
             arrivalTime.StopID === stop.StopID
           ) {
-            stop = {
+            data.push({
               ...stop,
               estimateTime: arrivalTime.EstimateTime,
               stopStatus: arrivalTime.StopStatus,
-            };
+            });
           }
         });
-        return stop;
       });
       dispatch(setStops(data));
     }
   }, [stops, direction, arrivalTimes, dispatch]);
 
-  const toggleRoute = (e: RouteOption) => {
+  const toggleRoute = (e: optionRouteStop) => {
     setRoute(e);
     setDeparture(e.departureStopNameZh);
     setDestination(e.destinationStopNameZh);
@@ -178,7 +140,7 @@ const Searchbar: React.FC = () => {
           value={city}
           name={"citySelector"}
           defaultValue={city}
-          onChange={(e: Option) => setCity(e)}
+          onChange={(e: option) => setCity(e)}
         />
         <Selector
           className="tracking-wider w-60"
@@ -211,4 +173,3 @@ const Searchbar: React.FC = () => {
 };
 
 export default Searchbar;
-export type { Route, RouteOption, Stop, ArriveTime };

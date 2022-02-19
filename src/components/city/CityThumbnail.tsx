@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
 /// components
 import { LocationMarkerIcon } from "@heroicons/react/solid";
+/// types
+import { option } from "types/common";
 
-interface City {
-  label: string;
-  value: string;
-}
-
-const Citythumbnail: React.FC<{ city: City; small?: boolean }> = ({
+const Citythumbnail: React.FC<{ city: option; small?: boolean }> = ({
   city,
   small = false,
 }) => {
@@ -38,7 +35,7 @@ const Citythumbnail: React.FC<{ city: City; small?: boolean }> = ({
 
 export default Citythumbnail;
 
-const getHeightClass = (small: boolean) => {
+const getHeightClass = (small: boolean): string => {
   if (small) {
     return "h-[92px] lg:h-[106px]";
   } else {
@@ -51,7 +48,7 @@ const getHeightClass = (small: boolean) => {
   }
 };
 
-const getPaddingClass = (small: boolean) => {
+const getPaddingClass = (small: boolean): string => {
   if (small) {
     return "p-[4px] lg:p-[8px] ";
   } else {
@@ -61,7 +58,7 @@ const getPaddingClass = (small: boolean) => {
 
 // since dynamic assemble background class name is not working,
 // so the temporal solution is hardcode the class name
-const getBackgroundImageClass = (city: string) => {
+const getBackgroundImageClass = (city: string): string => {
   switch (city) {
     case "ChanghuaCounty":
       return "bg-ChanghuaCounty";
@@ -108,6 +105,6 @@ const getBackgroundImageClass = (city: string) => {
     case "YunlinCounty":
       return "bg-YunlinCounty";
     default:
-      return null;
+      return "";
   }
 };

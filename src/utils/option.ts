@@ -1,12 +1,6 @@
-interface Option {
-  label: string;
-  value: string;
-}
-
-export const createOptions = (options: Array<Option>, option: Option) => {
+import { option } from "types/common";
+export const createOptions = (options: Array<option>, option: option) => {
   const _options = options.slice();
   _options.unshift(option);
   return _options;
 };
-
-export type { Option };

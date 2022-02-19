@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { UpCircleFilled } from "@ant-design/icons";
 
 const ScrollTopButton: React.FC<{
-  scrollbarRef: React.RefObject<HTMLElement>;
+  scrollbarRef: { current: HTMLElement | null };
 }> = ({ scrollbarRef }) => {
   const scorllToTop = useCallback(() => {
     const { current } = scrollbarRef;

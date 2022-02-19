@@ -5,7 +5,7 @@ import { setScrollTop } from "redux/slices/scrollSlice";
 
 // to-be fixed: scrollbarRef: any
 const Scrollbar: React.FC<{
-  scrollbarRef: any;
+  scrollbarRef: { current: HTMLElement | null };
 }> = ({ children, scrollbarRef }) => {
   const dispatch = useDispatch();
   const _onScollY = (container: HTMLElement): void => {

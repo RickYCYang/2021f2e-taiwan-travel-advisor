@@ -17,6 +17,9 @@ import Button from "components/common/Button";
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 
+// types
+import { motcTourismScenicSpot } from "types/tourism";
+
 const ScenicSpots: React.FC<{
   city?: string | null;
   defaultCount?: number | null;
@@ -41,7 +44,11 @@ const ScenicSpots: React.FC<{
         ? getScenicSpotsByKeyword(scenicSpotCount, keyword)
         : getScenicSpots(scenicSpotCount),
     { keepPreviousData: true }
-  );
+  ) as {
+    isLoading: boolean;
+    error: { message: string };
+    data: motcTourismScenicSpot;
+  };
 
   const loadMoreScenicSpots = () => {
     setScenicSpotCount(scenicSpotCount + 10);

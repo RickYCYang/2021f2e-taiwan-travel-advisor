@@ -1,29 +1,39 @@
-import axios, { AxiosResponse } from "api/axios";
+import axios from "api/axios";
 import { getCount } from "./utils";
+import { motcTourismHotel } from "types/tourism";
 
 export const getHotels = async (count: number) => {
   count = getCount(count);
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Tourism/Hotel?$orderby=ZipCode&$top=${count}&$format=JSON`
-  );
+  const { data } = (await axios.get(`Tourism/Hotel`, {
+    params: {
+      $orderby: "ZipCode",
+      $top: count,
+      format: "JSON",
+    },
+  })) as { data: Array<motcTourismHotel> };
   return data;
 };
 
 export const getHotelsByCity = async (count: number, city: string) => {
   count = getCount(count);
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Tourism/Hotel/${city}?$top=${count}&$format=JSON`
-  );
+  const { data } = (await axios.get(`Tourism/Hotel/${city}`, {
+    params: {
+      $top: count,
+      $format: "JSON",
+    },
+  })) as { data: Array<motcTourismHotel> };
   return data;
 };
 
 export const getHotelsByKeyword = async (count: number, keyword: string) => {
   count = getCount(count);
-  const { data }: boolean | AxiosResponse<unknown, any> | any = await axios(
-    "get",
-    `Tourism/Hotel?$filter=contains(HotelName%2C'${keyword}')&$orderby=ZipCode%20desc&$top=${count}&$format=JSON`
-  );
+  const { data } = (await axios.get(`Tourism/Hotel`, {
+    params: {
+      $filter: `contains(HotelName, '${keyword}')`,
+      $orderby: "ZipCode",
+      $top: count,
+      $format: "JSON",
+    },
+  })) as { data: Array<motcTourismHotel> };
   return data;
 };

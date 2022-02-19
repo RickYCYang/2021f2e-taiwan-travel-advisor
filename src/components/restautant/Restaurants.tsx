@@ -17,6 +17,9 @@ import Button from "components/common/Button";
 import WarningMsg from "components/common/WarningMsg";
 import Loading from "components/common/Loading";
 
+//types
+import { motcTourismRestaurant } from "types/tourism";
+
 const Restaurant: React.FC<{
   city?: string | null;
   defaultCount?: number | null;
@@ -41,7 +44,11 @@ const Restaurant: React.FC<{
         ? getRestaurantsByKeyword(restaurantCount, keyword)
         : getRestaurants(restaurantCount),
     { keepPreviousData: true }
-  );
+  ) as {
+    isLoading: boolean;
+    error: { message: string };
+    data: motcTourismRestaurant;
+  };
 
   const loadMoreRestaurant = () => {
     setRestaurantCount(restaurantCount + 10);
