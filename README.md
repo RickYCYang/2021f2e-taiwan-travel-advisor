@@ -14,17 +14,21 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `npm test`
 
+Launches the test runner one time
+
+### `npm run test:watch`
+
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run test:cypress`
+
+Launches the e2e cypress test runner
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-### `npm run test:watch`
-
-### `npm run test:cypress`
 
 ### `npm run eject`
 
@@ -35,4 +39,4 @@ It correctly bundles React in production mode and optimizes the build for the be
 Build docker image
 
 ### `docker run -d -p 8080:80 --name react-travel-advisor react-travel-advisor`
-Run docker container Open [http://localhost:8080]
+Run docker container Open [http://localhost:8080](http://localhost:8080)
