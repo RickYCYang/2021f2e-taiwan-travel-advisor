@@ -32,5 +32,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 ## Build & Run by Docker
 
 ### `docker build -t react-travel-advisor .`
+Build docker image
 
-### `docker run -d -p 80:3000 --name react-travel-advisor react-travel-advisor`
+### `docker run -d -p 8080:80 --name react-travel-advisor react-travel-advisor`
+Run docker container Open [http://localhost:8080]
