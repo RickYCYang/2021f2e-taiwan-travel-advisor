@@ -30,7 +30,7 @@ Launches the e2e cypress test runner
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### `npm run eject`
+`npm run eject`
 
 
 ## Build & Run by Docker
