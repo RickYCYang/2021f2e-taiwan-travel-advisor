@@ -32,7 +32,7 @@ describe('api/activity', () => {
     expect(mockedUtils.getCount).toHaveBeenCalledWith(count);
     expect(mockedAxios.get).toBeCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith('Tourism/Activity', {
-      params: { $orderby: 'StartTime desc', $format: 'JSON', $top: count },
+      params: { $format: 'JSON', $top: count },
     });
   });
 
@@ -43,7 +43,7 @@ describe('api/activity', () => {
     expect(mockedUtils.getCount).toHaveBeenCalledWith(count);
     expect(mockedAxios.get).toBeCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(`Tourism/Activity/${city}`, {
-      params: { $orderby: 'StartTime desc', $format: 'JSON', $top: count },
+      params: { $format: 'JSON', $top: count },
     });
   });
 
@@ -55,8 +55,7 @@ describe('api/activity', () => {
     expect(mockedAxios.get).toBeCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith('Tourism/Activity', {
       params: {
-        $filter: `contains(ActivityName,'${keyword}')`,
-        $orderby: 'StartTime desc',
+        $filter: `contains(ActivityName, '${keyword}')`,
         $format: 'JSON',
         $top: count,
       },
