@@ -2,11 +2,11 @@ name: Deployment pipeline
 
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
     types: [opened, synchronize]
   push:
     branches:
-      - master
+      - main
 
 jobs:
   linting_testing:
@@ -32,7 +32,7 @@ jobs:
   tag_release:
     if: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
     runs-on: ubuntu-20.04
-    needs: [simple_deployment_pipeline]
+    needs: [linting_testing]
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       REPO_OWNER: RickYCYang
