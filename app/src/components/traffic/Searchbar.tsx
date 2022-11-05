@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import usePrevious from "hooks/usePrevious";
-import { useQuery } from "react-query";
-import { setStops } from "redux/slices/routeSlice";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
+import usePrevious from 'hooks/usePrevious';
+import { useQuery } from 'react-query';
+import { setStops } from 'redux/slices/routeSlice';
+import { useDispatch } from 'react-redux';
 
 // types
 import {
@@ -10,23 +10,23 @@ import {
   stopOfRoute,
   stopOfRouteAndArrival,
   routeStopArriveTime,
-} from "types/traffic";
-import { option } from "types/common";
+} from 'types/traffic';
+import { option } from 'types/common';
 
 // api
 import {
   getRoutesByCity,
   getStopsByCityAndRouteName,
   getArrivalTimeByCityAndRouteName,
-} from "api/traffic";
+} from 'api/traffic';
 
 // components
-import Selector from "components/common/Selector";
-import MobileNavbar from "components/common/MobileNavbar";
+import Selector from 'components/common/Selector';
+import MobileNavbar from 'components/common/MobileNavbar';
 
 // constant,
 // Only five cities are supported by the API currently
-import cities from "const/trafficCities";
+import cities from 'const/trafficCities';
 
 type optionRouteStop = option & {
   routeName: string;
@@ -37,20 +37,20 @@ type optionRouteStop = option & {
 const Searchbar: React.FC = () => {
   const dispatch = useDispatch();
   const [city, setCity] = useState<option>(cities[0]);
-  const [departure, setDeparture] = useState<string>("");
-  const [destination, setDestination] = useState<string>("");
+  const [departure, setDeparture] = useState<string>('');
+  const [destination, setDestination] = useState<string>('');
   const [routeOptions, setRouteOptions] = useState<optionRouteStop[]>([]);
-  const [route, setRoute] = useState<option>({ label: "", value: "" });
+  const [route, setRoute] = useState<option>({ label: '', value: '' });
   const [direction, setDirection] = useState<number>(0);
 
   const prevRoute: option | undefined = usePrevious(route);
 
-  const { data: routes } = useQuery(["getRoutesByCity", city.value], () =>
+  const { data: routes } = useQuery(['getRoutesByCity', city.value], () =>
     getRoutesByCity(city.value)
   ) as { data: Array<route> };
 
   const { data: stops } = useQuery(
-    ["getStopsByCityAndRouteName", city.value, route.value],
+    ['getStopsByCityAndRouteName', city.value, route.value],
     () => getStopsByCityAndRouteName(city.value, route.value),
     {
       // The query will not execute until the userId exists
@@ -59,7 +59,7 @@ const Searchbar: React.FC = () => {
   ) as { data: Array<stopOfRoute> };
 
   const { data: arrivalTimes } = useQuery(
-    ["getArrivalTimeByCityAndRouteName", city.value, route.value],
+    ['getArrivalTimeByCityAndRouteName', city.value, route.value],
     () => getArrivalTimeByCityAndRouteName(city.value, route.value),
     {
       // The query will not execute until the userId exists
@@ -138,7 +138,7 @@ const Searchbar: React.FC = () => {
           className="tracking-wider w-60"
           options={cities}
           value={city}
-          name={"citySelector"}
+          name={'citySelector'}
           defaultValue={city}
           onChange={(e: option) => setCity(e)}
         />
@@ -146,14 +146,14 @@ const Searchbar: React.FC = () => {
           className="tracking-wider w-60"
           options={routeOptions}
           value={route}
-          name={"routeSelector"}
+          name={'routeSelector'}
           onChange={toggleRoute}
         />
       </div>
       <div className="flex justify-center gap-10 md:gap-20">
         <button
           className={`text-sm px-8 py-3 hover:bg-gray-100 
-                    ${direction === 0 && "border-b-2 border-b-custom-pink"}
+                    ${direction === 0 && 'border-b-2 border-b-custom-pink'}
                     md:px-24 md:text-base `}
           onClick={() => setDirection(0)}
         >
@@ -161,7 +161,7 @@ const Searchbar: React.FC = () => {
         </button>
         <button
           className={`text-sm px-8 py-3 hover:bg-gray-100 
-                    ${direction === 1 && "border-b-2 border-b-custom-pink"}
+                    ${direction === 1 && 'border-b-2 border-b-custom-pink'}
                     md:text-base md:px-24 `}
           onClick={() => setDirection(1)}
         >

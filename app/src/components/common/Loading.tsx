@@ -1,7 +1,11 @@
-import { CaretUpOutlined, CloudFilled } from "@ant-design/icons";
-import Container from "./Container";
+import { CaretUpOutlined, CloudFilled } from '@ant-design/icons';
+import Container from './Container';
 
-const Rectangle: React.FC<{ className?: string }> = ({ className }) => {
+interface IconProps {
+  className: string;
+}
+
+const Rectangle = ({ className }: IconProps) => {
   return (
     <svg width="20" height="20" className={className}>
       <rect width="20" height="20" fill="#FFB72C" />
@@ -9,7 +13,7 @@ const Rectangle: React.FC<{ className?: string }> = ({ className }) => {
   );
 };
 
-const Circle: React.FC<{ className?: string }> = ({ className }) => {
+const Circle = ({ className }: IconProps) => {
   return (
     <svg width="30" height="30" className={className}>
       <circle cx="50%" cy="50%" r="10" fill="#007350" />

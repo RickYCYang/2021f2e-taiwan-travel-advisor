@@ -1,18 +1,25 @@
 // hooks
-import { useCallback } from "react";
+import { useCallback } from 'react';
 // components
-import { UpCircleFilled } from "@ant-design/icons";
+import { UpCircleFilled } from '@ant-design/icons';
 
-const ScrollTopButton: React.FC<{
+interface ScrollTopButtonProps {
   scrollbarRef: { current: HTMLElement | null };
-}> = ({ scrollbarRef }) => {
+}
+
+const ScrollTopButton = ({ scrollbarRef }: ScrollTopButtonProps) => {
   const scorllToTop = useCallback(() => {
     const { current } = scrollbarRef;
     if (current) {
-      current.scrollTo({
-        behavior: "smooth",
-        top: 0,
-      });
+      /**
+       * behavior: 'smooth' is broken for chrome version v102+
+       * ref: https://github.com/mdbootstrap/perfect-scrollbar/issues/138
+       */
+      // current.scrollTo({
+      //   behavior: 'smooth',
+      //   top: 0,
+      // });
+      current.scrollTop = 0;
     }
   }, [scrollbarRef]);
 

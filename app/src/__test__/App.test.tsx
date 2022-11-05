@@ -1,16 +1,16 @@
-import { fireEvent, cleanup, render, screen } from "@testing-library/react";
-import App from "App";
+import { cleanup, render, screen } from '@testing-library/react';
+import App from 'App';
 
-describe("/App", () => {
+describe('/App', () => {
   beforeEach(cleanup);
 
-  test("Header", () => {
+  test('Header', () => {
     render(<App />);
-    expect(screen.getByRole("navigation")).toBeInTheDocument;
+    expect(screen.getByRole('navigation')).toBeInTheDocument;
   });
 
-  test("Home", () => {
+  test('Home', () => {
     render(<App />);
-    expect(screen.getByTestId("banner").firstChild).toHaveClass("lg:bg-home");
+    expect(screen.getByTestId('banner').firstChild).toHaveClass('lg:bg-home');
   });
 });

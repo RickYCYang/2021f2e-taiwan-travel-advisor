@@ -1,0 +1,43 @@
+name: Deployment pipeline
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+  push:
+    branches:
+      - master
+
+jobs:
+  linting_testing:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: npm install
+        run: cd app && npm install
+      - name: lint
+        run: cd app && npm run lint
+      - name: unit test
+        run: cd app && npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v4
+        with:
+          start: cd app && npm run start
+          wait-on: http://localhost:3000
+      - name: build
+        run: npm run build
+  tag_release:
+    if: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
+    runs-on: ubuntu-20.04
+    needs: [simple_deployment_pipeline]
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO_OWNER: RickYCYang
+      DEFAULT_BUMP: patch
+    steps:
+      - uses: actions/checkout@master
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0

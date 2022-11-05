@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 // components
-import { SearchIcon } from "@heroicons/react/solid";
-import Selector from "./Selector";
-import MobileNavbar from "components/common/MobileNavbar";
+import { SearchIcon } from '@heroicons/react/solid';
+import Selector from './Selector';
+import MobileNavbar from 'components/common/MobileNavbar';
 // constant
-import cities from "const/cities";
-import categories from "const/categories";
+import cities from 'const/cities';
+import categories from 'const/categories';
 // utils
-import { createOptions } from "utils/option";
+import { createOptions } from 'utils/option';
 import {
   getLocalStorageWithExpiry,
   setLocalStorageWithExpiry,
-} from "utils/localStorage";
+} from 'utils/localStorage';
 // types
-import { option } from "types/common";
+import { option } from 'types/common';
 
 const Banner: React.FC<{ className?: string; search?: string | null }> = ({
   className,
@@ -24,30 +24,30 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
 
   /// Create selector options pool
   const selectCities = createOptions(cities, {
-    label: "不分縣市",
-    value: "",
+    label: '不分縣市',
+    value: '',
   });
   const selectCategories = createOptions(
-    categories.filter(({ label, value }) => label !== "交通"),
+    categories.filter(({ label }) => label !== '交通'),
     {
-      label: "類別",
-      value: "",
+      label: '類別',
+      value: '',
     }
   );
 
   /// States variables
-  const [keyword, setKeyword] = useState<string>(search || "");
-  const [category, setCategory] = useState<option>(selectCategories[0]);
-  const [city, setCity] = useState<option>(selectCities[0]);
+  const [keyword, setKeyword] = useState<string>(search || '');
+  const [category, setCategory] = useState<option | null>(selectCategories[0]);
+  const [city, setCity] = useState<option | null>(selectCities[0]);
   const [searchHistory, setSearchHistory] = useState<Array<string>>(
-    getLocalStorageWithExpiry("searchHistory")
-      ? (getLocalStorageWithExpiry("searchHistory") || "").split(",")
+    getLocalStorageWithExpiry('searchHistory')
+      ? (getLocalStorageWithExpiry('searchHistory') || '').split(',')
       : []
   );
 
   // Search by category and city
   const categorySearch = (): void => {
-    history.push(`/${category.value}/${city.value}`);
+    history.push(`/${category?.value}/${city?.value}`);
   };
 
   // Search by keyword
@@ -56,7 +56,7 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
     if (!searchHistory.includes(keyword)) {
       const tmpSearchHistory = [...searchHistory, keyword];
       setSearchHistory(tmpSearchHistory);
-      setLocalStorageWithExpiry("searchHistory", tmpSearchHistory.toString());
+      setLocalStorageWithExpiry('searchHistory', tmpSearchHistory.toString());
     }
     history.push(`/search?q=${keyword}`);
   };
@@ -104,19 +104,19 @@ const Banner: React.FC<{ className?: string; search?: string | null }> = ({
           <div className="flex space-x-[6px] items-stretch">
             <Selector
               options={selectCategories}
-              name={"catgSelector"}
+              name={'catgSelector'}
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={category}
               defaultValue={selectCategories[0]}
-              onChange={(e: option) => setCategory(e)}
+              onChange={(e: option | null) => setCategory(e)}
             />
             <Selector
               options={selectCities}
-              name={"citySelector"}
+              name={'citySelector'}
               className="tracking-wider flex-grow text-sm lg:text-base"
               value={city}
               defaultValue={selectCities[0]}
-              onChange={(e: option) => setCity(e)}
+              onChange={(e: option | null) => setCity(e)}
             />
             <button
               className="bg-custom-yellow w-10 rounded-md"

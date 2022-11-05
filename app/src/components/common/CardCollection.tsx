@@ -1,26 +1,29 @@
-import { useDispatch } from "react-redux";
-import { openModal } from "redux/slices/modalSlice";
-import Card from "components/common/Card";
+import { useDispatch } from 'react-redux';
+import { openModal } from 'redux/slices/modalSlice';
+import Card from 'components/common/Card';
 import {
   motcTourismHotel,
   motcTourismRestaurant,
   motcTourismScenicSpot,
-} from "types/tourism";
+  motcTourismType,
+} from 'types/tourism';
 
-type card = motcTourismHotel & motcTourismRestaurant & motcTourismScenicSpot;
+type card = motcTourismHotel | motcTourismRestaurant | motcTourismScenicSpot;
 
-const CardCollection: React.FC<{
-  data: Array<card>;
-}> = ({ data }) => {
+type CardCollectionProps = {
+  data: card[];
+};
+
+const CardCollection = ({ data }: CardCollectionProps) => {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-wrap gap-x-2 gap-y-6 md:gap-y-12 mb-6 md:mb-12">
-      {data.map((item: card, index: number) => {
+      {data.map((item: card) => {
         const payload = {
           photos: Object.values(item.Picture || {}) || [],
           thumbnail: item.Picture?.PictureUrl1,
-          title:
-            item.HotelName ?? item.RestaurantName ?? item.ScenicSpotName ?? "",
+          id: '',
+          title: '',
           description: item.Description,
           phone: item.Phone,
           address: item.Address,
@@ -29,11 +32,26 @@ const CardCollection: React.FC<{
           website: item.WebsiteUrl,
           position: item.Position,
         };
+        switch (item.type) {
+          case motcTourismType.hotel: {
+            payload.id = item.HotelID;
+            payload.title = item.HotelName;
+            break;
+          }
+          case motcTourismType.restaurant: {
+            payload.id = item.RestaurantID;
+            payload.title = item.RestaurantName;
+            break;
+          }
+          case motcTourismType.scenicSpot: {
+            payload.id = item.ScenicSpotID;
+            payload.title = item.ScenicSpotName;
+            break;
+          }
+        }
         return (
           <Card
-            key={
-              item.HotelID ?? item.RestaurantID ?? item.ScenicSpotID ?? index
-            }
+            key={payload.id}
             title={payload.title}
             city={payload.city}
             address={payload.address}

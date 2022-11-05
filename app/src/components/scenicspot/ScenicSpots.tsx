@@ -1,40 +1,42 @@
-import { useState } from "react";
-import { useQuery } from "react-query";
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 
 // api
 import {
   getScenicSpots,
   getScenicSpotsByCity,
   getScenicSpotsByKeyword,
-} from "api/scenicspot";
+} from 'api/scenicspot';
 
 // components
-import SubTitle from "../common/SubTitle";
-import CardCollection from "components/common/CardCollection";
-import Modal from "components/common/Modal";
-import Container from "components/common/Container";
-import Button from "components/common/Button";
-import WarningMsg from "components/common/WarningMsg";
-import Loading from "components/common/Loading";
+import SubTitle from '../common/SubTitle';
+import CardCollection from 'components/common/CardCollection';
+import Modal from 'components/common/Modal';
+import Container from 'components/common/Container';
+import Button from 'components/common/Button';
+import WarningMsg from 'components/common/WarningMsg';
+import Loading from 'components/common/Loading';
 
 // types
-import { motcTourismScenicSpot } from "types/tourism";
+import { motcTourismScenicSpot, motcTourismType } from 'types/tourism';
 
-const ScenicSpots: React.FC<{
-  city?: string | null;
-  defaultCount?: number | null;
+interface ScenicSpotsProp {
+  city?: string;
+  defaultCount?: number;
   keyword?: string | null;
-}> = ({ city, defaultCount, keyword }) => {
+}
+
+const ScenicSpots = ({ city, defaultCount, keyword }: ScenicSpotsProp) => {
   const [scenicSpotCount, setScenicSpotCount] = useState<number>(
     defaultCount || 10
   );
-  const { isLoading, error, data }: any = useQuery(
+  const { isLoading, error, data } = useQuery(
     [
       city
         ? `getScenicSpotsByCity/${city}`
         : keyword
         ? `getScenicSpotsByKeyword/${keyword}`
-        : "getScenicSpots",
+        : 'getScenicSpots',
       scenicSpotCount,
     ],
     () =>
@@ -47,7 +49,7 @@ const ScenicSpots: React.FC<{
   ) as {
     isLoading: boolean;
     error: { message: string };
-    data: motcTourismScenicSpot;
+    data: motcTourismScenicSpot[];
   };
 
   const loadMoreScenicSpots = () => {
@@ -63,10 +65,15 @@ const ScenicSpots: React.FC<{
         <WarningMsg message={error.message} />
       ) : data.length > 0 ? (
         <>
-          <CardCollection data={data} />
+          <CardCollection
+            data={data.map((scenicSpot) => ({
+              ...scenicSpot,
+              type: motcTourismType.scenicSpot,
+            }))}
+          />
           {data.length >= scenicSpotCount && (
             <div className="text-center">
-              <Button onClick={loadMoreScenicSpots} title={"Load More"} />
+              <Button onClick={loadMoreScenicSpots} title={'Load More'} />
             </div>
           )}
         </>

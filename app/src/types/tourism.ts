@@ -1,4 +1,11 @@
-import { position } from "types/common";
+import { position } from 'types/common';
+
+export enum motcTourismType {
+  hotel = 'hotel',
+  restaurant = 'restaurant',
+  scenicSpot = 'scenicSpot',
+  activity = 'activity',
+}
 
 export type motcTourism = {
   Address: string;
@@ -19,6 +26,7 @@ export type motcTourism = {
 };
 
 export type motcTourismActivity = motcTourism & {
+  type: motcTourismType.activity;
   ActivityID: string;
   ActivityName: string;
   Class1?: string;
@@ -38,6 +46,7 @@ export type motcTourismActivity = motcTourism & {
 };
 
 export type motcTourismHotel = motcTourism & {
+  type: motcTourismType.hotel;
   HotelID: string;
   HotelName: string;
   Grade?: string;
@@ -52,6 +61,7 @@ export type motcTourismHotel = motcTourism & {
 };
 
 export type motcTourismRestaurant = motcTourism & {
+  type: motcTourismType.restaurant;
   RestaurantID: string;
   RestaurantName: string;
   ZipCode?: string;
@@ -63,6 +73,7 @@ export type motcTourismRestaurant = motcTourism & {
 };
 
 export type motcTourismScenicSpot = motcTourism & {
+  type: motcTourismType.scenicSpot;
   ScenicSpotID: string;
   ScenicSpotName: string;
   DescriptionDetail?: string;

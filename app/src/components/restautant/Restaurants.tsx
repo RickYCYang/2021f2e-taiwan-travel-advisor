@@ -1,40 +1,42 @@
-import { useState } from "react";
-import { useQuery } from "react-query";
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 
 // api
 import {
   getRestaurants,
   getRestaurantsByCity,
   getRestaurantsByKeyword,
-} from "api/restaurant";
+} from 'api/restaurant';
 
 // components
-import SubTitle from "../common/SubTitle";
-import CardCollection from "components/common/CardCollection";
-import Modal from "components/common/Modal";
-import Container from "components/common/Container";
-import Button from "components/common/Button";
-import WarningMsg from "components/common/WarningMsg";
-import Loading from "components/common/Loading";
+import SubTitle from '../common/SubTitle';
+import CardCollection from 'components/common/CardCollection';
+import Modal from 'components/common/Modal';
+import Container from 'components/common/Container';
+import Button from 'components/common/Button';
+import WarningMsg from 'components/common/WarningMsg';
+import Loading from 'components/common/Loading';
 
 //types
-import { motcTourismRestaurant } from "types/tourism";
+import { motcTourismRestaurant, motcTourismType } from 'types/tourism';
 
-const Restaurant: React.FC<{
-  city?: string | null;
-  defaultCount?: number | null;
+interface RestaurantProps {
+  city?: string;
+  defaultCount?: number;
   keyword?: string | null;
-}> = ({ city, defaultCount, keyword }) => {
+}
+
+const Restaurant = ({ city, defaultCount, keyword }: RestaurantProps) => {
   const [restaurantCount, setRestaurantCount] = useState<number>(
     defaultCount || 10
   );
-  const { isLoading, error, data }: any = useQuery(
+  const { isLoading, error, data } = useQuery(
     [
       city
         ? `getRestaurantsByCity/${city}`
         : keyword
         ? `getRestaurantsByKeyword/${keyword}`
-        : "getRestaurants",
+        : 'getRestaurants',
       restaurantCount,
     ],
     () =>
@@ -47,7 +49,7 @@ const Restaurant: React.FC<{
   ) as {
     isLoading: boolean;
     error: { message: string };
-    data: motcTourismRestaurant;
+    data: motcTourismRestaurant[];
   };
 
   const loadMoreRestaurant = () => {
@@ -63,10 +65,15 @@ const Restaurant: React.FC<{
         <WarningMsg message={error.message} />
       ) : data.length > 0 ? (
         <>
-          <CardCollection data={data} />
+          <CardCollection
+            data={data.map((restaurant) => ({
+              ...restaurant,
+              type: motcTourismType.restaurant,
+            }))}
+          />
           {data.length >= restaurantCount && (
             <div className="text-center">
-              <Button onClick={loadMoreRestaurant} title={"Load More"} />
+              <Button onClick={loadMoreRestaurant} title={'Load More'} />
             </div>
           )}
         </>

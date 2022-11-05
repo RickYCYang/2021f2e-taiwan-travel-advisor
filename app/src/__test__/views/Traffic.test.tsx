@@ -1,14 +1,14 @@
-import { render, screen, cleanup, waitFor } from "@testing-library/react";
-import Traffic from "views/Traffic";
-import { Provider } from "react-redux";
-import rootReducer from "redux/slices";
-import { configureStore } from "@reduxjs/toolkit";
-import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-jest.mock("api/traffic");
+import { render, screen, cleanup } from '@testing-library/react';
+import Traffic from 'views/Traffic';
+import { Provider } from 'react-redux';
+import rootReducer from 'redux/slices';
+import { configureStore } from '@reduxjs/toolkit';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+jest.mock('api/traffic');
 
-describe("views/Traffic", () => {
+describe('views/Traffic', () => {
   beforeEach(cleanup);
   const store = configureStore({ reducer: rootReducer });
   const history = createMemoryHistory();
@@ -22,7 +22,7 @@ describe("views/Traffic", () => {
     },
   });
 
-  test("default", () => {
+  test('default', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
@@ -32,9 +32,9 @@ describe("views/Traffic", () => {
         </Router>
       </Provider>
     );
-    const searchbar = screen.getByTestId("searchbar");
-    const routeFlow = screen.getByTestId("routeFlow");
-    const hintMsg = screen.getByText("*每隔15秒自動更新");
+    const searchbar = screen.getByTestId('searchbar');
+    const routeFlow = screen.getByTestId('routeFlow');
+    const hintMsg = screen.getByText('*每隔15秒自動更新');
     expect(searchbar).toBeInTheDocument;
     expect(routeFlow).toBeInTheDocument;
     expect(hintMsg).toBeInTheDocument;

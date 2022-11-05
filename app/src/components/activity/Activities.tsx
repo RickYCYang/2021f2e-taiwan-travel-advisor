@@ -1,14 +1,16 @@
 // components
-import SubTitle from "../common/SubTitle";
-import ActivityCardCollection from "./ActivityCardCollection";
-import Modal from "components/common/Modal";
-import Container from "components/common/Container";
+import SubTitle from '../common/SubTitle';
+import ActivityCardCollection from './ActivityCardCollection';
+import Modal from 'components/common/Modal';
+import Container from 'components/common/Container';
 
-const Activities: React.FC<{
+interface ActivitiesProps {
   city?: string | null;
   defaultCount?: number;
   keyword?: string | null;
-}> = ({ city, defaultCount, keyword }) => {
+}
+
+const Activities = ({ city, defaultCount, keyword }: ActivitiesProps) => {
   return (
     <Container>
       <SubTitle subTitle="熱門活動" icon="triangle" />

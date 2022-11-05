@@ -2,31 +2,31 @@ import {
   setLocalStorageWithExpiry,
   removeLocalStorage,
   getLocalStorageWithExpiry,
-} from "utils/localStorage";
+} from 'utils/localStorage';
 
 const clearLocalStorage = () => localStorage.clear();
 
-describe("utils/localStorage", () => {
+describe('utils/localStorage', () => {
   beforeAll(clearLocalStorage);
   afterAll(clearLocalStorage);
 
-  test("setLocalStorageWithExpiry", () => {
-    const [_key, _value] = ["_key", "_value"];
-    setLocalStorageWithExpiry(_key, _value, 1);
-    const { value } = JSON.parse(localStorage.getItem(_key) || "");
-    expect(value).toBe(_value);
+  test('setLocalStorageWithExpiry', () => {
+    const [key, value] = ['key', 'value'];
+    setLocalStorageWithExpiry(key, value, 1);
+    const result = JSON.parse(localStorage.getItem(key) || '');
+    expect(result.value).toBe(value);
   });
 
-  test("getLocalStorageWithExpiry", () => {
-    const [_key, _value] = ["_key", "_value"];
-    const value = getLocalStorageWithExpiry("_key");
-    expect(value).toBe(_value);
+  test('getLocalStorageWithExpiry', () => {
+    const [key, value] = ['key', 'value'];
+    const result = getLocalStorageWithExpiry(key);
+    expect(result).toBe(value);
   });
 
-  test("removeLocalStorage", () => {
-    const [_key, _value] = ["_key", "_value"];
-    removeLocalStorage(_key);
-    const value = getLocalStorageWithExpiry("_key");
-    expect(value).toBe(null);
+  test('removeLocalStorage', () => {
+    const key = 'key';
+    removeLocalStorage(key);
+    const result = getLocalStorageWithExpiry(key);
+    expect(result).toBe(null);
   });
 });

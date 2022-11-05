@@ -1,85 +1,63 @@
-import { Suspense, lazy } from "react";
-import { Route, Switch } from "react-router"; // react-router v4/v5
-import ErrorBoundary from "./ErrorBoundary";
-import LoadingView from "views/LoadingView";
-const Home = lazy(() => import("views/Home"));
-const Restaurant = lazy(() => import("views/Restaurant"));
-const ScenicSpot = lazy(() => import("views/ScenicSpot"));
-const Hotel = lazy(() => import("views/Hotel"));
-const Traffic = lazy(() => import("views/Traffic"));
-const Activity = lazy(() => import("views/Activity"));
-const Search = lazy(() => import("views/Search"));
+import { Suspense, lazy } from 'react';
+import { Route, Switch } from 'react-router'; // react-router v4/v5
+import ErrorBoundary from './ErrorBoundary';
+import LoadingView from 'views/LoadingView';
+const Home = lazy(() => import('views/Home'));
+const Restaurant = lazy(() => import('views/Restaurant'));
+const ScenicSpot = lazy(() => import('views/ScenicSpot'));
+const Hotel = lazy(() => import('views/Hotel'));
+const Traffic = lazy(() => import('views/Traffic'));
+const Activity = lazy(() => import('views/Activity'));
+const Search = lazy(() => import('views/Search'));
 
 const Routes = () => {
   return (
     <ErrorBoundary>
-      <Switch>
-        <Route exact path="/">
-          <Suspense fallback={<LoadingView />}>
+      <Suspense fallback={<LoadingView />}>
+        <Switch>
+          <Route exact path="/">
             <Home />
-          </Suspense>
-        </Route>
-        <Route exact path="/scenicSpot/">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/scenicSpot/">
             <ScenicSpot />
-          </Suspense>
-        </Route>
-        <Route exact path="/scenicSpot/:city">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/scenicSpot/:city">
             <ScenicSpot />
-          </Suspense>
-        </Route>
-        <Route exact path="/restaurant/">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/restaurant/">
             <Restaurant />
-          </Suspense>
-        </Route>
-        <Route exact path="/restaurant/:city">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/restaurant/:city">
             <Restaurant />
-          </Suspense>
-        </Route>
-        <Route exact path="/hotel/">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/hotel/">
             <Hotel />
-          </Suspense>
-        </Route>
-        <Route exact path="/hotel/:city">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/hotel/:city">
             <Hotel />
-          </Suspense>
-        </Route>
-        <Route exact path="/traffic/">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/traffic/">
             <Traffic />
-          </Suspense>
-        </Route>
-        <Route exact path="/activity/">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/activity/">
             <Activity />
-          </Suspense>
-        </Route>
-        <Route exact path="/activity/:city">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/activity/:city">
             <Activity />
-          </Suspense>
-        </Route>
-        <Route exact path="/search">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/search">
             <Search />
-          </Suspense>
-        </Route>
-        <Route exact path="/:city">
-          <Suspense fallback={<LoadingView />}>
+          </Route>
+          <Route exact path="/:city">
             <Home />
-          </Suspense>
-        </Route>
-        <Route exact path="*">
-          <div>
-            <h1>404 Page not found</h1>
-          </div>
-        </Route>
-      </Switch>
+          </Route>
+          <Route exact path="*">
+            <div>
+              <h1>404 Page not found</h1>
+            </div>
+          </Route>
+        </Switch>
+      </Suspense>
     </ErrorBoundary>
   );
 };

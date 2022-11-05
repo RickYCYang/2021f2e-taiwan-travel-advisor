@@ -1,16 +1,16 @@
-import axios from "api/axios";
-import { getCount } from "./utils";
-import { motcTourismActivity } from "types/tourism";
+import axios from 'api/axios';
+import { getCount } from './utils';
+import { motcTourismActivity } from 'types/tourism';
 
 export const getNewestAcitivities = async (count: number) => {
   count = getCount(count);
   const { data } = (await axios.get(`Tourism/Activity`, {
     params: {
-      $orderby: "StartTime desc",
       $top: count,
-      $format: JSON,
+      $format: 'JSON',
     },
   })) as { data: Array<motcTourismActivity> };
+
   return data;
 };
 
@@ -21,9 +21,8 @@ export const getNewestAcitivitiesByCity = async (
   count = getCount(count);
   const { data } = (await axios.get(`Tourism/Activity/${city}`, {
     params: {
-      $orderby: "StartTime desc",
       $top: count,
-      $format: JSON,
+      $format: 'JSON',
     },
   })) as { data: Array<motcTourismActivity> };
   return data;
@@ -36,10 +35,9 @@ export const getNewestAcitivitiesByKeyword = async (
   count = getCount(count);
   const { data } = (await axios.get(`Tourism/Activity`, {
     params: {
-      $filter: `contains(ActivityName,'${keyword}')`,
-      $orderby: "StartTime desc",
+      $filter: `contains(ActivityName, '${keyword}')`,
       $top: count,
-      $format: "JSON",
+      $format: 'JSON',
     },
   })) as { data: Array<motcTourismActivity> };
   return data;

@@ -1,34 +1,36 @@
-import { useState } from "react";
-import { useQuery } from "react-query";
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 
 // api
-import { getHotels, getHotelsByCity, getHotelsByKeyword } from "api/hotel";
+import { getHotels, getHotelsByCity, getHotelsByKeyword } from 'api/hotel';
 
 // components
-import SubTitle from "../common/SubTitle";
-import CardCollection from "components/common/CardCollection";
-import Modal from "components/common/Modal";
-import Container from "components/common/Container";
-import Button from "components/common/Button";
-import WarningMsg from "components/common/WarningMsg";
-import Loading from "components/common/Loading";
+import SubTitle from '../common/SubTitle';
+import CardCollection from 'components/common/CardCollection';
+import Modal from 'components/common/Modal';
+import Container from 'components/common/Container';
+import Button from 'components/common/Button';
+import WarningMsg from 'components/common/WarningMsg';
+import Loading from 'components/common/Loading';
 
 // types
-import { motcTourismHotel } from "types/tourism";
+import { motcTourismHotel, motcTourismType } from 'types/tourism';
 
-const Hotels: React.FC<{
-  city?: string | null;
-  defaultCount?: number | null;
+interface HotelProps {
+  city?: string;
+  defaultCount?: number;
   keyword?: string | null;
-}> = ({ city, defaultCount, keyword }) => {
+}
+
+const Hotels = ({ city, defaultCount, keyword }: HotelProps) => {
   const [hotelCount, setHotelCount] = useState<number>(defaultCount || 10);
-  const { isLoading, error, data }: any = useQuery(
+  const { isLoading, error, data } = useQuery(
     [
       city
         ? `getHotelsByCity/${city}`
         : keyword
         ? `getHotelsByKeyword/${keyword}`
-        : "getHotels",
+        : 'getHotels',
       hotelCount,
     ],
     () =>
@@ -41,7 +43,7 @@ const Hotels: React.FC<{
   ) as {
     isLoading: boolean;
     error: { message: string };
-    data: motcTourismHotel;
+    data: motcTourismHotel[];
   };
 
   const loadMoreHotel = () => {
@@ -57,10 +59,15 @@ const Hotels: React.FC<{
         <WarningMsg message={error.message} />
       ) : data.length > 0 ? (
         <>
-          <CardCollection data={data} />
+          <CardCollection
+            data={data.map((hotel) => ({
+              ...hotel,
+              type: motcTourismType.hotel,
+            }))}
+          />
           {data.length >= hotelCount && (
             <div className="text-center">
-              <Button onClick={loadMoreHotel} title={"Load More"} />
+              <Button onClick={loadMoreHotel} title={'Load More'} />
             </div>
           )}
         </>

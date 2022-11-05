@@ -1,9 +1,8 @@
-import React from "react";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import { useDispatch } from "react-redux";
-import { setScrollTop } from "redux/slices/scrollSlice";
+import React from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { useDispatch } from 'react-redux';
+import { setScrollTop } from 'redux/slices/scrollSlice';
 
-// to-be fixed: scrollbarRef: any
 const Scrollbar: React.FC<{
   scrollbarRef: { current: HTMLElement | null };
 }> = ({ children, scrollbarRef }) => {

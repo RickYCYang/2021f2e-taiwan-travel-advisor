@@ -2,25 +2,62 @@ import {
   getRoutesByCity,
   getStopsByCityAndRouteName,
   getArrivalTimeByCityAndRouteName,
-} from "api/traffic";
-import { AxiosResponse } from "api/axios";
+} from 'api/traffic';
+import axios from '../../api/axios';
 
-describe("api/traffic", () => {
-  test("getRoutesByCity", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any =
-      await getRoutesByCity("Taipei");
-    expect(data.length).toBeGreaterThanOrEqual(5);
+// Mock jest and set the type
+jest.mock('../../api/axios');
+
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+
+describe('api/traffic', () => {
+  const city = 'Taipei';
+  const routeName = '203';
+
+  beforeEach(() => {
+    //jest.resetAllMocks();
+    mockedAxios.get.mockResolvedValue({
+      data: 'data',
+    });
   });
 
-  test("getStopsByCityAndRouteName", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any =
-      await getStopsByCityAndRouteName("Taipei", "203");
-    expect(data.length).toBeGreaterThanOrEqual(1);
+  test('getRoutesByCity', async () => {
+    await getRoutesByCity(city);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(`Bus/Route/City/${city}`, {
+      params: {
+        $select: `RouteUID,RouteName,DepartureStopNameZh,DestinationStopNameZh`,
+        $orderby: 'RouteUID',
+        $format: 'JSON',
+      },
+    });
   });
 
-  test("getArrivalTimeByCityAndRouteName", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any =
-      await getArrivalTimeByCityAndRouteName("Taipei", "203");
-    expect(data.length).toBeGreaterThanOrEqual(1);
+  test('getStopsByCityAndRouteName', async () => {
+    await getStopsByCityAndRouteName(city, routeName);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      `Bus/DisplayStopOfRoute/City/${city}/${routeName}`,
+      {
+        params: {
+          $select: 'RouteName,Direction,Stops',
+          $top: 30,
+          $format: 'JSON',
+        },
+      }
+    );
+  });
+
+  test('getArrivalTimeByCityAndRouteName', async () => {
+    await getArrivalTimeByCityAndRouteName(city, routeName);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      `Bus/EstimatedTimeOfArrival/City/${city}/${routeName}`,
+      {
+        params: {
+          $format: 'JSON',
+        },
+      }
+    );
   });
 });

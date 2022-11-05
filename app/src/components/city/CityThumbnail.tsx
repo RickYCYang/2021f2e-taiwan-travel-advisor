@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 /// components
-import { LocationMarkerIcon } from "@heroicons/react/solid";
+import { LocationMarkerIcon } from '@heroicons/react/solid';
 /// types
-import { option } from "types/common";
+import { option } from 'types/common';
 
-const Citythumbnail: React.FC<{ city: option; small?: boolean }> = ({
-  city,
-  small = false,
-}) => {
+interface CitythumbnailProps {
+  city: option;
+  small?: boolean;
+}
+
+const Citythumbnail = ({ city, small = false }: CitythumbnailProps) => {
   const bgClass = getBackgroundImageClass(city.value);
   const heightClass = getHeightClass(small);
   const padding = getPaddingClass(small);
@@ -37,22 +39,22 @@ export default Citythumbnail;
 
 const getHeightClass = (small: boolean): string => {
   if (small) {
-    return "h-[92px] lg:h-[106px]";
+    return 'h-[92px] lg:h-[106px]';
   } else {
     /* 
       gap = 8px, 
       92 * 2 + 8 = 192
       106 * 2 + 8 = 220
     */
-    return "h-[192px] lg:h-[220px]";
+    return 'h-[192px] lg:h-[220px]';
   }
 };
 
 const getPaddingClass = (small: boolean): string => {
   if (small) {
-    return "p-[4px] lg:p-[8px] ";
+    return 'p-[4px] lg:p-[8px] ';
   } else {
-    return "p-[8px] lg:p-[16px] ";
+    return 'p-[8px] lg:p-[16px] ';
   }
 };
 
@@ -60,51 +62,51 @@ const getPaddingClass = (small: boolean): string => {
 // so the temporal solution is hardcode the class name
 const getBackgroundImageClass = (city: string): string => {
   switch (city) {
-    case "ChanghuaCounty":
-      return "bg-ChanghuaCounty";
-    case "Chiayi":
-      return "bg-Chiayi";
-    case "ChiayiCounty":
-      return "bg-ChiayiCounty";
-    case "Hsinchu":
-      return "bg-Hsinchu";
-    case "HsinchuCounty":
-      return "bg-HsinchuCounty";
-    case "HualienCounty":
-      return "bg-HualienCounty";
-    case "Kaohsiung":
-      return "bg-Kaohsiung";
-    case "KinmenCounty":
-      return "bg-KinmenCounty";
-    case "Keelung":
-      return "bg-Keelung";
-    case "LienchiangCounty":
-      return "bg-LienchiangCounty";
-    case "MiaoliCounty":
-      return "bg-MiaoliCounty";
-    case "NantouCounty":
-      return "bg-NantouCounty";
-    case "NewTaipei":
-      return "bg-NewTaipei";
-    case "PenghuCounty":
-      return "bg-PenghuCounty";
-    case "PingtungCounty":
-      return "bg-PingtungCounty";
-    case "Taichung":
-      return "bg-Taichung";
-    case "Tainan":
-      return "bg-Tainan";
-    case "Taipei":
-      return "bg-Taipei";
-    case "TaitungCounty":
-      return "bg-TaitungCounty";
-    case "Taoyuan":
-      return "bg-Taoyuan";
-    case "YilanCounty":
-      return "bg-YilanCounty";
-    case "YunlinCounty":
-      return "bg-YunlinCounty";
+    case 'ChanghuaCounty':
+      return 'bg-ChanghuaCounty';
+    case 'Chiayi':
+      return 'bg-Chiayi';
+    case 'ChiayiCounty':
+      return 'bg-ChiayiCounty';
+    case 'Hsinchu':
+      return 'bg-Hsinchu';
+    case 'HsinchuCounty':
+      return 'bg-HsinchuCounty';
+    case 'HualienCounty':
+      return 'bg-HualienCounty';
+    case 'Kaohsiung':
+      return 'bg-Kaohsiung';
+    case 'KinmenCounty':
+      return 'bg-KinmenCounty';
+    case 'Keelung':
+      return 'bg-Keelung';
+    case 'LienchiangCounty':
+      return 'bg-LienchiangCounty';
+    case 'MiaoliCounty':
+      return 'bg-MiaoliCounty';
+    case 'NantouCounty':
+      return 'bg-NantouCounty';
+    case 'NewTaipei':
+      return 'bg-NewTaipei';
+    case 'PenghuCounty':
+      return 'bg-PenghuCounty';
+    case 'PingtungCounty':
+      return 'bg-PingtungCounty';
+    case 'Taichung':
+      return 'bg-Taichung';
+    case 'Tainan':
+      return 'bg-Tainan';
+    case 'Taipei':
+      return 'bg-Taipei';
+    case 'TaitungCounty':
+      return 'bg-TaitungCounty';
+    case 'Taoyuan':
+      return 'bg-Taoyuan';
+    case 'YilanCounty':
+      return 'bg-YilanCounty';
+    case 'YunlinCounty':
+      return 'bg-YunlinCounty';
     default:
-      return "";
+      return '';
   }
 };

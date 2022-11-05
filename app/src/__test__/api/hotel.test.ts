@@ -1,23 +1,61 @@
-import { getHotels, getHotelsByCity, getHotelsByKeyword } from "api/hotel";
-import { AxiosResponse } from "api/axios";
+import { getHotels, getHotelsByCity, getHotelsByKeyword } from 'api/hotel';
+import axios from '../../api/axios';
+import * as utils from '../../api/utils';
 
-describe("api/hotel", () => {
-  test("getHotels", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any = await getHotels(
-      5
-    );
-    expect(data.length).toBeGreaterThanOrEqual(5);
+// Mock jest and set the type
+jest.mock('../../api/axios');
+jest.mock('../../api/utils');
+
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockedUtils = utils as jest.Mocked<{
+  getCount: (count?: number) => number;
+}>;
+
+describe('api/hotel', () => {
+  const count = 5;
+
+  beforeEach(() => {
+    //jest.resetAllMocks();
+    mockedAxios.get.mockResolvedValue({
+      data: 'data',
+    });
+    mockedUtils.getCount.mockReturnValue(count);
   });
 
-  test("getHotelsByCity", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any =
-      await getHotelsByCity(5, "Taipei");
-    expect(data.length).toBeGreaterThanOrEqual(5);
+  test('getHotels', async () => {
+    await getHotels(count);
+    expect(mockedUtils.getCount).toBeCalledTimes(1);
+    expect(mockedUtils.getCount).toHaveBeenCalledWith(count);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith('Tourism/Hotel', {
+      params: { $orderby: 'ZipCode', $format: 'JSON', $top: count },
+    });
   });
 
-  test("getHotelsByKeyword", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any =
-      await getHotelsByKeyword(1, "台北");
-    expect(data.length).toBeGreaterThanOrEqual(1);
+  test('getHotelsByCity', async () => {
+    const city = 'Taipei';
+    await getHotelsByCity(count, city);
+    expect(mockedUtils.getCount).toBeCalledTimes(1);
+    expect(mockedUtils.getCount).toHaveBeenCalledWith(count);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(`Tourism/Hotel/${city}`, {
+      params: { $format: 'JSON', $top: count },
+    });
+  });
+
+  test('getHotelsByKeyword', async () => {
+    const keyword = '台北';
+    await getHotelsByKeyword(count, keyword);
+    expect(mockedUtils.getCount).toBeCalledTimes(1);
+    expect(mockedUtils.getCount).toHaveBeenCalledWith(count);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(`Tourism/Hotel`, {
+      params: {
+        $filter: `contains(HotelName, '${keyword}')`,
+        $orderby: 'ZipCode',
+        $format: 'JSON',
+        $top: count,
+      },
+    });
   });
 });

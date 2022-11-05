@@ -1,8 +1,12 @@
-import { ExclamationCircleFilled } from "@ant-design/icons";
+import { ExclamationCircleFilled } from '@ant-design/icons';
 
-const defaultMessage: string = "很抱歉，找不到符合此搜尋相關的內容。";
+const defaultMessage = '很抱歉，找不到符合此搜尋相關的內容。';
 
-const WarningMsg: React.FC<{ message?: string }> = ({ message }) => {
+interface WarningMsgProp {
+  message?: string;
+}
+
+const WarningMsg = ({ message }: WarningMsgProp) => {
   return (
     <div className="flex gap-3 justify-center items-center">
       <ExclamationCircleFilled

@@ -1,20 +1,26 @@
-import { memo, MouseEventHandler } from "react";
-import "lazysizes";
-import "lazysizes/plugins/parent-fit/ls.parent-fit";
+import { memo, MouseEventHandler } from 'react';
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 // components
-import { LocationMarkerIcon } from "@heroicons/react/solid";
-import ReactTooltip from "react-tooltip";
+import { LocationMarkerIcon } from '@heroicons/react/solid';
+import ReactTooltip from 'react-tooltip';
 // assets
-import altImage from "assets/images/alt.jpeg";
+import altImage from 'assets/images/alt.jpeg';
 
-const Card: React.FC<{
+interface CardProps {
   title: string;
   address?: string;
   picture?: string;
   city: string;
   onClick: MouseEventHandler;
-}> = memo(
-  ({ title, address, picture, city, onClick }) => {
+}
+
+/**
+ * for eslint error: Disallow missing displayName in a React component definition
+ * ref: https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/display-name.md
+ */
+const Card = memo(
+  function Card({ title, address, picture, city, onClick }: CardProps) {
     return (
       <div
         data-testid="card"
@@ -43,10 +49,10 @@ const Card: React.FC<{
         </div>
         <ReactTooltip
           id="main"
-          place={"top"}
-          type={"light"}
+          place={'top'}
+          type={'light'}
           textColor="white"
-          effect={"float"}
+          effect={'float'}
           backgroundColor="#007350"
           borderColor="#007350"
           multiline={false}

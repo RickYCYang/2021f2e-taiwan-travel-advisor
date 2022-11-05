@@ -1,27 +1,33 @@
-import { useState } from "react";
-import { useQuery } from "react-query";
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 // api
 import {
   getNewestAcitivities,
   getNewestAcitivitiesByCity,
   getNewestAcitivitiesByKeyword,
-} from "api/activity";
+} from 'api/activity';
 // components
-import ActivityCard from "./ActivityCard";
-import WarningMsg from "components/common/WarningMsg";
-import Loading from "components/common/Loading";
-import Button from "components/common/Button";
+import ActivityCard from './ActivityCard';
+import WarningMsg from 'components/common/WarningMsg';
+import Loading from 'components/common/Loading';
+import Button from 'components/common/Button';
 
 // types
-import { motcTourismActivity } from "types/tourism";
+import { motcTourismActivity } from 'types/tourism';
 
 const loadCityCount = 4;
 
-const ActivityCardCollection: React.FC<{
+interface ActivityCardCollectionProps {
   city?: string | null;
   defaultCount?: number | null;
   keyword?: string | null;
-}> = ({ city, defaultCount, keyword }) => {
+}
+
+const ActivityCardCollection = ({
+  city,
+  defaultCount,
+  keyword,
+}: ActivityCardCollectionProps) => {
   const [activityCount, setActivityCount] = useState<number>(
     defaultCount || 10
   );
@@ -31,7 +37,7 @@ const ActivityCardCollection: React.FC<{
         ? `getNewestAcitivitiesByCity/${city}`
         : keyword
         ? `getNewestAcitivitiesByKeyword/${keyword}`
-        : "getNewestAcitivities",
+        : 'getNewestAcitivities',
       activityCount,
     ],
     () =>
@@ -66,7 +72,7 @@ const ActivityCardCollection: React.FC<{
         ))}
       </div>
       {data.length < activityCount ? (
-        ""
+        ''
       ) : (
         <div className="text-center">
           <Button title="Load More" onClick={loadMoreActivity} />

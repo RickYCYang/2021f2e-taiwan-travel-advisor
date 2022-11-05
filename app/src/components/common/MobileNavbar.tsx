@@ -1,6 +1,6 @@
-import categories from "const/categories";
-import { useHistory, useLocation } from "react-router-dom";
-import { option } from "types/common";
+import categories from 'const/categories';
+import { useHistory, useLocation } from 'react-router-dom';
+import { option } from 'types/common';
 
 const MobileNavbar: React.FC = () => {
   const history = useHistory();
@@ -15,10 +15,10 @@ const MobileNavbar: React.FC = () => {
       {categories.map((item: option) => (
         <li
           className={`py-2 hover:text-custom-pink ${
-            location.pathname === "/" + item.value ? "text-custom-pink" : ""
+            location.pathname === '/' + item.value ? 'text-custom-pink' : ''
           }`}
-          key={"smNav-" + item.value}
-          onClick={(e) => {
+          key={'smNav-' + item.value}
+          onClick={() => {
             history.push(`/${item.value}`);
           }}
         >

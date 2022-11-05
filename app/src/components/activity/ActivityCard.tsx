@@ -1,20 +1,28 @@
-import { memo } from "react";
-import { useDispatch } from "react-redux";
-import "lazysizes";
-import "lazysizes/plugins/parent-fit/ls.parent-fit";
+import { memo } from 'react';
+import { useDispatch } from 'react-redux';
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 // components
-import { LocationMarkerIcon } from "@heroicons/react/solid";
-import { openModal } from "redux/slices/modalSlice";
+import { LocationMarkerIcon } from '@heroicons/react/solid';
+import { openModal } from 'redux/slices/modalSlice';
 
 // assets
-import altImage from "assets/images/alt.jpeg";
+import altImage from 'assets/images/alt.jpeg';
 
 // types
-import { motcTourismActivity } from "types/tourism";
+import { motcTourismActivity } from 'types/tourism';
 
-const ActivityCard: React.FC<{ activity: motcTourismActivity }> = memo(
-  ({ activity }) => {
+interface ActivityCardProps {
+  activity: motcTourismActivity;
+}
+
+/**
+ * for eslint error: Disallow missing displayName in a React component definition
+ * ref: https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/display-name.md
+ */
+const ActivityCard = memo(
+  function ActivityCard({ activity }: ActivityCardProps) {
     const {
       Address,
       Description,
@@ -45,7 +53,7 @@ const ActivityCard: React.FC<{ activity: motcTourismActivity }> = memo(
     };
 
     const dispatch = useDispatch();
-    let thumbnail: string = Object.values(Picture || {})[0];
+    const thumbnail: string = Object.values(Picture || {})[0];
 
     return (
       <>
@@ -72,7 +80,7 @@ const ActivityCard: React.FC<{ activity: motcTourismActivity }> = memo(
               <div className="lg:w-1/2 space-x-2">
                 <LocationMarkerIcon className="w-1/12 text-custom-pink inline-block align-middle" />
                 <h6 className="text-sm inline-block align-middle w-10/12">
-                  {Location ?? Address ?? "to see the official site"}
+                  {Location ?? Address ?? 'to see the official site'}
                 </h6>
               </div>
               <button

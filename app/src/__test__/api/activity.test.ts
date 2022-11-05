@@ -2,26 +2,64 @@ import {
   getNewestAcitivities,
   getNewestAcitivitiesByCity,
   getNewestAcitivitiesByKeyword,
-} from "api/activity";
-import { AxiosResponse } from "api/axios";
+} from 'api/activity';
+import axios from '../../api/axios';
+import * as utils from '../../api/utils';
 
-describe("api/activity", () => {
-  test("getNewestAcitivities", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any =
-      await getNewestAcitivities(5);
-    expect(data.length).toBeGreaterThanOrEqual(5);
+// Mock jest and set the type
+jest.mock('../../api/axios');
+jest.mock('../../api/utils');
+
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockedUtils = utils as jest.Mocked<{
+  getCount: (count?: number) => number;
+}>;
+
+describe('api/activity', () => {
+  const count = 5;
+
+  beforeEach(() => {
+    //jest.resetAllMocks();
+    mockedAxios.get.mockResolvedValue({
+      data: 'data',
+    });
+    mockedUtils.getCount.mockReturnValue(count);
   });
 
-  test("getNewestAcitivitiesByCity", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any =
-      await getNewestAcitivitiesByCity(5, "Taipei");
-    expect(data.length).toBeGreaterThanOrEqual(5);
+  test('getNewestAcitivities', async () => {
+    await getNewestAcitivities(count);
+    expect(mockedUtils.getCount).toBeCalledTimes(1);
+    expect(mockedUtils.getCount).toHaveBeenCalledWith(count);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith('Tourism/Activity', {
+      params: { $orderby: 'StartTime desc', $format: 'JSON', $top: count },
+    });
   });
 
-  test("getNewestAcitivitiesByKeyword", async () => {
-    const data: boolean | AxiosResponse<unknown, any> | any =
-      await getNewestAcitivitiesByKeyword(1, "音樂祭");
+  test('getNewestAcitivitiesByCity', async () => {
+    const city = 'Taipei';
+    await getNewestAcitivitiesByCity(count, city);
+    expect(mockedUtils.getCount).toBeCalledTimes(1);
+    expect(mockedUtils.getCount).toHaveBeenCalledWith(count);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(`Tourism/Activity/${city}`, {
+      params: { $orderby: 'StartTime desc', $format: 'JSON', $top: count },
+    });
+  });
 
-    expect(data.length).toBeGreaterThanOrEqual(1);
+  test('getNewestAcitivitiesByKeyword', async () => {
+    const keyword = '音樂祭';
+    await getNewestAcitivitiesByKeyword(count, keyword);
+    expect(mockedUtils.getCount).toBeCalledTimes(1);
+    expect(mockedUtils.getCount).toHaveBeenCalledWith(count);
+    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith('Tourism/Activity', {
+      params: {
+        $filter: `contains(ActivityName,'${keyword}')`,
+        $orderby: 'StartTime desc',
+        $format: 'JSON',
+        $top: count,
+      },
+    });
   });
 });
