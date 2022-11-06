@@ -12,14 +12,20 @@ To start development mode.
 `npm start`
 After the local server is started, open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+To check if the coding style fits the pre-defined rule of eslint, which is set in file .eslintrc.
+`npm lint`
+
 To launche the test runner for unit test
 `npm test`
 
 To launche the test runner with interactive mode of unit test
 `npm run test:watch`
 
+To open cypress test console. Be sure that you have started a local server. e.g. run `npm run start` before the e2e test, since cypress test would not start a server automatically.
+`cypress:open`
+
 To run E2E test by cypress. Be sure that you have started a local server, e.g. run `npm run start` before the e2e test, since cypress test would not start a server automatically.
-`npm run test:cypress`
+`test:e2e`
 
 To build the app for production mode, the output files would be in the "app/build" folder.
 `npm run build`
